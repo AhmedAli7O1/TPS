@@ -1,7 +1,7 @@
 package datalayer;
 
 public class Settings {
-    private static String webServiceAddress = "http://127.0.0.1/webservice/";
+    private static String webServiceAddress = "http://79.170.40.36/ahmedali701.com/tps-webservice/";
 
     public static String getWebServiceAddress() {
         return webServiceAddress;
