@@ -198,12 +198,14 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ToolBar nodeOrientation="RIGHT_TO_LEFT" VBox.vgrow="ALWAYS">
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT">
               <items>
-                  <Button layoutX="3.0" mnemonicParsing="false" text="Button" />
-                <Button layoutX="3.0" mnemonicParsing="false" text="Button" />
+                <Button mnemonicParsing="false" text="Button" />
+                  <AnchorPane prefHeight="30.0" prefWidth="0.0" />
+                  <Button mnemonicParsing="false" text="Button" />
+                  <AnchorPane prefHeight="30.0" prefWidth="500.0" />
                   <Label text="المستخدم : " />
-                  <Label fx:id="lblUserName" layoutX="62.0" prefHeight="17.0" prefWidth="56.0" text="--" />
+                  <Label fx:id="lblUserName" layoutX="630.0" layoutY="17.0" text="--" />
               </items>
             </ToolBar>
          </children>
