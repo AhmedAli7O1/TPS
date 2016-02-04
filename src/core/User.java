@@ -8,31 +8,21 @@ public class User extends CoreMain{
      * ##### local variables #####
      * ###########################
      */
-    private int id;
     private String name;
-    private String password;
     private Authorization auth;
     private String title;
     private DateTime lastLogged;
     private DateTime lastEdit;
+    private int secKey;
 
-    public User(int id, String name, String password, Authorization auth,
-                String title, DateTime lastLogged, DateTime lastEdit){
-        this.id = id;
+    public User(String name, Authorization auth,
+                String title, DateTime lastLogged, DateTime lastEdit, int secKey){
         this.name = name;
-        this.password = password;
         this.auth = auth;
         this.title = title;
         this.lastLogged = lastLogged;
         this.lastEdit = lastEdit;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.secKey = secKey;
     }
 
     public String getName() {
@@ -41,14 +31,6 @@ public class User extends CoreMain{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Authorization getAuth() {
@@ -83,4 +65,11 @@ public class User extends CoreMain{
         this.lastEdit = lastEdit;
     }
 
+    public int getSecKey() {
+        return secKey;
+    }
+
+    public void setSecKey(int secKey) {
+        this.secKey = secKey;
+    }
 }

@@ -1,8 +1,7 @@
 package core;
 
+import core.exceptions.LoginException;
 import core.igui.IUserControl;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserControl extends CoreMain implements IUserControl {
@@ -14,28 +13,17 @@ public class UserControl extends CoreMain implements IUserControl {
      * | object -> userData | class -> UserData | implements -> IUserData |
      */
 
-    private List<User> users;
     private User currentUser;
 
-    public UserControl(){
-        // load all user data
-        users = new ArrayList<>(userData.getAllUsers());
-    }
-
     @Override // login to app using username and password
-    public boolean login(String userName, String password){
-        for(User ur : users){
-            if(userName.equals(ur.getName()) && password.equals(ur.getPassword())) {
-                currentUser = ur;
-                return true;
-            }
+    public boolean login(String userName, String password) throws LoginException{
+        try {
+            currentUser = userData.login(userName, password);
+            return true;
         }
-        return false;
-    }
-
-    @Override
-    public int getUserCount() {
-        return users.size();
+        catch (LoginException ex){
+            throw new LoginException(ex.getExType());
+        }
     }
 
     @Override

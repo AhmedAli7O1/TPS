@@ -4,28 +4,25 @@ import core.Authorization;
 import core.idata.IUserData;
 import core.User;
 import org.joda.time.DateTime;
-import org.json.JSONArray;
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
+import core.exceptions.LoginException;
 
 public class UserData implements IUserData{
 
     @Override
-    public List<User> getAllUsers() {
-        // create new User List to store all users
-        List<User> users = new ArrayList<>();
-
-        // get user data from database in json format
-        JSONArray jArray = new JSONArray(WebService.getJson("UserData", "getAllUsers"));
-        for(int i = 0; i < jArray.length(); i++){
-            users.add(new User(jArray.getJSONObject(i).getInt("ID"),
-                    jArray.getJSONObject(i).getString("Name"),
-                    jArray.getJSONObject(i).getString("Password"),
-                    Authorization.valueOf(jArray.getJSONObject(i).getString("Auth")),
-                    jArray.getJSONObject(i).getString("Title"),
-                    DateTime.parse(jArray.getJSONObject(i).getString("LastLogged")),
-                    DateTime.parse(jArray.getJSONObject(i).getString("LastEdit"))));
+    public User login(String uName, String uPass) throws LoginException{
+        try {
+            JSONObject jsonObj = new JSONObject(WebService.getJson("users", "login", "uName=" + uName, "uPass=" + uPass));
+            return new User(jsonObj.getString("Name"),
+                    Authorization.valueOf(jsonObj.getString("Auth")),
+                    jsonObj.getString("Title"),
+                    DateTime.parse(jsonObj.getString("LastLogged")),
+                    DateTime.parse(jsonObj.getString("LastEdit")),
+                    jsonObj.getInt("SecKey"));
         }
-        return  users;
+        catch (JSONException ex){
+            throw new LoginException(LoginException.ExType.INVALID_ID_PASS);
+        }
     }
 }

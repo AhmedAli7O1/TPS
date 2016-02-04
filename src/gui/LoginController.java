@@ -1,5 +1,7 @@
 package gui;
 
+import core.Authorization;
+import core.exceptions.LoginException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -18,14 +20,20 @@ public class LoginController extends Main implements Initializable {
 
     @FXML
     private void btnLoginOnAction(){
-        String userName = txtUserName.getText();
-        String password = txtPassword.getText();
-        boolean result = userControl.login(userName, password);
-        if (result) {
-            System.out.println("true");
-            showMainScene();
+        try{
+            boolean result = userControl.login(txtUserName.getText(), txtPassword.getText());
+            if(result){
+                System.out.println("logged");
+            }
         }
-        else
-            System.out.println("false");
+        catch (LoginException ex){
+            if(ex.getExType() == LoginException.ExType.INVALID_ID_PASS){
+                // open alert
+                // temp msg
+                System.out.println("invalid id & pass");
+            }
+            else
+                ex.printStackTrace();
+        }
     }
 }
