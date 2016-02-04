@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="206.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
+<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="206.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -40,22 +40,6 @@
          <children>
             <VBox>
                <children>
-                  <HBox alignment="CENTER_LEFT" spacing="30.0">
-                     <children>
-                        <Label text="أسم المستخدم">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <effect>
-                              <Glow level="0.65" />
-                           </effect>
-                        </Label>
-                        <TextField fx:id="txtUserName" prefHeight="25.0" prefWidth="208.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="3.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="71.0">
                      <children>
                         <Label alignment="CENTER" text="كلمة السر" textAlignment="RIGHT">
@@ -72,13 +56,25 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="3.0" />
                      </padding>
                   </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="30.0">
+                     <children>
+                        <Label text="أسم المستخدم">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <effect>
+                              <Glow level="0.65" />
+                           </effect>
+                        </Label>
+                        <TextField fx:id="txtUserName" prefHeight="25.0" prefWidth="208.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="3.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children>
             </VBox>
-            <ImageView fx:id="imageState" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </HBox.margin>
-            </ImageView>
+            <ImageView fx:id="imageState" fitHeight="93.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

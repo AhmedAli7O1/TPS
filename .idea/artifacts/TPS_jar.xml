@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/TPS_jar</output-path>
     <root id="archive" name="TPS.jar">
       <element id="module-output" name="TPS" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
     </root>
   </artifact>
 </component>
