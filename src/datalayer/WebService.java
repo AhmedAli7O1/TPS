@@ -26,6 +26,10 @@ public class WebService {
     }
 
     private static String requestData(String strUrl){
+
+        // @debug: print json request url
+        System.out.println("Debug: " + strUrl);
+
         String json = new String();
         try{
             URL url = new URL(strUrl);
@@ -46,6 +50,10 @@ public class WebService {
         catch(MalformedURLException ex){
             ex.printStackTrace();
         }
+
+        // @debug: print returned json string
+        System.out.println("Debug: " + json);
+
         return json;
     }
 }

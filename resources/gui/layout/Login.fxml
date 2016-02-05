@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="206.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
+<VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="206.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -76,14 +75,13 @@
             </VBox>
             <ImageView fx:id="imageState" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </HBox.margin>
-            </ImageView>
+                  <Insets left="25.0" top="10.0" />
+               </HBox.margin></ImageView>
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#btnLoginOnAction" text="تسجيل" />
+            <Button mnemonicParsing="false" onAction="#btnLoginOnAction" text="دخول" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="خروج" />
          </children>
          <padding>

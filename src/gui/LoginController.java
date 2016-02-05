@@ -28,19 +28,19 @@ public class LoginController extends Main implements Initializable {
 
     }
 
-    @FXML
+    @FXML // fire this event when user clicks Login Button
     private void btnLoginOnAction(){
         try{
             boolean result = userControl.login(txtUserName.getText(), txtPassword.getText());
             if(result){
-                System.out.println("logged");
+                // open main window
+                showMainScene();
             }
         }
         catch (LoginException ex){
             if(ex.getExType() == LoginException.ExType.INVALID_ID_PASS){
-                // open alert
-                // temp msg
-                System.out.println("invalid id & pass");
+                //error image
+                imageState.setImage(new Image(getClass().getResourceAsStream("images/error_64x64.png")));
             }
             else
                 ex.printStackTrace();

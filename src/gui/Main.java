@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("layout/LoginWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("layout/Login.fxml"));
         primaryStage.centerOnScreen();
         primaryStage.setTitle("إدارة المبيعات - تسجيل الدخول");
         primaryStage.setScene(new Scene(root));
@@ -29,7 +29,7 @@ public class Main extends Application {
 
     protected void showMainScene(){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("layout/MainWindow.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("layout/Main.fxml"));
             primaryStage.centerOnScreen();
             primaryStage.setTitle("برنامج إدارة المبيعات");
             primaryStage.setScene(new Scene(root));

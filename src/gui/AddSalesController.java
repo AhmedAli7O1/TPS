@@ -22,7 +22,6 @@ public class AddSalesController implements Initializable{
     @FXML private TextField txtDiscount;
     @FXML private TextField txtTotal;
     @FXML private TextField txtDiscountPercentage;
-
     @FXML private TableColumn<OrderView, String> itemColumn;
     @FXML private TableColumn<OrderView, String> amountColumn;
     @FXML private TableColumn<OrderView, String> priceColumn;
