@@ -3,7 +3,6 @@ package gui;
 import core.Item;
 import core.SalesControl;
 import core.SalesViewStyle;
-import core.igui.ISalesControl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,7 +43,7 @@ public class MainController extends Main implements Initializable {
 
     private List<VBox> panes;
 
-    private ISalesControl salesControl;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -98,8 +97,10 @@ public class MainController extends Main implements Initializable {
      */
     @FXML
     private void btnAddSalesOnClick(){
-        SubWindow subWin = new SubWindow("sales sub window", "layout/AddSales.fxml");
-        subWin.show();
+        addSalesWindow = new AddSalesWindow();
+        addSalesWindow.showAndWait();
+        salesControl.addNewOrders();
+        btnSalesViewOnAction();
     }
 
     @FXML

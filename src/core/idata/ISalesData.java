@@ -11,4 +11,5 @@ import java.util.List;
 public interface ISalesData {
 
     List<Order> getOrders(LocalDate date, SalesViewStyle style);
+    boolean addNewOrder(Order order);
 }

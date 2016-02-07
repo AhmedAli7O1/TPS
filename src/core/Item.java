@@ -1,7 +1,5 @@
 package core;
 
-import org.joda.time.DateTime;
-
 import java.time.LocalDate;
 
 public class Item {
@@ -15,7 +13,12 @@ public class Item {
     private double paid;
     private LocalDate date;
 
-    public Item(int id, String name, int amount, double price, double discount, double soldPrice, double purchaseValue, double paid, LocalDate date) {
+    public Item(
+            int id, String name, int amount,
+            double price, double discount,
+            double soldPrice, double purchaseValue,
+            double paid, LocalDate date) {
+
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -23,6 +26,20 @@ public class Item {
         this.discount = discount;
         this.soldPrice = soldPrice;
         this.purchaseValue = purchaseValue;
+        this.paid = paid;
+        this.date = date;
+    }
+
+    public Item(
+            String name, int amount, double price,
+            double discount, double soldPrice,
+            double paid, LocalDate date) {
+
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.discount = discount;
+        this.soldPrice = soldPrice;
         this.paid = paid;
         this.date = date;
     }

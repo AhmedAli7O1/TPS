@@ -4,10 +4,8 @@ import core.Item;
 import core.Order;
 import core.SalesViewStyle;
 import core.idata.ISalesData;
-import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +15,14 @@ public class SalesData implements ISalesData {
 
     @Override
     public List<Order> getOrders(LocalDate date, SalesViewStyle style) {
-        JSONObject obj = new JSONObject(WebService.getJson("sales", "getOrders", "date=" + date, "style=" + style));
+        // put params into a json object to send
+        JSONObject jsonToSend = new JSONObject();
+        jsonToSend.put("date", date);
+        jsonToSend.put("style", style);
+
+        WebService webService = new WebService();
+
+        JSONObject obj = webService.getJson("sales", "getOrders", jsonToSend);
         JSONArray jsonOrdersArray = obj.getJSONArray("Orders");
         JSONArray jsonItemsArray = obj.getJSONArray("Items");
 
@@ -30,7 +35,7 @@ public class SalesData implements ISalesData {
                     jsonOrdersArray.getJSONObject(i).getDouble("Discount"),
                     jsonOrdersArray.getJSONObject(i).getDouble("TotalPrice"),
                     jsonOrdersArray.getJSONObject(i).getDouble("Paid"),
-                    DateTime.parse(jsonOrdersArray.getJSONObject(i).getString("Date")),
+                    LocalDate.parse(jsonOrdersArray.getJSONObject(i).getString("Date")),
                     new ArrayList<>());
             orders.add(order);
         }
@@ -64,5 +69,15 @@ public class SalesData implements ISalesData {
         }
 
         return orders;
+    }
+
+    @Override
+    public boolean addNewOrder(Order order){
+        WebService webService = new WebService();
+        if(webService.getJson("sales", "addOrder", order).getInt("result") > 0){
+            return true;
+        }
+        else
+            return false;
     }
 }

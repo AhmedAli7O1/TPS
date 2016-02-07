@@ -1,59 +1,83 @@
 package datalayer;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
 
-public class WebService {
+public class WebService extends DataSource {
+    private String urlParameters =  "method=";
+    private JSONObject jsonObject;
+    private String strUrl;
 
-    public static String getJson(String className, String method){
-        String strUrl = String.format("%s%s.php?method=%s", Settings.getWebServiceAddress(), className, method);
-        return requestData(strUrl);
-    }
+    public JSONObject getJson(String className, String methodName){
+        strUrl = address;
 
-    public static String getJson(String className, String method, String...parm){
-        String strUrl = String.format("%s%s.php?method=%s", Settings.getWebServiceAddress(), className, method);
+        strUrl += className + ".php";
+        urlParameters += methodName;
 
-        if(parm.length > 0) {
-            String s = "";
-            for (String p : parm) {
-                s += "&" + p;
-            }
-            strUrl += s;
-        }
-        return requestData(strUrl);
-    }
-
-    private static String requestData(String strUrl){
-
-        // @debug: print json request url
-        System.out.println("Debug: " + strUrl);
-
-        String json = new String();
-        try{
-            URL url = new URL(strUrl);
-
-            // read from url
-            try{
-                Scanner scan = new Scanner(url.openStream());
-
-                while(scan.hasNext()){
-                    json += scan.nextLine();
-                }
-                scan.close();
-            }
-            catch(IOException ex){
-                ex.printStackTrace();
-            }
-        }
-        catch(MalformedURLException ex){
+        try {
+            return new JSONObject(requestJson());
+        }catch (Exception ex){
             ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject getJson(String className, String methodName, Object obj){
+        strUrl = address;
+
+        strUrl += className + ".php";
+        urlParameters += methodName;
+
+        if(obj instanceof JSONObject)
+            jsonObject = (JSONObject) obj;
+        else
+            this.jsonObject = new JSONObject(obj);
+
+        urlParameters += "&json=" + jsonObject.toString();
+
+        try {
+            return new JSONObject(requestJson());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    private String requestJson()throws Exception{
+
+        URL url = new URL(strUrl);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        connection.setInstanceFollowRedirects(false);
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        connection.setRequestProperty("charset", "utf-8");
+        connection.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
+        connection.setUseCaches (false);
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
+        bw.write(urlParameters);
+        bw.flush();
+
+        String response = new String();
+        String partRes;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+        while ((partRes = reader.readLine()) != null) {
+            response += partRes;
         }
 
-        // @debug: print returned json string
-        System.out.println("Debug: " + json);
+        bw.close();
+        reader.close();
 
-        return json;
+        return response;
     }
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import core.igui.ISalesControl;
 import core.igui.IUserControl;
 import core.UserControl;
 import javafx.application.Application;
@@ -14,7 +15,9 @@ import java.io.IOException;
 public class Main extends Application {
 
     protected static IUserControl userControl = new UserControl();
+    protected static ISalesControl salesControl;
     private static Stage primaryStage;
+    protected static AddSalesWindow addSalesWindow;
 
     @Override
     public void start(Stage primaryStage) throws Exception{

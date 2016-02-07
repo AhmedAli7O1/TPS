@@ -2,6 +2,7 @@ package core;
 
 import org.joda.time.DateTime;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +12,20 @@ public class Order {
     private double discount;
     private double totalPrice;
     private double paid;
-    private DateTime date;
+    private LocalDate date;
     private List<Item> items;
 
-    public Order(int id, String customer, double discount, double totalPrice, double paid, DateTime date, List<Item> items) {
+    public Order(int id, String customer, double discount, double totalPrice, double paid, LocalDate date, List<Item> items) {
         this.id = id;
+        this.customer = customer;
+        this.discount = discount;
+        this.totalPrice = totalPrice;
+        this.paid = paid;
+        this.date = date;
+        this.items = items;
+    }
+
+    public Order(String customer, double discount, double totalPrice, double paid, LocalDate date, List<Item> items) {
         this.customer = customer;
         this.discount = discount;
         this.totalPrice = totalPrice;
@@ -64,11 +74,11 @@ public class Order {
         this.paid = paid;
     }
 
-    public DateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(DateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
