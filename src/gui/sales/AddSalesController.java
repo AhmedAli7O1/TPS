@@ -1,7 +1,8 @@
-package gui;
+package gui.sales;
 
 import core.Item;
 import core.Order;
+import gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,9 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

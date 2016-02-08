@@ -1,6 +1,6 @@
 package core;
 
-public enum SalesViewStyle {
+public enum DataViewStyle {
     DAY,
     MONTH,
     YEAR

@@ -2,13 +2,20 @@
 ini_set('display_errors', 1);
     include 'connection.php';
     
-    // call the passes in function 
-    if(function_exists($_GET['method'])){
-        $_GET['method']($_GET['date'], $_GET['style']);
+    if($_POST['method'] === "getOrders"){
+        getOrders($_POST['json']); //call getOrders method
+    }
+    elseif($_POST['method'] === "addOrder"){
+        addOrder($_POST['json']);
     }
     
-    function getOrders($date, $style){
+    function getOrders($json){
         global $mysqli;
+        
+        //get params from json object
+        $jsonObj = json_decode($json);
+        $date = $jsonObj->{'date'};
+        $style = $jsonObj->{'style'};
         
         $undate = strtotime($date); 
         
@@ -60,6 +67,72 @@ ini_set('display_errors', 1);
             
             echo json_encode($data); 
         }
+    }
+    
+    function addOrder($jsonString){
+        global $mysqli;
+
+        $jsonResponse = "";
+        $processResult = 0;
+
+        $order = json_decode($jsonString);  
+        
+        $customer = $order->{'customer'};
+        $discount = $order->{'discount'};
+        $totalPrice = $order->{'totalPrice'};
+        $paid = $order->{'paid'};
+        $date = $order->{'date'};
+        $items = $order->{'items'};
+        
+        $query = "INSERT INTO Orders (`Customer`, `Discount`, `TotalPrice`, `Paid`, `Date`) 
+            VALUES ('" . $customer . "', '" . $discount . "',
+                '" . $totalPrice . "', '" . $paid . "', '" . $date . "')";
+                
+        $result = $mysqli->query($query);
+        
+        if($result === TRUE){
+            //get last order ID to store with items 
+            $query = "SELECT ID FROM Orders ORDER BY ID DESC LIMIT 1";
+            $result = $mysqli->query($query);
+        
+            $value = $result->fetch_object();
+            
+            $itemCount = 0;
+            
+            foreach($items as $it){
+                $name = $it->{'name'};              // Customer Name
+                $amount = $it->{'amount'};          // Amount of Items
+                $price = $it->{'price'};            // Item Price
+                $discount = $it->{'discount'};      // Discount
+                $soldPrice = $it->{'soldPrice'};    // Price after discount
+                $paid = $it->{'paid'};              // money paid
+                $orderID = $value->ID;              // order id 
+                $date = $it->{'date'};              // date of sale
+            
+                $query = "INSERT INTO Sales (`Name`, `Amount`, `Price`, `Discount`, `SoldPrice`, `Paid`, `OrderID`, `Date`) 
+                    VALUES ('" . $name . "', '" . $amount . "','" . $price . "', '" . $discount . "', '" . $soldPrice . "',
+                        '" . $paid . "', '" . $orderID . "', '" . $date . "')";
+                
+                $result = $mysqli->query($query);
+                if($result === TRUE){
+                    $itemCount++;
+                }
+            }
+            
+            if($itemCount === count($items)){
+                $processResult = 1;
+            }
+            else{
+                $processResult = 0;
+            }
+        }
+        else{
+            $processResult = 0;
+        }
+        
+        $jsonResponse = json_encode(array('result' => $processResult), JSON_FORCE_OBJECT);
+        
+        echo $jsonResponse;
     }
     
     mysqli_close($mysqli);

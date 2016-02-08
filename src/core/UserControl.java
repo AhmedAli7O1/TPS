@@ -1,6 +1,7 @@
 package core;
 
 import core.exceptions.LoginException;
+import core.exceptions.WSConnException;
 import core.igui.IUserControl;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class UserControl extends CoreMain implements IUserControl {
     private User currentUser;
 
     @Override // login to app using username and password
-    public boolean login(String userName, String password) throws LoginException{
+    public boolean login(String userName, String password) throws LoginException, WSConnException{
         try {
             currentUser = userData.login(userName, password);
             return true;

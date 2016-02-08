@@ -1,10 +1,10 @@
-package gui;
+package gui.sales;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class SalesView {
     private SimpleIntegerProperty id;
@@ -97,5 +97,13 @@ public class SalesView {
 
     public void setDate(String date) {
         this.date.set(date);
+    }
+
+    public static Double getTotalPaid(List<SalesView> sales){
+        double total = 0;
+        for (SalesView sale : sales){
+            total += sale.getPaid();
+        }
+        return total;
     }
 }

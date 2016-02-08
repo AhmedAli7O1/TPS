@@ -1,5 +1,7 @@
 package core;
 
+import core.exceptions.NoDataException;
+import core.exceptions.WSConnException;
 import core.idata.ISalesData;
 import core.igui.ISalesControl;
 import datalayer.SalesData;
@@ -15,19 +17,16 @@ public class SalesControl implements ISalesControl {
     private Queue<Order> newOrdersQueue;
 
     public SalesControl(){
-
         newOrdersQueue = new PriorityQueue<>();
-
         salesData = new SalesData();
-
     }
 
-    private void getOrders(LocalDate date, SalesViewStyle style){
+    private void getOrders(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException{
         orders= new ArrayList<>(salesData.getOrders(date, style));
     }
 
     @Override
-    public List<Item> getItems(LocalDate date, SalesViewStyle style) {
+    public List<Item> getItems(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException{
         getOrders(date, style);
         List<Item> items = new ArrayList<>();
         for(Order order : orders){
@@ -42,7 +41,7 @@ public class SalesControl implements ISalesControl {
     }
 
     @Override
-    public boolean addNewOrders(){
+    public boolean addNewOrders()throws WSConnException, NoDataException{
         for (int i = 0; i < newOrdersQueue.size(); i++) {
             salesData.addNewOrder(newOrdersQueue.poll());
         }

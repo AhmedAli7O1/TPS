@@ -1,4 +1,4 @@
-package gui;
+package gui.sales;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;

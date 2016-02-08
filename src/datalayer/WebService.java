@@ -1,5 +1,8 @@
 package datalayer;
 
+import core.exceptions.NoDataException;
+import core.exceptions.WSConnException;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -28,7 +31,7 @@ public class WebService extends DataSource {
         }
     }
 
-    public JSONObject getJson(String className, String methodName, Object obj){
+    public JSONObject getJson(String className, String methodName, Object obj) throws WSConnException, NoDataException{
         strUrl = address;
 
         strUrl += className + ".php";
@@ -43,10 +46,14 @@ public class WebService extends DataSource {
 
         try {
             return new JSONObject(requestJson());
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return null;
         }
+        catch (JSONException ex){
+            throw new NoDataException(ex.getMessage());
+        }
+        catch (Exception ex){
+            throw new WSConnException(ex.getMessage());
+        }
+
     }
 
     private String requestJson()throws Exception{
@@ -77,6 +84,10 @@ public class WebService extends DataSource {
 
         bw.close();
         reader.close();
+
+        System.out.println("Debug - File = 'WebService' Line = '81' : ");
+        System.out.println(response);
+        System.out.println("### End of Debug Line = '83' ###");
 
         return response;
     }

@@ -3,14 +3,15 @@ package core.igui;
 
 import core.Item;
 import core.Order;
-import core.SalesViewStyle;
-import org.joda.time.DateTime;
+import core.DataViewStyle;
+import core.exceptions.NoDataException;
+import core.exceptions.WSConnException;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface ISalesControl {
     void addOrder(Order order);
-    boolean addNewOrders();
-    List<Item> getItems(LocalDate date, SalesViewStyle style);
+    boolean addNewOrders()throws WSConnException, NoDataException;
+    List<Item> getItems(LocalDate date, DataViewStyle style)throws WSConnException, NoDataException;
 }

@@ -2,7 +2,9 @@ package datalayer;
 
 import core.Item;
 import core.Order;
-import core.SalesViewStyle;
+import core.DataViewStyle;
+import core.exceptions.NoDataException;
+import core.exceptions.WSConnException;
 import core.idata.ISalesData;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,7 +16,7 @@ import java.util.List;
 public class SalesData implements ISalesData {
 
     @Override
-    public List<Order> getOrders(LocalDate date, SalesViewStyle style) {
+    public List<Order> getOrders(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException {
         // put params into a json object to send
         JSONObject jsonToSend = new JSONObject();
         jsonToSend.put("date", date);
@@ -60,7 +62,7 @@ public class SalesData implements ISalesData {
                 itemsMap.put(orderID, new ArrayList<>());
             }
 
-            itemsMap.get(orderID).add(new Item(id, name, amount, price, discount, soldPrice, paid, purchaseValue, soldDate));
+            itemsMap.get(orderID).add(new Item(id, name, amount, price, discount, soldPrice, purchaseValue, paid, soldDate));
         }
 
         // add all items to Orders
@@ -72,7 +74,7 @@ public class SalesData implements ISalesData {
     }
 
     @Override
-    public boolean addNewOrder(Order order){
+    public boolean addNewOrder(Order order)throws WSConnException, NoDataException{
         WebService webService = new WebService();
         if(webService.getJson("sales", "addOrder", order).getInt("result") > 0){
             return true;

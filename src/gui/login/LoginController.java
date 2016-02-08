@@ -1,13 +1,10 @@
-package gui;
+package gui.login;
 
-import core.Authorization;
 import core.exceptions.LoginException;
+import gui.Main;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
@@ -23,7 +20,7 @@ public class LoginController extends Main implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //empty for now
-        imageState.setImage(new Image(getClass().getResourceAsStream("images/login_64x64.png")));
+        imageState.setImage(new Image(getClass().getResourceAsStream("./login_64x64.png")));
         imageState.resize(64,64);
 
     }
@@ -40,10 +37,13 @@ public class LoginController extends Main implements Initializable {
         catch (LoginException ex){
             if(ex.getExType() == LoginException.ExType.INVALID_ID_PASS){
                 //error image
-                imageState.setImage(new Image(getClass().getResourceAsStream("images/error_64x64.png")));
+                imageState.setImage(new Image(getClass().getResourceAsStream("error_64x64.png")));
             }
             else
                 ex.printStackTrace();
+        }
+        catch (Exception ex){
+
         }
     }
 }

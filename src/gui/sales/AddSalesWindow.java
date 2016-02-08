@@ -1,4 +1,4 @@
-package gui;
+package gui.sales;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

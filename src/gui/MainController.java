@@ -1,94 +1,97 @@
 package gui;
 
-import core.Item;
-import core.SalesControl;
-import core.SalesViewStyle;
+import core.DataViewStyle;
+import core.igui.IOutgoingsControl;
+import core.igui.ISalesControl;
+import gui.outgoings.OutgoingsMainController;
+import gui.purchases.PurchasesMainController;
+import gui.sales.AddSalesWindow;
+import gui.sales.SalesMainController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController extends Main implements Initializable {
+public class MainController extends Main implements Initializable, IParentController {
 
-    @FXML private VBox salesVBox;
-    @FXML private VBox outgoingsVBox;
-    @FXML private VBox purchasesVBox;
-    @FXML private Label lblUserName;
-
-    // Sales Pane Controllers
-    @FXML private ComboBox<String> cboxSalesViewStyle;
-    @FXML private DatePicker dpSalesDatePicker;
-    @FXML private Pane paneLoading;
-    @FXML private TableView<SalesView> tableSales;
-    @FXML private TableColumn<SalesView, Integer> cnSalesId;
-    @FXML private TableColumn<SalesView, String> cnSalesName;
-    @FXML private TableColumn<SalesView, Integer> cnSalesAmount;
-    @FXML private TableColumn<SalesView, Double> cnSalesSoldPrice;
-    @FXML private TableColumn<SalesView, Double> cnSalesPaid;
-    @FXML private TableColumn<SalesView, DateFormat> cnSalesDate;
-    private ObservableList<SalesView> salesList;
-
-    private ObservableList<String> salesViewStyle;
-
-    private List<VBox> panes;
-
+    @FXML private VBox purchasesMain;
+    @FXML private PurchasesMainController purchasesMainController;
+    @FXML private VBox outgoingsMain;
+    @FXML private OutgoingsMainController outgoingsMainController;
+    @FXML private VBox salesMain;                             //Sales Window
+    @FXML private SalesMainController salesMainController;    //Sales Window Controller
+    @FXML private Label lblUserName;                          //label shows current user name
+    @FXML private Pane paneLoading;                           //Loading Pane
+    private List<VBox> panes;                                 //List of panes "Sales, Outgoings, Withdrawals...etc"
+    private VBox currPane;                                    //Current Pane
+    private ObservableList<String> dataViewStyleList;      //how sales are displayed daily, monthly...etc
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // create list contains all panes to control them
         panes = new ArrayList<>();
-        panes.add(salesVBox);
-        panes.add(outgoingsVBox);
-        panes.add(purchasesVBox);
+        panes.add(salesMain);
+        panes.add(outgoingsMain);
+        panes.add(purchasesMain);
 
         // by default all panes not visible
-        salesVBox.setVisible(false);
-        outgoingsVBox.setVisible(false);
-        purchasesVBox.setVisible(false);
+        salesMain.setVisible(false);
+        outgoingsMain.setVisible(false);
+        purchasesMain.setVisible(false);
+
+        // init View Style ComboBox
+        dataViewStyleList = FXCollections.observableArrayList();
+        dataViewStyleList.add("يومى");
+        dataViewStyleList.add("شهرى");
+        dataViewStyleList.add("سنوى");
 
         // get user data
         lblUserName.setText(userControl.getCurrentUser().getName());
 
-        salesControl = new SalesControl();
-
-        // initialize Sales controllers
-        initSalesControllers();
+        //initialize all sub Windows with this instance as parent
+        salesMainController.setMainController(this);       //Sales
+        outgoingsMainController.setMainController(this);   //Outgoings
     }
-
-    /**
-     * ###################################################
-     * ############# Event handling Methods ##############
-     * ###################################################
-     */
 
     //sales TitledPane onMouseClicked Event
-    public void salesOnClicked(){ showPane(salesVBox); }
+    public void salesOnClicked(){ showPane(salesMain); }
     //outgoings TitledPane onMouseClicked Event
-    public void outgoingsOnClicked() { showPane(outgoingsVBox); }
+    public void outgoingsOnClicked() { showPane(outgoingsMain); }
     //purchases TitledPane onMouseClicked Event
-    public void purchasesOnClicked() { showPane(purchasesVBox); }
+    public void purchasesOnClicked() { showPane(purchasesMain); }
 
-    // show and hide panes "Windows"
-    private void showPane(VBox pane){
+    @Override // show and hide panes "Windows"
+    public void showPane(VBox pane){
         panes.forEach(p -> {
-            if(p != pane)
+            if(p == pane) {
+                p.setVisible(true);
+                currPane = pane;
+            }
+            else
                 p.setVisible(false);
-
-            pane.setVisible(true);
         });
     }
+
+    @Override
+    public void showLoading(){
+        paneLoading.setVisible(true);
+        currPane.setDisable(true);
+    }
+
+    @Override
+    public void hideLoading(){
+        currPane.setDisable(false);
+        paneLoading.setVisible(false);
+    }
+
 
     /**
      * OnAction Event for button AddSales
@@ -99,86 +102,36 @@ public class MainController extends Main implements Initializable {
     private void btnAddSalesOnClick(){
         addSalesWindow = new AddSalesWindow();
         addSalesWindow.showAndWait();
-        salesControl.addNewOrders();
-        btnSalesViewOnAction();
+        try {
+            salesControl.addNewOrders();
+        }catch (Exception ex){}
+        salesMainController.btnSalesViewOnAction();
     }
 
-    @FXML
-    private void btnSalesViewOnAction(){
-
-        paneLoading.setVisible(true);
-        salesVBox.setDisable(true);
-        salesList.clear();
-
-        new Thread(
-                () -> {
-                    try {
-
-                        List<Item> items = salesControl.getItems(dpSalesDatePicker.getValue(), getSalesViewStyle());
-
-                        for (Item item : items) {
-
-                            salesList.add(new SalesView(
-                                    item.getId(),
-                                    item.getName(),
-                                    item.getAmount(),
-                                    item.getSoldPrice(),
-                                    item.getPaid(),
-                                    item.getDate().toString()));
-                        }
-                    }
-                    catch(Exception ex){
-                    }
-                    finally {
-                        salesVBox.setDisable(false);
-                        paneLoading.setVisible(false);
-                    }
-                }
-        ).start();
-    }
-
-    /**
-     * ############################################
-     * ######### Initialize of controls ###########
-     * ############################################
-     */
-
-    // initialize Sales controllers
-    private void initSalesControllers(){
-        //init DatePicker
-        dpSalesDatePicker.setValue(LocalDate.now());
-
-        // init View Style ComboBox
-        salesViewStyle = FXCollections.observableArrayList();
-        salesViewStyle.add("يومى");
-        salesViewStyle.add("شهرى");
-        salesViewStyle.add("سنوى");
-
-        cboxSalesViewStyle.setItems(salesViewStyle);
-
-        cboxSalesViewStyle.setValue(salesViewStyle.get(1));
-
-        // init Sales Table
-        cnSalesId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        cnSalesName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cnSalesAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        cnSalesSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
-        cnSalesPaid.setCellValueFactory(new PropertyValueFactory<>("paid"));
-        cnSalesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-
-        salesList = FXCollections.observableArrayList();
-
-        tableSales.setItems(salesList);
-    }
-
-    private SalesViewStyle getSalesViewStyle(){
-        if(cboxSalesViewStyle.getSelectionModel().isSelected(1))
-            return SalesViewStyle.MONTH;
-        else if(cboxSalesViewStyle.getSelectionModel().isSelected(0))
-            return SalesViewStyle.DAY;
-        else if(cboxSalesViewStyle.getSelectionModel().isSelected(2))
-            return SalesViewStyle.YEAR;
+    @Override //read ComboBox value and return it as SalesViewStyle
+    public DataViewStyle getDataViewStyle(ComboBox<String> cbox){
+        if(cbox.getSelectionModel().isSelected(1))
+            return DataViewStyle.MONTH;
+        else if(cbox.getSelectionModel().isSelected(0))
+            return DataViewStyle.DAY;
+        else if(cbox.getSelectionModel().isSelected(2))
+            return DataViewStyle.YEAR;
         else
             return null;
+    }
+
+    @Override
+    public ObservableList<String> getDataViewStyleList() {
+        return dataViewStyleList;
+    }
+
+    @Override
+    public ISalesControl getSalesControl(){
+        return salesControl;
+    }
+
+    @Override
+    public IOutgoingsControl getOutgoingsControl(){
+        return outgoingsControl;
     }
 }

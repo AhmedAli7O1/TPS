@@ -2,12 +2,16 @@
     include 'connection.php';
 
     // call the passes in function 
-    if(function_exists($_GET['method'])){
-        $_GET['method']($_GET['uName'], $_GET['uPass']);
+    if($_POST['method'] === "login"){
+        login($_POST['json']);
     }
     
-    function login($uName, $uPass){
+    function login($json){
         global $mysqli;
+        
+        $params = json_decode($json); 
+        $uName = $params->{'uName'};
+        $uPass = $params->{'uPass'};
         
         // check if user exist 
         $strQuery = sprintf("SELECT `Name`, `Title`, `Auth`, `LastEdit`, `LastLogged`, `SecKey`
