@@ -6,85 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/gui/Main.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/gui/OutgoingsMain.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/gui/PurchasesMain.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/gui/SalesMain.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/core/Outgoing.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/core/OutgoingsControl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/core/exceptions/NoDataException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/core/exceptions/WSConnException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/core/idata/IOutgoingsData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/core/igui/IOutgoingsControl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/datalayer/OutgoingsData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/IParentController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/outgoings/OutgoingsMainController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/outgoings/OutgoingsView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/purchases/PurchasesMainController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/sales/SalesMainController.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/AddSalesController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/LoginController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/OrderView.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/SalesView.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/images/error_64x64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/images/login_64x64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/layout/AddSales.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/layout/Login.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/layout/Main.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/layout/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/TPS/core/SalesViewStyle.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/gui/layout/Main.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/gui/layout/SalesMain.fxml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/TPS_jar/TPS.jar" afterPath="$PROJECT_DIR$/out/artifacts/TPS_jar/TPS.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/Main.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/MainController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/MainController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/CoreMain.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/CoreMain.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/SalesControl.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/SalesControl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/UserControl.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/UserControl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/idata/ISalesData.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/idata/ISalesData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/idata/IUserData.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/idata/IUserData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/igui/ISalesControl.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/igui/ISalesControl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/core/igui/IUserControl.class" afterPath="$PROJECT_DIR$/out/production/TPS/core/igui/IUserControl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/datalayer/SalesData.class" afterPath="$PROJECT_DIR$/out/production/TPS/datalayer/SalesData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/datalayer/UserData.class" afterPath="$PROJECT_DIR$/out/production/TPS/datalayer/UserData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/datalayer/WebService.class" afterPath="$PROJECT_DIR$/out/production/TPS/datalayer/WebService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/TPS_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/TPS_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TPS.iml" afterPath="$PROJECT_DIR$/TPS.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/CoreMain.java" afterPath="$PROJECT_DIR$/src/core/CoreMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/SalesControl.java" afterPath="$PROJECT_DIR$/src/core/SalesControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/UserControl.java" afterPath="$PROJECT_DIR$/src/core/UserControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/idata/ISalesData.java" afterPath="$PROJECT_DIR$/src/core/idata/ISalesData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/idata/IUserData.java" afterPath="$PROJECT_DIR$/src/core/idata/IUserData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/igui/ISalesControl.java" afterPath="$PROJECT_DIR$/src/core/igui/ISalesControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/igui/IUserControl.java" afterPath="$PROJECT_DIR$/src/core/igui/IUserControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/SalesData.java" afterPath="$PROJECT_DIR$/src/datalayer/SalesData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/UserData.java" afterPath="$PROJECT_DIR$/src/datalayer/UserData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/WebService.java" afterPath="$PROJECT_DIR$/src/datalayer/WebService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Main.java" afterPath="$PROJECT_DIR$/src/gui/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/MainController.java" afterPath="$PROJECT_DIR$/src/gui/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tps-webservice/connection.php" afterPath="$PROJECT_DIR$/tps-webservice/connection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tps-webservice/sales.php" afterPath="$PROJECT_DIR$/tps-webservice/sales.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tps-webservice/users.php" afterPath="$PROJECT_DIR$/tps-webservice/users.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/images/add_16x16.png" afterPath="$PROJECT_DIR$/images/gui/add_16x16.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/images/delete_16x16.png" afterPath="$PROJECT_DIR$/images/gui/delete_16x16.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/images/error_64x64.png" afterPath="$PROJECT_DIR$/images/gui/error_64x64.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/images/invoice_64x64.png" afterPath="$PROJECT_DIR$/images/gui/invoice_64x64.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/images/login_64x64.png" afterPath="$PROJECT_DIR$/images/gui/login_64x64.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/images/money_64x64.png" afterPath="$PROJECT_DIR$/images/gui/money_64x64.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/layout/AddSales.fxml" afterPath="$PROJECT_DIR$/layout/gui/AddSales.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/layout/Login.fxml" afterPath="$PROJECT_DIR$/layout/gui/Login.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/gui/layout/style.css" afterPath="$PROJECT_DIR$/layout/gui/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/core/SalesViewStyle.java" afterPath="$PROJECT_DIR$/src/core/DataViewStyle.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/gui/AddSalesController.java" afterPath="$PROJECT_DIR$/src/gui/sales/AddSalesController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/gui/AddSalesWindow.java" afterPath="$PROJECT_DIR$/src/gui/sales/AddSalesWindow.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/gui/LoginController.java" afterPath="$PROJECT_DIR$/src/gui/login/LoginController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/gui/OrderView.java" afterPath="$PROJECT_DIR$/src/gui/sales/OrderView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/gui/SalesView.java" afterPath="$PROJECT_DIR$/src/gui/sales/SalesView.java" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -168,7 +90,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -198,7 +122,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -413,6 +339,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="TPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TPS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -804,7 +744,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454854050208</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="features : View Outgoings">
+      <created>1454951266050</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1454951266050</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -825,6 +771,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763976" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -845,7 +792,6 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39906833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763976" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32608697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -900,7 +846,8 @@
     <MESSAGE value="update folders hierarchy&#10;Resources folder added for images and layouts" />
     <MESSAGE value="features : View Sales By Date #1" />
     <MESSAGE value="features : Add New Order&#10;Update : updated the way WebService class&#10;                works so now it supports sending data &#10;                int UTF-8 format" />
-    <option name="LAST_COMMIT_MESSAGE" value="features : Add New Order&#10;Update : updated the way WebService class&#10;                works so now it supports sending data &#10;                int UTF-8 format" />
+    <MESSAGE value="features : View Outgoings" />
+    <option name="LAST_COMMIT_MESSAGE" value="features : View Outgoings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -915,7 +862,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1065,6 +1014,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1212,6 +1162,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="72" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#891#892#0" expanded="false" />
+            <element signature="e#1090#1091#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1235,7 +1190,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1288,7 +1245,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
