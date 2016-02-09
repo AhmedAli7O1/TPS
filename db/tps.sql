@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2016 at 06:04 PM
+-- Generation Time: Feb 09, 2016 at 10:26 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -33,6 +33,13 @@ CREATE TABLE `incomes` (
   `IsDebt` tinyint(1) NOT NULL DEFAULT '0',
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `incomes`
+--
+
+INSERT INTO `incomes` (`ID`, `Details`, `Value`, `IsDebt`, `Date`) VALUES
+(1, 'باقى حساب عبد السلام ', 500, 1, '2016-02-10');
 
 -- --------------------------------------------------------
 
@@ -163,7 +170,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `Name`, `Password`, `Title`, `Auth`, `LastEdit`, `LastLogged`, `SecKey`) VALUES
 (1, 'bluemax', '234597458', 'devo', 'DEV', '2016-01-08', '2016-01-31', 0),
-(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 28244);
+(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 28647);
 
 -- --------------------------------------------------------
 
@@ -177,6 +184,13 @@ CREATE TABLE `withdrawals` (
   `Value` double NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `withdrawals`
+--
+
+INSERT INTO `withdrawals` (`ID`, `Details`, `Value`, `Date`) VALUES
+(1, 'يد ايمن فراج سحب نقدى', 10000, '2016-02-09');
 
 --
 -- Indexes for dumped tables
@@ -226,7 +240,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `incomes`
 --
 ALTER TABLE `incomes`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -251,7 +265,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `withdrawals`
 --
 ALTER TABLE `withdrawals`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="outgoingsVBox" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OutgoingsMainController">
+<VBox fx:id="outgoingsVBox" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" visible="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OutgoingsMainController">
     <children>
         <HBox spacing="5.0">
             <children>

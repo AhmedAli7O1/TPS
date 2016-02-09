@@ -1,13 +1,10 @@
 package gui;
 
-import core.exceptions.LoginException;
 import core.exceptions.WSConnException;
-import gui.Main;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;

@@ -1,11 +1,7 @@
 package gui;
 
-import core.OutgoingsControl;
-import core.SalesControl;
-import core.igui.IOutgoingsControl;
-import core.igui.ISalesControl;
-import core.igui.IUserControl;
-import core.UserControl;
+import core.*;
+import core.igui.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +17,8 @@ public class Main extends Application {
     protected static IUserControl userControl = new UserControl();
     protected static ISalesControl salesControl = new SalesControl();
     protected static IOutgoingsControl outgoingsControl = new OutgoingsControl();
+    protected static IIncomesControl incomesControl = new IncomesControl();
+    protected static IWithdrawalsControl withdrawalsControl = new WithdrawalsControl();
 
     @Override
     public void start(Stage primaryStage) throws Exception{

@@ -1,8 +1,10 @@
 package gui;
 
 import core.DataViewStyle;
+import core.igui.IIncomesControl;
 import core.igui.IOutgoingsControl;
 import core.igui.ISalesControl;
+import core.igui.IWithdrawalsControl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,16 +20,20 @@ import java.util.ResourceBundle;
 public class MainController extends Main implements Initializable, IParentController {
 
     @FXML private VBox purchasesMain;
-    @FXML private PurchasesMainController purchasesMainController;
     @FXML private VBox outgoingsMain;
+    @FXML private VBox incomesMain;
+    @FXML private VBox salesMain;                                    //Sales Window
+    @FXML private VBox withdrawalsMain;
+    @FXML private WithdrawalsMainController withdrawalsMainController;
+    @FXML private PurchasesMainController purchasesMainController;
     @FXML private OutgoingsMainController outgoingsMainController;
-    @FXML private VBox salesMain;                             //Sales Window
-    @FXML private SalesMainController salesMainController;    //Sales Window Controller
-    @FXML private Label lblUserName;                          //label shows current user name
-    @FXML private Pane paneLoading;                           //Loading Pane
-    private List<VBox> panes;                                 //List of panes "Sales, Outgoings, Withdrawals...etc"
-    private VBox currPane;                                    //Current Pane
-    private ObservableList<String> dataViewStyleList;      //how sales are displayed daily, monthly...etc
+    @FXML private IncomesMainController incomesMainController;
+    @FXML private SalesMainController salesMainController;           //Sales Window Controller
+    @FXML private Label lblUserName;                                 //label shows current user name
+    @FXML private Pane paneLoading;                                  //Loading Pane
+    private List<VBox> panes;                                        //List of panes "Sales, Outgoings, Withdrawals...etc"
+    private VBox currPane;                                           //Current Pane
+    private ObservableList<String> dataViewStyleList;                //how sales are displayed daily, monthly...etc
 
 
     @Override
@@ -37,11 +43,15 @@ public class MainController extends Main implements Initializable, IParentContro
         panes.add(salesMain);
         panes.add(outgoingsMain);
         panes.add(purchasesMain);
+        panes.add(incomesMain);
+        panes.add(withdrawalsMain);
 
         // by default all panes not visible
         salesMain.setVisible(false);
         outgoingsMain.setVisible(false);
         purchasesMain.setVisible(false);
+        incomesMain.setVisible(false);
+        withdrawalsMain.setVisible(false);
 
         // init View Style ComboBox
         dataViewStyleList = FXCollections.observableArrayList();
@@ -55,6 +65,8 @@ public class MainController extends Main implements Initializable, IParentContro
         //initialize all sub Windows with this instance as parent
         salesMainController.setMainController(this);       //Sales
         outgoingsMainController.setMainController(this);   //Outgoings
+        incomesMainController.setMainController(this);     //Incomes
+        withdrawalsMainController.setMainController(this);     //Withdrawals
     }
 
     //sales TitledPane onMouseClicked Event
@@ -63,6 +75,10 @@ public class MainController extends Main implements Initializable, IParentContro
     public void outgoingsOnClicked() { showPane(outgoingsMain); }
     //purchases TitledPane onMouseClicked Event
     public void purchasesOnClicked() { showPane(purchasesMain); }
+    //Incomes TitledPane onMouseClicked Event
+    public void btnIncomesOnClicked() { showPane(incomesMain); }
+    //Withdrawals TitledPane onMouseClicked Event
+    public void btnWithdrawalsOnClicked(){ showPane(withdrawalsMain); }
 
     @Override // show and hide panes "Windows"
     public void showPane(VBox pane){
@@ -129,5 +145,13 @@ public class MainController extends Main implements Initializable, IParentContro
     @Override
     public IOutgoingsControl getOutgoingsControl(){
         return outgoingsControl;
+    }
+
+    @Override
+    public IIncomesControl getIncomesControl() { return incomesControl; }
+
+    @Override
+    public IWithdrawalsControl getWithdrawalsControl() {
+        return withdrawalsControl;
     }
 }
