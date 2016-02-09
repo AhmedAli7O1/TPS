@@ -1,4 +1,4 @@
-package gui.outgoings;
+package gui;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;

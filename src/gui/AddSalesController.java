@@ -1,8 +1,7 @@
-package gui.sales;
+package gui;
 
 import core.Item;
 import core.Order;
-import gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,10 +60,10 @@ public class AddSalesController extends Main implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        imageAddSalesSave.setImage(new Image(getClass().getResourceAsStream("images/add_16x16.png")));
-        imageAddSalesDelete.setImage(new Image(getClass().getResourceAsStream("images/delete_16x16.png")));
-        imageMoney.setImage(new Image(getClass().getResourceAsStream("images/money_64x64.png")));
-        imageInvoice.setImage(new Image(getClass().getResourceAsStream("images/invoice_64x64.png")));
+        imageAddSalesSave.setImage(new Image(getClass().getResourceAsStream("add_16x16.png")));
+        imageAddSalesDelete.setImage(new Image(getClass().getResourceAsStream("delete_16x16.png")));
+        imageMoney.setImage(new Image(getClass().getResourceAsStream("money_64x64.png")));
+        imageInvoice.setImage(new Image(getClass().getResourceAsStream("invoice_64x64.png")));
 
         /**
          * set the property value

@@ -20,7 +20,7 @@ public class UserData implements IUserData{
             jsonToSend.put("uPass", uPass);
 
         try {
-            JSONObject jsonResponse = webService.getJson("users", "gui/login", jsonToSend);
+            JSONObject jsonResponse = webService.getJson("users", "login", jsonToSend);
 
             return new User(jsonResponse.getString("Name"),
                     Authorization.valueOf(jsonResponse.getString("Auth")),

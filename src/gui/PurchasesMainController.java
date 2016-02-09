@@ -1,4 +1,4 @@
-package gui.purchases;
+package gui;
 
 public class PurchasesMainController {
 }

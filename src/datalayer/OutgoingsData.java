@@ -20,7 +20,7 @@ public class OutgoingsData implements IOutgoingsData {
         jsonToSend.put("style", style);
 
         WebService webService = new WebService();
-        JSONObject obj = webService.getJson("gui/outgoings", "getOutgoings", jsonToSend);
+        JSONObject obj = webService.getJson("outgoings", "getOutgoings", jsonToSend);
         List<Outgoing> outgoings = new ArrayList<>();
         try {
             JSONArray jsonOutgoingsArray = obj.getJSONArray("Outgoings");

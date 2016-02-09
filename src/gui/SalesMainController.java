@@ -1,15 +1,22 @@
-package gui.sales;
+package gui;
 
 import core.Item;
-import gui.IParentController;
+import core.Outgoing;
+import core.exceptions.NoDataException;
+import core.exceptions.WSConnException;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SalesMainController {
 
@@ -41,29 +48,41 @@ public class SalesMainController {
         salesList.clear();
 
         new Thread(
-                () -> {
-                    Double totalPaid = 0d;
-                    try {
-                        List<Item> items =
-                                parent.getSalesControl().getItems(dpSalesDatePicker.getValue(),
-                                        parent.getDataViewStyle(cboxSalesViewStyle));
-                        for (Item item : items) {
-                            totalPaid += item.getPaid();
-                            salesList.add(new SalesView(
-                                    item.getId(),
-                                    item.getName(),
-                                    item.getAmount(),
-                                    item.getSoldPrice(),
-                                    item.getPaid(),
-                                    item.getDate().toString()));
-                        }
+                new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        try{
+                            // get outgoings
+                            List<Item> sales =
+                                    parent.getSalesControl().getItems(dpSalesDatePicker.getValue(),
+                                            parent.getDataViewStyle(cboxSalesViewStyle));
 
-                    }
-                    catch(Exception ex){
-                    }
-                    finally {
-                        txtTotalSales.setText(totalPaid.toString());
-                        parent.hideLoading();
+                            /**
+                             * update observable list
+                             * that will update Items
+                             * Table and total label too
+                             */
+                            Platform.runLater(() -> {
+                                salesList.addAll(sales.stream().map(item -> new SalesView(
+                                        item.getId(),
+                                        item.getName(),
+                                        item.getAmount(),
+                                        item.getSoldPrice(),
+                                        item.getPaid(),
+                                        item.getDate().toString()
+                                )).collect(Collectors.toList()));
+                            });
+
+                        }catch (WSConnException ex){
+                            //TODO: add no connection GUI alert
+                            System.out.println("no connection");
+                        }catch(NoDataException ex){
+                            //TODO: add no Data GUI alert
+                            System.out.println("no data received");
+                        } finally {
+                            parent.hideLoading(); // hide loading pane
+                        }
+                        return null;
                     }
                 }
         ).start();
@@ -87,6 +106,19 @@ public class SalesMainController {
         salesList = FXCollections.observableArrayList();
 
         tableSales.setItems(salesList);
+
+        /**
+         * bind txtTotalSales which display Total Sales
+         * of the table Sales
+         * that means whenever the table updates the TextField
+         * will update too
+         */
+        DoubleBinding total = Bindings.createDoubleBinding(() ->
+                        tableSales.getItems().stream().collect(Collectors.summingDouble(SalesView::getPaid)),
+                tableSales.getItems()
+        );
+
+        txtTotalSales.textProperty().bind(Bindings.format("%3.2f", total));
     }
 
 }

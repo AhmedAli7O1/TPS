@@ -17,13 +17,13 @@ public class UserControl extends CoreMain implements IUserControl {
     private User currentUser;
 
     @Override // login to app using username and password
-    public boolean login(String userName, String password) throws LoginException, WSConnException{
+    public boolean login(String userName, String password) throws WSConnException{
         try {
             currentUser = userData.login(userName, password);
             return true;
         }
         catch (LoginException ex){
-            throw new LoginException(ex.getExType());
+            return false;
         }
     }
 

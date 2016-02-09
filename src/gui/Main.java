@@ -6,7 +6,6 @@ import core.igui.IOutgoingsControl;
 import core.igui.ISalesControl;
 import core.igui.IUserControl;
 import core.UserControl;
-import gui.sales.AddSalesWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

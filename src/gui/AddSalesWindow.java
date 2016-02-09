@@ -1,4 +1,4 @@
-package gui.sales;
+package gui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +20,7 @@ public class AddSalesWindow extends Stage{
 
     private void initialize() throws Exception{
         setTitle("برنامج إدارة المبيعات - إضافة فاتورة");
-        Parent root = FXMLLoader.load(getClass().getResource("layout/AddSales.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("AddSales.fxml"));
         Scene scene = new Scene(root);
         setScene(scene);
         sizeToScene();

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="outgoingsVBox" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.outgoings.OutgoingsMainController">
+<VBox fx:id="outgoingsVBox" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OutgoingsMainController">
     <children>
         <HBox spacing="5.0">
             <children>
@@ -41,7 +41,7 @@
         <HBox alignment="CENTER_LEFT" spacing="8.0">
             <children>
                 <Label text="إجمالى المصروفات" />
-                <TextField fx:id="txtTotalOutgoings" editable="false" />
+            <TextField fx:id="txtTotalOutgoings" editable="false" />
             </children>
             <padding>
                 <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
