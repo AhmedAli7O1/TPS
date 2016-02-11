@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface IOutgoingsControl {
     List<Outgoing> getOutgoings(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException;
+    void addOutgoings(List<Outgoing> newOutgoings);
+    boolean saveChanges() throws WSConnException, NoDataException;
 }

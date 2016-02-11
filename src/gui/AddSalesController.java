@@ -156,7 +156,7 @@ public class AddSalesController extends Main implements Initializable{
     }
 
     @FXML
-    private void btnSaveOrderOnAction(){
+    public void btnSaveOrderOnAction(){
 
         List<Item> items = new ArrayList<>();
         for(OrderView orderView : orders){

@@ -12,11 +12,20 @@ public class OutgoingsView {
     private SimpleDoubleProperty value;
     private SimpleStringProperty date;
 
+
+
     public OutgoingsView(int id, String details, double value, LocalDate date) {
         this.id = new SimpleIntegerProperty(id);
         this.details = new SimpleStringProperty(details);
         this.value = new SimpleDoubleProperty(value);
         this.date = new SimpleStringProperty(date.toString());
+    }
+
+    public OutgoingsView(String details, double value, String date) {
+        this.id = new SimpleIntegerProperty();
+        this.details = new SimpleStringProperty(details);
+        this.value = new SimpleDoubleProperty(value);
+        this.date = new SimpleStringProperty(date);
     }
 
     public int getId() {

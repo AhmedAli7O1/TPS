@@ -14,11 +14,13 @@ public class Main extends Application {
 
     private static Stage primaryStage;
     protected static AddSalesWindow addSalesWindow;
+    protected static AddOutgoingsWindow addOutgoingsWindow;
     protected static IUserControl userControl = new UserControl();
     protected static ISalesControl salesControl = new SalesControl();
     protected static IOutgoingsControl outgoingsControl = new OutgoingsControl();
     protected static IIncomesControl incomesControl = new IncomesControl();
     protected static IWithdrawalsControl withdrawalsControl = new WithdrawalsControl();
+    protected static IPurchasesControl purchasesControl = new PurchasesControl();
 
     @Override
     public void start(Stage primaryStage) throws Exception{

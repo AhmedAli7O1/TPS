@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2016 at 10:26 PM
+-- Generation Time: Feb 11, 2016 at 09:42 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -101,7 +101,35 @@ CREATE TABLE `outgoings` (
 --
 
 INSERT INTO `outgoings` (`ID`, `Details`, `Value`, `Date`) VALUES
-(1, 'راتب شهر 10 ', 2000, '2016-01-24');
+(1, 'راتب شهر 10 ', 2000, '2016-01-24'),
+(2, 'qqqqqqqqqqqqqq', 1000, '2016-01-11'),
+(3, 'eeeeeeeeeee', 1000, '2016-01-04'),
+(4, 'mmmmmmmmmm', 1000, '2016-01-04'),
+(5, 'cccccccc', 1000, '2016-01-04'),
+(6, 'محمود فتحى محمد', 5, '2016-01-13'),
+(7, 'محمود فتحى على', 10, '2016-01-13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `ID` bigint(20) NOT NULL,
+  `Item` varchar(200) NOT NULL,
+  `Amount` int(11) NOT NULL,
+  `PurchasePrice` double NOT NULL,
+  `Seller` varchar(100) NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`ID`, `Item`, `Amount`, `PurchasePrice`, `Seller`, `Date`) VALUES
+(1, 'تربو ك 10', 2, 5000, 'محمود قرنى', '2016-02-10');
 
 -- --------------------------------------------------------
 
@@ -170,7 +198,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `Name`, `Password`, `Title`, `Auth`, `LastEdit`, `LastLogged`, `SecKey`) VALUES
 (1, 'bluemax', '234597458', 'devo', 'DEV', '2016-01-08', '2016-01-31', 0),
-(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 28647);
+(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 22308);
 
 -- --------------------------------------------------------
 
@@ -215,6 +243,12 @@ ALTER TABLE `outgoings`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
@@ -250,6 +284,11 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `outgoings`
 --
 ALTER TABLE `outgoings`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sales`

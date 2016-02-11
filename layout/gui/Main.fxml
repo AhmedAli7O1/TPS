@@ -25,9 +25,24 @@
       </ToolBar>
    </bottom>
    <left>
-      <Accordion BorderPane.alignment="CENTER">
+      <Accordion fx:id="rightAccordion" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane fx:id="salesButton" animated="false" contentDisplay="RIGHT" onMouseClicked="#salesOnClicked" stylesheets="@style.css" text="المبيعات">
+            <TitledPane fx:id="btnStatistics" animated="false" onMouseClicked="#statisticsOnClicked" stylesheets="@style.css" text="احصائيات">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="imageStatistics" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </TitledPane>
+          <TitledPane fx:id="salesButton" animated="false" onMouseClicked="#salesOnClicked" stylesheets="@style.css" text="المبيعات">
                <font>
                   <Font size="16.0" />
                </font>
@@ -43,38 +58,101 @@
                      </padding>
                   </VBox>
                </content>
+               <graphic>
+                  <ImageView fx:id="imageSales" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
           </TitledPane>
           <TitledPane fx:id="outgoingsButton" animated="false" onMouseClicked="#outgoingsOnClicked" text="المصروفات">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="btnAddOutgoings" minWidth="100.0" mnemonicParsing="false" onAction="#btnAddOutgoingsOnClick" text="إضافة" />
+                              <Button minWidth="100.0" mnemonicParsing="false" text="تعديل" />
+                              <Button layoutX="20.0" layoutY="59.0" minWidth="100.0" mnemonicParsing="false" text="حفظ" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children></AnchorPane>
             </content>
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imageOutgoings" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
           </TitledPane>
             <TitledPane fx:id="btnIncomes" layoutX="10.0" layoutY="84.0" onMouseClicked="#btnIncomesOnClicked" text="الوارد">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="btnAddSales2" minWidth="100.0" mnemonicParsing="false" onAction="#btnAddSalesOnClick" text="إضافة" />
+                              <Button minWidth="100.0" mnemonicParsing="false" text="تعديل" />
+                              <Button layoutX="20.0" layoutY="59.0" minWidth="100.0" mnemonicParsing="false" text="حفظ" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children></AnchorPane>
                </content>
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imageIncomes" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
             </TitledPane>
           <TitledPane fx:id="purchasesButton" onMouseClicked="#purchasesOnClicked" text="المشتريات">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+                           <children>
+                              <Button fx:id="btnAddSales3" minWidth="100.0" mnemonicParsing="false" onAction="#btnAddSalesOnClick" text="إضافة" />
+                              <Button minWidth="100.0" mnemonicParsing="false" text="تعديل" />
+                              <Button layoutX="20.0" layoutY="59.0" minWidth="100.0" mnemonicParsing="false" text="حفظ" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children></AnchorPane>
             </content>
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imagePurchases" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
           </TitledPane>
             <TitledPane fx:id="btnWithdrawals" layoutX="10.0" layoutY="121.0" onMouseClicked="#btnWithdrawalsOnClicked" text="المسحوبات">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="btnAddSales4" minWidth="100.0" mnemonicParsing="false" onAction="#btnAddSalesOnClick" text="إضافة" />
+                              <Button minWidth="100.0" mnemonicParsing="false" text="تعديل" />
+                              <Button layoutX="20.0" layoutY="59.0" minWidth="100.0" mnemonicParsing="false" text="حفظ" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children></AnchorPane>
                </content>
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imageWithdrawals" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
             </TitledPane>
         </panes>
       </Accordion>
@@ -84,6 +162,7 @@
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
+                   <fx:include fx:id="statisticsMain" source="StatisticsMain.fxml" />
                    <fx:include fx:id="salesMain" source="SalesMain.fxml" />
                    <fx:include fx:id="outgoingsMain" source="OutgoingsMain.fxml" />
                    <fx:include fx:id="purchasesMain" source="PurchasesMain.fxml" />
@@ -135,10 +214,22 @@
             </MenuBar>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" VBox.vgrow="ALWAYS">
               <items>
-                  <Button layoutX="3.0" mnemonicParsing="false" text="Button" />
-                <Button layoutX="3.0" mnemonicParsing="false" text="Button" />
-                  <Label text="المستخدم : " />
-                  <Label fx:id="lblUserName" layoutX="62.0" prefHeight="17.0" prefWidth="56.0" text="--" />
+                  <Label fx:id="lblUserName" contentDisplay="GRAPHIC_ONLY" layoutX="62.0" prefHeight="32.0" prefWidth="32.0" text="المستخدم">
+                     <graphic>
+                        <ImageView fx:id="imageUserIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Label>
+                  <TextField fx:id="txtUserName" editable="false" prefHeight="25.0" prefWidth="127.0" />
+                  <AnchorPane prefHeight="32.0" prefWidth="67.0" />
+                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Button">
+                     <graphic>
+                        <ImageView fx:id="imageCalendar" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="248.0" layoutY="10.0" mnemonicParsing="false" text="Button">
+                     <graphic>
+                        <ImageView fx:id="imageCalc" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
               </items>
             </ToolBar>
          </children>

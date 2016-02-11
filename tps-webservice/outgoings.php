@@ -5,8 +5,8 @@ ini_set('display_errors', 1);
     if($_POST['method'] === "getOutgoings"){
         getOutgoings($_POST['json']); //call getOutgoings method
     }
-    elseif($_POST['method'] === "addOutgoing"){
-        addOutgoing($_POST['json']);
+    elseif($_POST['method'] === "addOutgoings"){
+        addOutgoings($_POST['json']);
     }
     
     function getOutgoings($json){
@@ -54,33 +54,34 @@ ini_set('display_errors', 1);
         }
     }
     
-    function addOutgoing($jsonString){
+    function addOutgoings($jsonString){
         global $mysqli;
 
         $jsonResponse = "";
         $processResult = 0;
 
-        $outgoing = json_decode($jsonString);  
+        $jsonObj = json_decode($jsonString);   // json object contains outgoings array
+        $outgoings = $jsonObj->{'Outgoings'};  // outgoings array
         
-        $details = $outgoing->{'details'};
-        $value = $outgoing->{'value'};
-        $date = $outgoing->{'date'};
+        foreach($outgoings as $outgoing){
         
-        $query = "INSERT INTO Outgoings (`Details`, `Value`, `Date`) 
-            VALUES ('" . $details . "', '" . $value . "', '" . $date . "')";
+            $details = $outgoing->{'details'};
+            $value = $outgoing->{'value'};
+            $date = $outgoing->{'date'};
+        
+            $query = "INSERT INTO Outgoings (`Details`, `Value`, `Date`) 
+                VALUES ('" . $details . "', '" . $value . "', '" . $date . "')";
                 
-        $result = $mysqli->query($query);
+            $result = $mysqli->query($query);
         
-        if($result === TRUE){
-            $processResult = 1;
-        }
-        else{
-            $processResult = 0;
+            if($result === TRUE){
+                $processResult ++;
+            } 
         }
         
+                
         $jsonResponse = json_encode(array('result' => $processResult), JSON_FORCE_OBJECT);
-        
-        echo $jsonResponse;
+        echo $jsonResponse;  
     }
     
     mysqli_close($mysqli);
