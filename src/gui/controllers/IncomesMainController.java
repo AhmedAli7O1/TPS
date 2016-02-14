@@ -1,9 +1,11 @@
-package gui;
+package gui.controllers;
 
 import core.Income;
-import core.Outgoing;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
+import gui.GuiMain;
+import gui.IncomesView;
+import gui.Main;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -11,11 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -25,7 +30,7 @@ import java.util.stream.Collectors;
 public class IncomesMainController {
 
     private ObservableList<IncomesView> incomesList;        //current outgoings list
-    private IParentController parent;                           //link to MainController instance
+    private TpsWindowController parent;
 
     @FXML private DatePicker dpIncomes;
     @FXML private ComboBox<String> cboxIncomesViewStyle;
@@ -36,9 +41,8 @@ public class IncomesMainController {
     @FXML private TableColumn<IncomesView, Double> columnValue;     //Column : Value
     @FXML private TableColumn<IncomesView, String> columnDate;      //Column : Date
 
-    //MainController calls this method to set the parent interface
-    public void setMainController(IParentController parent){
-        this.parent = parent;
+    public void init() {
+        parent = GuiMain.getTpsWindowController();
         dpIncomes.setValue(LocalDate.now());
         cboxIncomesViewStyle.setItems(parent.getDataViewStyleList());
         cboxIncomesViewStyle.setValue(parent.getDataViewStyleList().get(1));
@@ -79,7 +83,7 @@ public class IncomesMainController {
                 try{
                     // get outgoings
                     List<Income> incomes =
-                            parent.getIncomesControl().getIncomes(dpIncomes.getValue(),
+                            GuiMain.getIncomesControl().getIncomes(dpIncomes.getValue(),
                                     parent.getDataViewStyle(cboxIncomesViewStyle));
 
                     /**

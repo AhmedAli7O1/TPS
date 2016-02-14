@@ -1,5 +1,8 @@
-package gui;
+package gui.controllers;
 
+import gui.GuiMain;
+import gui.Main;
+import gui.OutgoingsView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Ahmed ali on 11/02/2016.
  */
-public class AddOutgoingsController extends Main implements Initializable{
+public class AddOutgoingsController implements Initializable {
     @FXML private ImageView imageSave;
     @FXML private ImageView imageCancel;
     @FXML private ImageView imageInfo;
@@ -37,13 +40,9 @@ public class AddOutgoingsController extends Main implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initialize();
-    }
-
-    private void initialize(){
-        imageSave.setImage(new Image(getClass().getResourceAsStream("save_32x32.png")));
-        imageCancel.setImage(new Image(getClass().getResourceAsStream("cancel_32x32.png")));
-        imageInfo.setImage(new Image(getClass().getResourceAsStream("money2_64x64.png")));
+        imageSave.setImage(new Image(GuiMain.class.getResourceAsStream("save_32x32.png")));
+        imageCancel.setImage(new Image(GuiMain.class.getResourceAsStream("cancel_32x32.png")));
+        imageInfo.setImage(new Image(GuiMain.class.getResourceAsStream("money2_64x64.png")));
 
         columnDetails.setCellValueFactory(new PropertyValueFactory<>("details"));
         columnValue.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -65,11 +64,15 @@ public class AddOutgoingsController extends Main implements Initializable{
 
     @FXML
     public void btnSaveOnAction(){
-        outgoingsControl.addOutgoings(outgoingsList.stream().map(outgoingView -> new Outgoing(
+        GuiMain.getOutgoingsControl().addOutgoings(outgoingsList.stream().map(outgoingView -> new Outgoing(
                 outgoingView.getDetails(),
                 outgoingView.getValue(),
                 LocalDate.parse(outgoingView.getDate())
         )).collect(Collectors.toList()));
-        addOutgoingsWindow.close();
+        GuiMain.getAddOutgoingsWindow().close();
+
+        try {
+            GuiMain.getOutgoingsControl().saveChanges();   //save all changes to data source
+        }catch (Exception ex){}
     }
 }

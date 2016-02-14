@@ -1,7 +1,11 @@
-package gui;
+package gui.controllers;
 
 import core.DataViewStyle;
 import core.igui.*;
+import gui.GuiMain;
+import gui.windows.AddOutgoingsWindow;
+import gui.windows.AddSalesWindow;
+import gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +20,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController extends Main implements Initializable, IParentController {
+public class TpsWindowController implements Initializable {
 
     @FXML private VBox statisticsMain;
     @FXML private VBox purchasesMain;
@@ -51,16 +55,18 @@ public class MainController extends Main implements Initializable, IParentContro
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        GuiMain.setTpsWindowController(this);
+
         // set some icons
-        imageUserIcon.setImage(new Image(getClass().getResourceAsStream("user_32x32.png")));
-        imageSales.setImage(new Image(getClass().getResourceAsStream("sales_16x16.png")));
-        imageOutgoings.setImage(new Image(getClass().getResourceAsStream("out_16x16.png")));
-        imageIncomes.setImage(new Image(getClass().getResourceAsStream("in_16x16.png")));
-        imagePurchases.setImage(new Image(getClass().getResourceAsStream("purchases_16x16.png")));
-        imageWithdrawals.setImage(new Image(getClass().getResourceAsStream("withdrawals_16x16.png")));
-        imageStatistics.setImage(new Image(getClass().getResourceAsStream("statistics_16x16.png")));
-        imageCalendar.setImage(new Image(getClass().getResourceAsStream("calendar_32x32.png")));
-        imageCalc.setImage(new Image(getClass().getResourceAsStream("calc_32x32.png")));
+        imageUserIcon.setImage(new Image(GuiMain.class.getResourceAsStream("user_32x32.png")));
+        imageSales.setImage(new Image(GuiMain.class.getResourceAsStream("sales_16x16.png")));
+        imageOutgoings.setImage(new Image(GuiMain.class.getResourceAsStream("out_16x16.png")));
+        imageIncomes.setImage(new Image(GuiMain.class.getResourceAsStream("in_16x16.png")));
+        imagePurchases.setImage(new Image(GuiMain.class.getResourceAsStream("purchases_16x16.png")));
+        imageWithdrawals.setImage(new Image(GuiMain.class.getResourceAsStream("withdrawals_16x16.png")));
+        imageStatistics.setImage(new Image(GuiMain.class.getResourceAsStream("statistics_16x16.png")));
+        imageCalendar.setImage(new Image(GuiMain.class.getResourceAsStream("calendar_32x32.png")));
+        imageCalc.setImage(new Image(GuiMain.class.getResourceAsStream("calc_32x32.png")));
 
         // create list contains all panes to control them
         panes = new ArrayList<>();
@@ -87,17 +93,16 @@ public class MainController extends Main implements Initializable, IParentContro
 
         // get user data
         //lblUserName.setText(userControl.getCurrentUser().getName());
-        txtUserName.setText(userControl.getCurrentUser().getName());
-
-        //initialize all sub Windows with this instance as parent
-        statisticsMainController.setMainController(this);     //Statistics
-        salesMainController.setMainController(this);          //Sales
-        outgoingsMainController.setMainController(this);      //Outgoings
-        incomesMainController.setMainController(this);        //Incomes
-        purchasesMainController.setMainController(this);      //Purchases
-        withdrawalsMainController.setMainController(this);    //Withdrawals
+        txtUserName.setText(GuiMain.getUserControl().getCurrentUser().getName());
 
         rightAccordion.setExpandedPane(btnStatistics);  //set Statistics TitledPane to expanded by default
+
+        // initialize sub controllers
+        incomesMainController.init();
+        outgoingsMainController.init();
+        purchasesMainController.init();
+        salesMainController.init();
+        withdrawalsMainController.init();
     }
 
     //sales TitledPane onMouseClicked Event
@@ -113,7 +118,7 @@ public class MainController extends Main implements Initializable, IParentContro
     //Statistics TitledPane onMouseClicked Event
     public void statisticsOnClicked(){ showPane(statisticsMain); }
 
-    @Override // show and hide panes "Windows"
+    // show and hide panes "Windows"
     public void showPane(VBox pane){
         panes.forEach(p -> {
             if(p == pane) {
@@ -125,13 +130,11 @@ public class MainController extends Main implements Initializable, IParentContro
         });
     }
 
-    @Override
     public void showLoading(){
         paneLoading.setVisible(true);
         currPane.setDisable(true);
     }
 
-    @Override
     public void hideLoading(){
         currPane.setDisable(false);
         paneLoading.setVisible(false);
@@ -145,26 +148,19 @@ public class MainController extends Main implements Initializable, IParentContro
      */
     @FXML
     public void btnAddSalesOnClick(){
-        addSalesWindow = new AddSalesWindow();
-        addSalesWindow.showAndWait();
-        try {
-            salesControl.addNewOrders();
-        }catch (Exception ex){}
-        salesMainController.btnSalesViewOnAction();
+        GuiMain.setAddSalesWindow(new AddSalesWindow());
+        GuiMain.getAddSalesWindow().showAndWait();     //show new window to Add new Order
+        salesMainController.btnSalesViewOnAction();    //refresh sales list
     }
 
     @FXML
     public void btnAddOutgoingsOnClick(){
-        addOutgoingsWindow = new AddOutgoingsWindow();
-        addOutgoingsWindow.showAndWait();                   //show AddOutgoingsWindow and wait till user close it
-        try {
-            outgoingsControl.saveChanges();                     //save all changes to data source
-        }catch (Exception ex){}
-
-        outgoingsMainController.btnOutgoingsViewOnAction(); //perform view Outgoings event
+        GuiMain.setAddOutgoingsWindow(new AddOutgoingsWindow());
+        GuiMain.getAddOutgoingsWindow().showAndWait();      //show AddOutgoingsWindow and wait till user close it
+        outgoingsMainController.btnOutgoingsViewOnAction(); //refresh Outgoings list
     }
 
-    @Override //read ComboBox value and return it as SalesViewStyle
+    //read ComboBox value and return it as SalesViewStyle
     public DataViewStyle getDataViewStyle(ComboBox<String> cbox){
         if(cbox.getSelectionModel().isSelected(1))
             return DataViewStyle.MONTH;
@@ -176,29 +172,11 @@ public class MainController extends Main implements Initializable, IParentContro
             return null;
     }
 
-    @Override
     public ObservableList<String> getDataViewStyleList() {
         return dataViewStyleList;
     }
 
-    @Override
-    public ISalesControl getSalesControl(){
-        return salesControl;
+    public void test(){
+        System.out.println("workssssssssssssssssssssssssssss");
     }
-
-    @Override
-    public IOutgoingsControl getOutgoingsControl(){
-        return outgoingsControl;
-    }
-
-    @Override
-    public IIncomesControl getIncomesControl() { return incomesControl; }
-
-    @Override
-    public IWithdrawalsControl getWithdrawalsControl() {
-        return withdrawalsControl;
-    }
-
-    @Override
-    public IPurchasesControl getPurchasesControl() { return purchasesControl; }
 }

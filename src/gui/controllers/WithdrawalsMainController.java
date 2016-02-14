@@ -1,9 +1,11 @@
-package gui;
+package gui.controllers;
 
-import core.Income;
 import core.Withdraw;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
+import gui.GuiMain;
+import gui.Main;
+import gui.WithdrawalsView;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -11,11 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -23,7 +28,7 @@ import java.util.stream.Collectors;
  */
 public class WithdrawalsMainController {
     private ObservableList<WithdrawalsView> withdrawalsList;        //current outgoings list
-    private IParentController parent;                           //link to MainController instance
+    private TpsWindowController parent;
 
     @FXML private DatePicker dpWithdrawals;
     @FXML private ComboBox<String> cboxWithdrawalsViewStyle;
@@ -34,9 +39,10 @@ public class WithdrawalsMainController {
     @FXML private TableColumn<WithdrawalsView, Double> columnValue;     //Column : Value
     @FXML private TableColumn<WithdrawalsView, String> columnDate;      //Column : Date
 
-    //MainController calls this method to set the parent interface
-    public void setMainController(IParentController parent){
-        this.parent = parent;
+
+    public void init() {
+        parent = GuiMain.getTpsWindowController();
+
         dpWithdrawals.setValue(LocalDate.now());
         cboxWithdrawalsViewStyle.setItems(parent.getDataViewStyleList());
         cboxWithdrawalsViewStyle.setValue(parent.getDataViewStyleList().get(1));
@@ -77,7 +83,7 @@ public class WithdrawalsMainController {
                 try{
                     // get outgoings
                     List<Withdraw> withdrawals =
-                            parent.getWithdrawalsControl().getWithdrawals(dpWithdrawals.getValue(),
+                            GuiMain.getWithdrawalsControl().getWithdrawals(dpWithdrawals.getValue(),
                                     parent.getDataViewStyle(cboxWithdrawalsViewStyle));
 
                     /**

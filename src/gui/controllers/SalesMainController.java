@@ -1,9 +1,11 @@
-package gui;
+package gui.controllers;
 
 import core.Item;
-import core.Outgoing;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
+import gui.GuiMain;
+import gui.Main;
+import gui.SalesView;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -11,11 +13,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.net.URL;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class SalesMainController {
@@ -32,13 +38,41 @@ public class SalesMainController {
     @FXML private TableColumn<SalesView, DateFormat> cnSalesDate;     //Column : Date
     @FXML private TextField txtTotalSales;
 
-    private IParentController parent;                   //represent all methods needed from MainController
+    private TpsWindowController parent;
     private ObservableList<SalesView> salesList;        //current sales list
 
-    //MainController calls this method to set the parent interface
-    public void setMainController(IParentController parent){
-        this.parent = parent;
-        initSalesControllers();
+    public void init() {
+        parent = GuiMain.getTpsWindowController();
+
+        //init DatePicker
+        dpSalesDatePicker.setValue(LocalDate.now());
+        cboxSalesViewStyle.setItems(parent.getDataViewStyleList());
+        cboxSalesViewStyle.setValue(parent.getDataViewStyleList().get(1));
+
+        // init Sales Table
+        cnSalesId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cnSalesName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cnSalesAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        cnSalesSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
+        cnSalesPaid.setCellValueFactory(new PropertyValueFactory<>("paid"));
+        cnSalesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        salesList = FXCollections.observableArrayList();
+
+        tableSales.setItems(salesList);
+
+        /**
+         * bind txtTotalSales which display Total Sales
+         * of the table Sales
+         * that means whenever the table updates the TextField
+         * will update too
+         */
+        DoubleBinding total = Bindings.createDoubleBinding(() ->
+                        tableSales.getItems().stream().collect(Collectors.summingDouble(SalesView::getPaid)),
+                tableSales.getItems()
+        );
+
+        txtTotalSales.textProperty().bind(Bindings.format("%3.2f", total));
     }
 
     @FXML //view Sales depends on the chosen date and style
@@ -54,7 +88,7 @@ public class SalesMainController {
                         try{
                             // get outgoings
                             List<Item> sales =
-                                    parent.getSalesControl().getItems(dpSalesDatePicker.getValue(),
+                                    GuiMain.getSalesControl().getItems(dpSalesDatePicker.getValue(),
                                             parent.getDataViewStyle(cboxSalesViewStyle));
 
                             /**
@@ -86,39 +120,6 @@ public class SalesMainController {
                     }
                 }
         ).start();
-    }
-
-    // initialize Sales controllers
-    private void initSalesControllers(){
-        //init DatePicker
-        dpSalesDatePicker.setValue(LocalDate.now());
-        cboxSalesViewStyle.setItems(parent.getDataViewStyleList());
-        cboxSalesViewStyle.setValue(parent.getDataViewStyleList().get(1));
-
-        // init Sales Table
-        cnSalesId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        cnSalesName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cnSalesAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        cnSalesSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
-        cnSalesPaid.setCellValueFactory(new PropertyValueFactory<>("paid"));
-        cnSalesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-
-        salesList = FXCollections.observableArrayList();
-
-        tableSales.setItems(salesList);
-
-        /**
-         * bind txtTotalSales which display Total Sales
-         * of the table Sales
-         * that means whenever the table updates the TextField
-         * will update too
-         */
-        DoubleBinding total = Bindings.createDoubleBinding(() ->
-                        tableSales.getItems().stream().collect(Collectors.summingDouble(SalesView::getPaid)),
-                tableSales.getItems()
-        );
-
-        txtTotalSales.textProperty().bind(Bindings.format("%3.2f", total));
     }
 
 }

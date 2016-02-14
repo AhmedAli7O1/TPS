@@ -1,28 +1,27 @@
-package gui;
+package gui.windows;
 
+import gui.GuiMain;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-/**
- * Created by Ahmed ali on 11/02/2016.
- */
-public class AddOutgoingsWindow extends Stage {
+public class AddSalesWindow extends Stage{
 
-    public AddOutgoingsWindow(){
+    public AddSalesWindow(){
         try{
             initialize();
         }
         catch (Exception ex){
-
+            ex.printStackTrace();
         }
     }
 
     private void initialize() throws Exception{
-        setTitle("برنامج إدارة المبيعات - إضافة مصروفات");
-        Parent root = FXMLLoader.load(getClass().getResource("AddOutgoings.fxml"));
+        setTitle("برنامج إدارة المبيعات - إضافة فاتورة");
+        Parent root = FXMLLoader.load(GuiMain.class.getResource("AddSales.fxml"));
         Scene scene = new Scene(root);
         setScene(scene);
         sizeToScene();

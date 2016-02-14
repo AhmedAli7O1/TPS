@@ -1,7 +1,10 @@
-package gui;
+package gui.controllers;
 
 import core.Item;
 import core.Order;
+import gui.GuiMain;
+import gui.Main;
+import gui.OrderView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddSalesController extends Main implements Initializable{
+public class AddSalesController implements Initializable {
     @FXML private TextField txtCustomer;
     @FXML private TextField txtPaid;
     @FXML private DatePicker dpOrderDate;
@@ -57,13 +60,14 @@ public class AddSalesController extends Main implements Initializable{
     private Double discountPercentage = 0d;
     private Double remaining = 0d;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        imageAddSalesSave.setImage(new Image(getClass().getResourceAsStream("add_16x16.png")));
-        imageAddSalesDelete.setImage(new Image(getClass().getResourceAsStream("delete_16x16.png")));
-        imageMoney.setImage(new Image(getClass().getResourceAsStream("money_64x64.png")));
-        imageInvoice.setImage(new Image(getClass().getResourceAsStream("invoice_64x64.png")));
+        imageAddSalesSave.setImage(new Image(GuiMain.class.getResourceAsStream("add_16x16.png")));
+        imageAddSalesDelete.setImage(new Image(GuiMain.class.getResourceAsStream("delete_16x16.png")));
+        imageMoney.setImage(new Image(GuiMain.class.getResourceAsStream("money_64x64.png")));
+        imageInvoice.setImage(new Image(GuiMain.class.getResourceAsStream("invoice_64x64.png")));
 
         /**
          * set the property value
@@ -171,7 +175,7 @@ public class AddSalesController extends Main implements Initializable{
             ));
         }
 
-        salesControl.addOrder(new Order(
+        GuiMain.getSalesControl().addOrder(new Order(
                 txtCustomer.getText(),
                 Double.parseDouble(txtDiscount.getText()),
                 Double.parseDouble(txtTotal.getText()),
@@ -179,6 +183,12 @@ public class AddSalesController extends Main implements Initializable{
                 dpOrderDate.getValue(),
                 items
         ));
-        addSalesWindow.close();
+
+        // save changes made to sales list
+        try {
+            GuiMain.getSalesControl().addNewOrders();
+        }catch (Exception ex){}
+
+        GuiMain.getAddSalesWindow().close();
     }
 }

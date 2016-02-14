@@ -1,6 +1,9 @@
-package gui;
+package gui.controllers;
 
 import core.exceptions.WSConnException;
+import gui.GuiMain;
+import gui.Main;
+import gui.windows.TpsWindow;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -24,7 +27,7 @@ public class LoginController extends Main implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //empty for now
-        imageState.setImage(new Image(getClass().getResourceAsStream("login_64x64.png")));
+        imageState.setImage(new Image(GuiMain.class.getResourceAsStream("login_64x64.png")));
         imageState.resize(64,64);
 
     }
@@ -40,16 +43,16 @@ public class LoginController extends Main implements Initializable {
                     @Override
                     protected Object call() throws Exception {
                         try{
-                            boolean result = userControl.login(txtUserName.getText(), txtPassword.getText());
+                            boolean result = GuiMain.getUserControl().login(txtUserName.getText(), txtPassword.getText());
 
                             Platform.runLater(() ->{
                                 if(result){
-                                    // open main window
-                                    showMainScene();
+                                    GuiMain.getLoginWindow().close();     // close login window
+                                    GuiMain.getTpsWindow().show();        // open main window
                                 }
                                 else {
                                     //error image
-                                    imageState.setImage(new Image(getClass().getResourceAsStream("error_64x64.png")));
+                                    imageState.setImage(new Image(GuiMain.class.getResourceAsStream("error_64x64.png")));
                                     paneMain.setDisable(false);
                                     paneLoading.setVisible(false);
                                 }

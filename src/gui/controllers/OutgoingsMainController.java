@@ -1,29 +1,31 @@
-package gui;
+package gui.controllers;
 
-import com.sun.javafx.tk.Toolkit;
 import core.Outgoing;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
+import gui.GuiMain;
+import gui.Main;
+import gui.OutgoingsView;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class OutgoingsMainController {
     private ObservableList<OutgoingsView> outgoingsList;        //current outgoings list
-    private IParentController parent;                           //link to MainController instance
+    private TpsWindowController parent;
 
     @FXML private DatePicker dpOutgoings;
     @FXML private ComboBox<String> cboxOutgoingsViewStyle;
@@ -34,9 +36,9 @@ public class OutgoingsMainController {
     @FXML private TableColumn<OutgoingsView, Double> columnValue;     //Column : Value
     @FXML private TableColumn<OutgoingsView, String> columnDate;      //Column : Date
 
-    //MainController calls this method to set the parent interface
-    public void setMainController(IParentController parent){
-        this.parent = parent;
+    public void init() {
+        parent = GuiMain.getTpsWindowController();
+
         dpOutgoings.setValue(LocalDate.now());
         cboxOutgoingsViewStyle.setItems(parent.getDataViewStyleList());
         cboxOutgoingsViewStyle.setValue(parent.getDataViewStyleList().get(1));
@@ -57,8 +59,8 @@ public class OutgoingsMainController {
          * that means whenever the table updates the TextField
          * will update too
          */
-         DoubleBinding total = Bindings.createDoubleBinding(() ->
-            tableOutgoings.getItems().stream().collect(Collectors.summingDouble(OutgoingsView::getValue)),
+        DoubleBinding total = Bindings.createDoubleBinding(() ->
+                        tableOutgoings.getItems().stream().collect(Collectors.summingDouble(OutgoingsView::getValue)),
                 tableOutgoings.getItems()
         );
 
@@ -77,7 +79,7 @@ public class OutgoingsMainController {
                 try{
                     // get outgoings
                     List<Outgoing> outgoings =
-                            parent.getOutgoingsControl().getOutgoings(dpOutgoings.getValue(),
+                            GuiMain.getOutgoingsControl().getOutgoings(dpOutgoings.getValue(),
                                     parent.getDataViewStyle(cboxOutgoingsViewStyle));
 
                     /**
