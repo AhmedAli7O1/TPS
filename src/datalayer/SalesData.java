@@ -76,10 +76,12 @@ public class SalesData implements ISalesData {
     @Override
     public boolean addNewOrder(Order order)throws WSConnException, NoDataException{
         WebService webService = new WebService();
-        if(webService.getJson("sales", "addOrder", order).getInt("result") > 0){
+        JSONObject jsonObj = webService.getJson("sales", "addOrder", order);
+
+        if(jsonObj.getBoolean("SalesResult") &&
+                jsonObj.getBoolean("AccountsResult")){
             return true;
         }
-        else
-            return false;
+        else return false;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
+    include 'accounts.php';
     
     if($_POST['method'] === "getOrders"){
         getOrders($_POST['json']); //call getOrders method
@@ -73,7 +74,8 @@ ini_set('display_errors', 1);
         global $mysqli;
 
         $jsonResponse = "";
-        $processResult = 0;
+        $salesResult = FALSE;
+        $accountsResult = FALSE;
 
         $order = json_decode($jsonString);  
         
@@ -120,17 +122,12 @@ ini_set('display_errors', 1);
             }
             
             if($itemCount === count($items)){
-                $processResult = 1;
+                $salesResult = TRUE;
+                $accountsResult = updateAccounts("TotalSales", $paid, $date);
             }
-            else{
-                $processResult = 0;
-            }
-        }
-        else{
-            $processResult = 0;
         }
         
-        $jsonResponse = json_encode(array('result' => $processResult), JSON_FORCE_OBJECT);
+        $jsonResponse = json_encode(array('SalesResult' => $salesResult, 'AccountsResult' => $accountsResult), JSON_FORCE_OBJECT);
         
         echo $jsonResponse;
     }

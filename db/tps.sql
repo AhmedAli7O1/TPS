@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2016 at 09:42 PM
+-- Generation Time: Feb 15, 2016 at 05:16 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `tps`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `ID` bigint(20) NOT NULL,
+  `TotalSales` double NOT NULL,
+  `TotalIncomes` double NOT NULL,
+  `TotalOutgoings` double NOT NULL,
+  `TotalWithdrawals` double NOT NULL,
+  `TotalPurchases` double NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`ID`, `TotalSales`, `TotalIncomes`, `TotalOutgoings`, `TotalWithdrawals`, `TotalPurchases`, `Date`) VALUES
+(1, 1100, 600, 0, 0, 0, '2016-02-01');
 
 -- --------------------------------------------------------
 
@@ -39,7 +62,14 @@ CREATE TABLE `incomes` (
 --
 
 INSERT INTO `incomes` (`ID`, `Details`, `Value`, `IsDebt`, `Date`) VALUES
-(1, 'باقى حساب عبد السلام ', 500, 1, '2016-02-10');
+(1, 'باقى حساب عبد السلام ', 500, 1, '2016-02-10'),
+(2, 'hhhhhhhh', 100, 0, '2016-02-16'),
+(3, 'hhhhhhhh', 100, 1, '2016-02-16'),
+(4, 'ppppppppp', 100, 0, '2016-02-15'),
+(5, 'ppppppppp', 100, 1, '2016-02-15'),
+(6, 'wwwwwwww', 100, 0, '2016-02-15'),
+(7, 'wwwwwwww', 100, 1, '2016-02-15'),
+(8, 'wwwwwwww', 100, 0, '2016-02-15');
 
 -- --------------------------------------------------------
 
@@ -81,7 +111,17 @@ INSERT INTO `orders` (`ID`, `Customer`, `Discount`, `TotalPrice`, `Paid`, `Date`
 (27, 'فففففففففففف', 0, 100, 100, '2016-02-07'),
 (28, 'محمود على', 0, 1500, 1500, '2016-02-07'),
 (29, 'محمود', 0, 100, 100, '2016-02-07'),
-(30, 'aasdasd', 0, 10000, 10000, '2016-02-07');
+(30, 'aasdasd', 0, 10000, 10000, '2016-02-07'),
+(31, 'احمد على', 0, 1000, 1000, '2016-02-01'),
+(32, 'asdldkla;sdkl', 0, 100, 100, '2016-02-01'),
+(33, 'oooooo', 0, 1, 1, '2016-02-01'),
+(34, 'wewewe', 0, 1, 1, '2016-02-01'),
+(35, 'qqqqqq', 0, 1, 1, '2016-02-01'),
+(36, 'eeeeeee', 0, 1, 1, '2016-02-01'),
+(37, 'rrrrrrr', 0, 1, 1, '2016-02-01'),
+(38, 'yyyyyy', 0, 1, 1, '2016-02-01'),
+(39, 'uuuuuuu', 0, 99, 99, '2016-02-01'),
+(40, 'eeeeeeeee', 0, 1000, 1000, '2016-02-15');
 
 -- --------------------------------------------------------
 
@@ -173,7 +213,17 @@ INSERT INTO `sales` (`ID`, `Name`, `Amount`, `Price`, `Discount`, `SoldPrice`, `
 (22, 'فففففففففففففففف', 1, 100, 0, 100, 100, 0, 27, '2016-02-07'),
 (23, 'شريحة مكينة ك 10', 1, 1500, 0, 1500, 1500, 0, 28, '2016-02-07'),
 (24, 'محمود', 1, 100, 0, 100, 100, 0, 29, '2016-02-07'),
-(25, 'lasdalsd', 1, 10000, 0, 10000, 10000, 0, 30, '2016-02-07');
+(25, 'lasdalsd', 1, 10000, 0, 10000, 10000, 0, 30, '2016-02-07'),
+(26, 'محمول', 1, 1000, 0, 1000, 1000, 0, 31, '2016-02-01'),
+(27, 'dlsakd;lkl', 1, 100, 0, 100, 100, 0, 32, '2016-02-01'),
+(28, 'lklklklk', 1, 1, 0, 1, 1, 0, 33, '2016-02-01'),
+(29, 'wwwwww', 1, 1, 0, 1, 1, 0, 34, '2016-02-01'),
+(30, 'qqqqqqqqqqq', 1, 1, 0, 1, 1, 0, 35, '2016-02-01'),
+(31, 'eeeeeeeee', 1, 1, 0, 1, 1, 0, 36, '2016-02-01'),
+(32, 'rrrrrrrr', 1, 1, 0, 1, 1, 0, 37, '2016-02-01'),
+(33, 'yyyyyyyyy', 1, 1, 0, 1, 1, 0, 38, '2016-02-01'),
+(34, 'uuuuuuuu', 1, 99, 0, 99, 99, 0, 39, '2016-02-01'),
+(35, 'eeeeeeeeeeee', 1, 1000, 0, 1000, 1000, 0, 40, '2016-02-15');
 
 -- --------------------------------------------------------
 
@@ -198,7 +248,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `Name`, `Password`, `Title`, `Auth`, `LastEdit`, `LastLogged`, `SecKey`) VALUES
 (1, 'bluemax', '234597458', 'devo', 'DEV', '2016-01-08', '2016-01-31', 0),
-(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 22308);
+(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 17897);
 
 -- --------------------------------------------------------
 
@@ -223,6 +273,13 @@ INSERT INTO `withdrawals` (`ID`, `Details`, `Value`, `Date`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Date` (`Date`);
 
 --
 -- Indexes for table `incomes`
@@ -271,15 +328,20 @@ ALTER TABLE `withdrawals`
 --
 
 --
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `incomes`
 --
 ALTER TABLE `incomes`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `outgoings`
 --
@@ -294,7 +356,7 @@ ALTER TABLE `purchases`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `users`
 --

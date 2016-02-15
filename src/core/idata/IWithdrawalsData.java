@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface IWithdrawalsData {
     List<Withdraw> getWithdrawals(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException;
+    boolean addNewWithdrawals(List<Withdraw> withdrawals)throws WSConnException, NoDataException;
 }

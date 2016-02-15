@@ -13,6 +13,7 @@ public class IncomesView {
     private SimpleIntegerProperty id;
     private SimpleStringProperty details;
     private SimpleDoubleProperty value;
+    private SimpleIntegerProperty isDebt;
     private SimpleStringProperty date;
 
     public IncomesView(int id, String details, double value, LocalDate date) {
@@ -20,6 +21,13 @@ public class IncomesView {
         this.details = new SimpleStringProperty(details);
         this.value = new SimpleDoubleProperty(value);
         this.date = new SimpleStringProperty(date.toString());
+    }
+
+    public IncomesView(String details, double value, int isDebt, String date) {
+        this.details = new SimpleStringProperty(details);
+        this.value = new SimpleDoubleProperty(value);
+        this.isDebt = new SimpleIntegerProperty(isDebt);
+        this.date = new SimpleStringProperty(date);
     }
 
     public int getId() {
@@ -68,5 +76,17 @@ public class IncomesView {
 
     public void setDate(String date) {
         this.date.set(date);
+    }
+
+    public int getIsDebt() {
+        return isDebt.get();
+    }
+
+    public SimpleIntegerProperty isDebtProperty() {
+        return isDebt;
+    }
+
+    public void setIsDebt(int isDebt) {
+        this.isDebt.set(isDebt);
     }
 }

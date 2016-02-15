@@ -29,6 +29,7 @@ public class IncomesData implements IIncomesData {
                         jsonIncomesArray.getJSONObject(i).getInt("ID"),
                         jsonIncomesArray.getJSONObject(i).getString("Details"),
                         jsonIncomesArray.getJSONObject(i).getDouble("Value"),
+                        jsonIncomesArray.getJSONObject(i).getInt("IsDebt"),
                         LocalDate.parse(jsonIncomesArray.getJSONObject(i).getString("Date"))
                 ));
             }
@@ -36,5 +37,18 @@ public class IncomesData implements IIncomesData {
             ex.printStackTrace();
         }
         return incomes;
+    }
+
+    @Override
+    public boolean addNewIncomes(List<Income> incomes) throws WSConnException, NoDataException {
+        JSONObject jsonToSend = new JSONObject();
+        jsonToSend.put("Incomes", incomes);
+
+        WebService webService = new WebService();
+        JSONObject jsonResult = webService.getJson("incomes", "addIncomes", jsonToSend);
+        if(jsonResult.getBoolean("IncomesResult") &&
+                jsonResult.getBoolean("AccountsResult")){
+            return true;
+        }else return false;
     }
 }

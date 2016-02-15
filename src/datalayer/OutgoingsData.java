@@ -38,12 +38,15 @@ public class OutgoingsData implements IOutgoingsData {
         return outgoings;
     }
 
-    public boolean addOutgoings(List<Outgoing> outgoings) throws WSConnException, NoDataException {
+    @Override
+    public boolean addNewOutgoings(List<Outgoing> outgoings) throws WSConnException, NoDataException {
         JSONObject jsonToSend = new JSONObject();
         jsonToSend.put("Outgoings", outgoings);
 
         WebService webService = new WebService();
-        if(webService.getJson("outgoings", "addOutgoings", jsonToSend).getInt("result") > 0 )
+        JSONObject jsonResult = webService.getJson("outgoings", "addOutgoings", jsonToSend);
+        if(jsonResult.getBoolean("OutgoingsResult") &&
+                jsonResult.getBoolean("AccountsResult"))
             return true;
         else return false;
     }

@@ -3,6 +3,7 @@ package gui;
 import core.*;
 import core.igui.*;
 import gui.controllers.TpsWindowController;
+import gui.windows.AddIncomesWindow;
 import gui.windows.AddOutgoingsWindow;
 import gui.windows.AddSalesWindow;
 import gui.windows.TpsWindow;
@@ -16,6 +17,7 @@ public abstract class GuiMain {
     private static TpsWindow tpsWindow;
     private static AddSalesWindow addSalesWindow;
     private static AddOutgoingsWindow addOutgoingsWindow;
+    private static AddIncomesWindow addIncomesWindow;
     private static TpsWindowController tpsWindowController;
     private static IUserControl userControl;
     private static ISalesControl salesControl;
@@ -137,5 +139,16 @@ public abstract class GuiMain {
 
     public static void setLoginWindow(Stage loginWindow) {
         GuiMain.loginWindow = loginWindow;
+    }
+
+    public static AddIncomesWindow getAddIncomesWindow() {
+        if(addIncomesWindow == null)
+            addIncomesWindow = new AddIncomesWindow();
+
+        return addIncomesWindow;
+    }
+
+    public static void setAddIncomesWindow(AddIncomesWindow addIncomesWindow) {
+        GuiMain.addIncomesWindow = addIncomesWindow;
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface IIncomesData {
     List<Income> getIncomes(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException;
+    boolean addNewIncomes(List<Income> incomes)throws WSConnException, NoDataException;
 }

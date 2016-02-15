@@ -3,6 +3,7 @@ package gui.controllers;
 import core.DataViewStyle;
 import core.igui.*;
 import gui.GuiMain;
+import gui.windows.AddIncomesWindow;
 import gui.windows.AddOutgoingsWindow;
 import gui.windows.AddSalesWindow;
 import gui.Main;
@@ -158,6 +159,13 @@ public class TpsWindowController implements Initializable {
         GuiMain.setAddOutgoingsWindow(new AddOutgoingsWindow());
         GuiMain.getAddOutgoingsWindow().showAndWait();      //show AddOutgoingsWindow and wait till user close it
         outgoingsMainController.btnOutgoingsViewOnAction(); //refresh Outgoings list
+    }
+
+    @FXML
+    public void btnAddIncomesOnClick(){
+        GuiMain.setAddIncomesWindow(new AddIncomesWindow());
+        GuiMain.getAddIncomesWindow().showAndWait();
+        incomesMainController.btnIncomesViewOnAction();
     }
 
     //read ComboBox value and return it as SalesViewStyle

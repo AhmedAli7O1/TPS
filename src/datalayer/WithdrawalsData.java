@@ -42,4 +42,18 @@ public class WithdrawalsData implements IWithdrawalsData {
         }
         return withdrawals;
     }
+
+    @Override
+    public boolean addNewWithdrawals(List<Withdraw> withdrawals)throws WSConnException, NoDataException {
+        JSONObject jsonToSend = new JSONObject();
+        jsonToSend.put("Withdrawals", withdrawals);
+
+        WebService webService = new WebService();
+        JSONObject jsonObj = webService.getJson("withdrawals", "addWithdrawals", jsonToSend);
+        if(jsonObj.getBoolean("WithdrawalsResult") &&
+                jsonObj.getBoolean("AccountsResult")){
+            return true;
+        }
+        else return false;
+    }
 }

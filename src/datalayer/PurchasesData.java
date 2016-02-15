@@ -44,4 +44,16 @@ public class PurchasesData implements IPurchasesData {
         }
         return purchases;
     }
+
+    @Override
+    public boolean addNewPurchases(List<Purchase> purchases) throws WSConnException, NoDataException {
+        JSONObject jsonToSend = new JSONObject();
+        jsonToSend.put("Purchases", purchases);
+        WebService webService = new WebService();
+        JSONObject jsonObj = webService.getJson("purchases", "addPurchase", jsonToSend);
+        if(jsonObj.getBoolean("PurchasesResult") &&
+                jsonObj.getBoolean("AccountsResult")){
+            return true;
+        }else return false;
+    }
 }

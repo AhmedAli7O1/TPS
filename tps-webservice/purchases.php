@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
+    include 'accounts.php';
     
     if($_POST['method'] === "getPurchases"){
         getPurchases($_POST['json']);    //call getPurchases method
@@ -58,8 +59,9 @@ ini_set('display_errors', 1);
         global $mysqli;
 
         $jsonResponse = "";
-        $processResult = 0;
-
+        $purchasesResult = FALSE;
+        $accountResult = FALSE;
+        
         $purchase = json_decode($jsonString);  
         
         $item = $purchase->{'item'};
@@ -74,13 +76,11 @@ ini_set('display_errors', 1);
         $result = $mysqli->query($query);
         
         if($result === TRUE){
-            $processResult = 1;
-        }
-        else{
-            $processResult = 0;
+            $purchasesResult = TRUE;
+            $accountResult = updateAccounts("TotalPurchases", $purchasePrice, $date);
         }
         
-        $jsonResponse = json_encode(array('result' => $processResult), JSON_FORCE_OBJECT);
+        $jsonResponse = json_encode(array('PurchasesResult' => $purchasesResult, 'AccountsResult' => $accountResult), JSON_FORCE_OBJECT);
         
         echo $jsonResponse;
     }

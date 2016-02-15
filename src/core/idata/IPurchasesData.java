@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface IPurchasesData {
     List<Purchase> getPurchases(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException;
+    boolean addNewPurchases(List<Purchase> purchases)throws WSConnException, NoDataException;
 }

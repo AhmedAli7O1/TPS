@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AddSalesController implements Initializable {
     @FXML private TextField txtCustomer;
@@ -162,18 +163,16 @@ public class AddSalesController implements Initializable {
     @FXML
     public void btnSaveOrderOnAction(){
 
-        List<Item> items = new ArrayList<>();
-        for(OrderView orderView : orders){
-            items.add(new Item(
-                    orderView.getItem(),
-                    orderView.getAmount(),
-                    orderView.getPrice(),
-                    orderView.getDiscount(),      //discount
-                    orderView.getSoldPrice(),     //sold price
-                    orderView.getPaid(),          //paid
-                    dpOrderDate.getValue()        // date
-            ));
-        }
+        List<Item> items = orders.stream().map(orderView -> new Item(
+                orderView.getItem(),
+                orderView.getAmount(),
+                orderView.getPrice(),
+                orderView.getDiscount(),      //discount
+                orderView.getSoldPrice(),     //sold price
+                orderView.getPaid(),          //paid
+                dpOrderDate.getValue()        // date
+        )).collect(Collectors.toList());
+
 
         GuiMain.getSalesControl().addOrder(new Order(
                 txtCustomer.getText(),

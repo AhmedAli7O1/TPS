@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface IOutgoingsData {
     List<Outgoing> getOutgoings(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException;
-    boolean addOutgoings(List<Outgoing> outgoings) throws WSConnException, NoDataException;
+    boolean addNewOutgoings(List<Outgoing> outgoings) throws WSConnException, NoDataException;
 }
