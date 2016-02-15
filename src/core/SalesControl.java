@@ -29,9 +29,9 @@ public class SalesControl implements ISalesControl {
     public List<Item> getItems(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException{
         getOrders(date, style);
         List<Item> items = new ArrayList<>();
-        for(Order order : orders){
-            items.addAll(order.getItems());
-        }
+        try {
+            orders.stream().filter(order -> order.getItems() != null).forEach(order -> items.addAll(order.getItems()));
+        }catch (Exception ex){ex.printStackTrace();}
         return items;
     }
 

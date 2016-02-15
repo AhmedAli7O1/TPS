@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2016 at 05:16 PM
+-- Generation Time: Feb 15, 2016 at 10:50 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -41,7 +41,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`ID`, `TotalSales`, `TotalIncomes`, `TotalOutgoings`, `TotalWithdrawals`, `TotalPurchases`, `Date`) VALUES
-(1, 1100, 600, 0, 0, 0, '2016-02-01');
+(1, 9500, 600, 0, 0, 0, '2016-02-01'),
+(11, 3000, 0, 0, 0, 0, '2016-01-01');
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,13 @@ INSERT INTO `orders` (`ID`, `Customer`, `Discount`, `TotalPrice`, `Paid`, `Date`
 (37, 'rrrrrrr', 0, 1, 1, '2016-02-01'),
 (38, 'yyyyyy', 0, 1, 1, '2016-02-01'),
 (39, 'uuuuuuu', 0, 99, 99, '2016-02-01'),
-(40, 'eeeeeeeee', 0, 1000, 1000, '2016-02-15');
+(40, 'eeeeeeeee', 0, 1000, 1000, '2016-02-15'),
+(41, 'تامر', 0, 2800, 2800, '2016-02-15'),
+(42, 'تامر ', 0, 2800, 2800, '2016-02-15'),
+(44, 'تامر عبد المنعم', 0, 2800, 2800, '2016-02-15'),
+(45, 'غغغغغغغ', 0, 2000, 2000, '2016-01-11'),
+(46, 'wwwwwww', 0, 3000, 2000, '2016-01-12'),
+(47, 'eeeeeeee', 0, 4000, 3000, '2016-01-12');
 
 -- --------------------------------------------------------
 
@@ -223,7 +230,12 @@ INSERT INTO `sales` (`ID`, `Name`, `Amount`, `Price`, `Discount`, `SoldPrice`, `
 (32, 'rrrrrrrr', 1, 1, 0, 1, 1, 0, 37, '2016-02-01'),
 (33, 'yyyyyyyyy', 1, 1, 0, 1, 1, 0, 38, '2016-02-01'),
 (34, 'uuuuuuuu', 1, 99, 0, 99, 99, 0, 39, '2016-02-01'),
-(35, 'eeeeeeeeeeee', 1, 1000, 0, 1000, 1000, 0, 40, '2016-02-15');
+(35, 'eeeeeeeeeeee', 1, 1000, 0, 1000, 1000, 0, 40, '2016-02-15'),
+(39, 'طرمبة جاز 420', 1, 2800, 0, 2800, 2800, 0, 44, '2016-02-15'),
+(40, 'ضضضضضضضضض', 1, 1000, 0, 1000, 1000, 0, 45, '2016-01-11'),
+(42, 'ddddddddddddddd', 1, 1000, 0, 1000, 1000, 0, 46, '2016-01-12'),
+(44, 'eeeeeeeeeeeee', 1, 2000, 0, 2000, 2000, 0, 47, '2016-01-12'),
+(45, 'zzzzzzzzzz', 1, 2000, 0, 2000, 1000, 0, 47, '2016-01-12');
 
 -- --------------------------------------------------------
 
@@ -248,7 +260,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `Name`, `Password`, `Title`, `Auth`, `LastEdit`, `LastLogged`, `SecKey`) VALUES
 (1, 'bluemax', '234597458', 'devo', 'DEV', '2016-01-08', '2016-01-31', 0),
-(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 17897);
+(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 20744);
 
 -- --------------------------------------------------------
 
@@ -331,7 +343,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `incomes`
 --
@@ -341,7 +353,7 @@ ALTER TABLE `incomes`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `outgoings`
 --
@@ -356,7 +368,7 @@ ALTER TABLE `purchases`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `users`
 --

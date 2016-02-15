@@ -78,8 +78,7 @@ public class SalesData implements ISalesData {
         WebService webService = new WebService();
         JSONObject jsonObj = webService.getJson("sales", "addOrder", order);
 
-        if(jsonObj.getBoolean("SalesResult") &&
-                jsonObj.getBoolean("AccountsResult")){
+        if(jsonObj.getBoolean("result")){
             return true;
         }
         else return false;

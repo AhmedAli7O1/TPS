@@ -86,6 +86,7 @@ public class SalesMainController {
                     @Override
                     protected Object call() throws Exception {
                         try{
+
                             // get outgoings
                             List<Item> sales =
                                     GuiMain.getSalesControl().getItems(dpSalesDatePicker.getValue(),
@@ -97,6 +98,7 @@ public class SalesMainController {
                              * Table and total label too
                              */
                             Platform.runLater(() -> {
+
                                 salesList.addAll(sales.stream().map(item -> new SalesView(
                                         item.getId(),
                                         item.getName(),
