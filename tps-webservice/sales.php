@@ -117,7 +117,7 @@ ini_set('display_errors', 1);
         }
 
         $itemsResult = $mysqli->query($itemsQuery);  //excute items query
-        $accountsResult = updateAccounts("TotalSales", $paid, $date); //update accounts
+        $accountsResult = updateAccounts("TotalSales", $paid, $paid, $date); //update accounts
 
         if($orderResult === TRUE && $itemsResult === TRUE && $accountsResult === TRUE){
           $mysqli->commit();

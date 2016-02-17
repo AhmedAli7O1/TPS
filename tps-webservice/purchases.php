@@ -85,7 +85,7 @@ ini_set('display_errors', 1);
 
         $mysqli->begin_transaction();                //begin Transaction
         $purchasesResult = $mysqli->query($query);
-        $accountResult = updateAccounts("TotalPurchases", $totalValue, $date);
+        $accountResult = updateAccounts("TotalPurchases", $totalValue, 0, $date);
 
         if($purchasesResult === TRUE && $accountResult === TRUE){
           $mysqli->commit():

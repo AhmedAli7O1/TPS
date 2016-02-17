@@ -82,7 +82,7 @@ ini_set('display_errors', 1);
 
         $mysqli->begin_transaction();                //begin Transaction
         $outgoingsResult = $mysqli->query($query);
-        $accountsResult = updateAccounts("TotalOutgoings", $totalValue, $date);
+        $accountsResult = updateAccounts("TotalOutgoings", $totalValue, -$totalValue, $date);
 
         if($outgoingsResult === TRUE && $accountsResult === TRUE){
           $mysqli->commit();

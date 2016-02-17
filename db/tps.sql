@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2016 at 10:50 PM
+-- Generation Time: Feb 17, 2016 at 09:52 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -33,6 +33,8 @@ CREATE TABLE `accounts` (
   `TotalOutgoings` double NOT NULL,
   `TotalWithdrawals` double NOT NULL,
   `TotalPurchases` double NOT NULL,
+  `OldBalance` double NOT NULL,
+  `Balance` double NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,9 +42,8 @@ CREATE TABLE `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`ID`, `TotalSales`, `TotalIncomes`, `TotalOutgoings`, `TotalWithdrawals`, `TotalPurchases`, `Date`) VALUES
-(1, 9500, 600, 0, 0, 0, '2016-02-01'),
-(11, 3000, 0, 0, 0, 0, '2016-01-01');
+INSERT INTO `accounts` (`ID`, `TotalSales`, `TotalIncomes`, `TotalOutgoings`, `TotalWithdrawals`, `TotalPurchases`, `OldBalance`, `Balance`, `Date`) VALUES
+(15, 1000, 0, 0, 0, 0, 0, 1000, '2016-01-01');
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,8 @@ INSERT INTO `orders` (`ID`, `Customer`, `Discount`, `TotalPrice`, `Paid`, `Date`
 (44, 'تامر عبد المنعم', 0, 2800, 2800, '2016-02-15'),
 (45, 'غغغغغغغ', 0, 2000, 2000, '2016-01-11'),
 (46, 'wwwwwww', 0, 3000, 2000, '2016-01-12'),
-(47, 'eeeeeeee', 0, 4000, 3000, '2016-01-12');
+(47, 'eeeeeeee', 0, 4000, 3000, '2016-01-12'),
+(52, 'qqqqq', 0, 1000, 1000, '2016-01-13');
 
 -- --------------------------------------------------------
 
@@ -202,40 +204,7 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`ID`, `Name`, `Amount`, `Price`, `Discount`, `SoldPrice`, `Paid`, `PurchasesValue`, `OrderID`, `Date`) VALUES
-(1, 'turbo 200', 1, 1000, 100, 900, 900, 500, 1, '2016-02-05'),
-(8, 'تربو ك 10', 1, 4100, 100, 4000, 4000, 0, 11, '2016-02-06'),
-(9, 'كومبروسر ك 10', 1, 1600, 100, 1500, 1500, 0, 11, '2016-02-06'),
-(10, 'تربو ك 10', 1, 4100, 100, 4000, 4000, 0, 12, '2016-02-06'),
-(11, 'كومبروسر ك 10', 1, 1600, 100, 1500, 1500, 0, 12, '2016-02-06'),
-(12, 'تربو ك 10', 1, 4100, 100, 4000, 4000, 0, 13, '2016-02-06'),
-(13, 'كومبروسر ك 10', 1, 1600, 100, 1500, 1500, 0, 13, '2016-02-06'),
-(14, 'خرطوم 100 سم', 1, 100, 0, 100, 100, 0, 15, '2016-02-07'),
-(15, 'خزان كبير ', 2, 200, 0, 200, 200, 0, 15, '2016-02-07'),
-(16, 'dsadasdasd', 1, 1212, 0, 121, 1212, 0, 16, '2016-02-07'),
-(17, 'wwwwwwwwww', 1, 100, 0, 100, 100, 0, 20, '2016-02-07'),
-(18, 'ooooooooooooooo', 1, 100, 0, 100, 100, 0, 23, '2016-02-07'),
-(19, 'ppppppppppp', 1, 100, 0, 100, 100, 0, 24, '2016-02-07'),
-(20, 'uuuuuuuuu', 1, 100, 0, 100, 100, 0, 25, '2016-02-07'),
-(21, 'Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹Ø¹', 1, 100, 0, 100, 100, 0, 26, '2016-02-07'),
-(22, 'فففففففففففففففف', 1, 100, 0, 100, 100, 0, 27, '2016-02-07'),
-(23, 'شريحة مكينة ك 10', 1, 1500, 0, 1500, 1500, 0, 28, '2016-02-07'),
-(24, 'محمود', 1, 100, 0, 100, 100, 0, 29, '2016-02-07'),
-(25, 'lasdalsd', 1, 10000, 0, 10000, 10000, 0, 30, '2016-02-07'),
-(26, 'محمول', 1, 1000, 0, 1000, 1000, 0, 31, '2016-02-01'),
-(27, 'dlsakd;lkl', 1, 100, 0, 100, 100, 0, 32, '2016-02-01'),
-(28, 'lklklklk', 1, 1, 0, 1, 1, 0, 33, '2016-02-01'),
-(29, 'wwwwww', 1, 1, 0, 1, 1, 0, 34, '2016-02-01'),
-(30, 'qqqqqqqqqqq', 1, 1, 0, 1, 1, 0, 35, '2016-02-01'),
-(31, 'eeeeeeeee', 1, 1, 0, 1, 1, 0, 36, '2016-02-01'),
-(32, 'rrrrrrrr', 1, 1, 0, 1, 1, 0, 37, '2016-02-01'),
-(33, 'yyyyyyyyy', 1, 1, 0, 1, 1, 0, 38, '2016-02-01'),
-(34, 'uuuuuuuu', 1, 99, 0, 99, 99, 0, 39, '2016-02-01'),
-(35, 'eeeeeeeeeeee', 1, 1000, 0, 1000, 1000, 0, 40, '2016-02-15'),
-(39, 'طرمبة جاز 420', 1, 2800, 0, 2800, 2800, 0, 44, '2016-02-15'),
-(40, 'ضضضضضضضضض', 1, 1000, 0, 1000, 1000, 0, 45, '2016-01-11'),
-(42, 'ddddddddddddddd', 1, 1000, 0, 1000, 1000, 0, 46, '2016-01-12'),
-(44, 'eeeeeeeeeeeee', 1, 2000, 0, 2000, 2000, 0, 47, '2016-01-12'),
-(45, 'zzzzzzzzzz', 1, 2000, 0, 2000, 1000, 0, 47, '2016-01-12');
+(50, 'qqqqqqqqqqqqqq', 1, 1000, 0, 1000, 1000, 0, 52, '2016-01-13');
 
 -- --------------------------------------------------------
 
@@ -260,7 +229,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `Name`, `Password`, `Title`, `Auth`, `LastEdit`, `LastLogged`, `SecKey`) VALUES
 (1, 'bluemax', '234597458', 'devo', 'DEV', '2016-01-08', '2016-01-31', 0),
-(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 20744);
+(2, 'ayman', '123', 'Admin', 'ADMIN', '2016-01-08', '2016-01-31', 11755);
 
 -- --------------------------------------------------------
 
@@ -343,7 +312,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `incomes`
 --
@@ -353,7 +322,7 @@ ALTER TABLE `incomes`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `outgoings`
 --
@@ -368,7 +337,7 @@ ALTER TABLE `purchases`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `users`
 --

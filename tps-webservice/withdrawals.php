@@ -80,7 +80,7 @@ ini_set('display_errors', 1);
 
         $mysqli->begin_transaction();                 //begin Transaction
         $withdrawalsResult = $mysqli->query($query);
-        $accountsResult = updateAccounts("TotalWithdrawals", $totalValue, $date);
+        $accountsResult = updateAccounts("TotalWithdrawals", $totalValue, -$totalValue, $date);
 
         if($withdrawalsResult === TRUE && $accountsResult === TRUE){
             $mysqli->commit();
