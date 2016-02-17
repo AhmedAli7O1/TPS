@@ -57,6 +57,7 @@ public class TpsWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         GuiMain.setTpsWindowController(this);
+        GuiMain.setStatisticsMainController(statisticsMainController);
 
         // set some icons
         imageUserIcon.setImage(new Image(GuiMain.class.getResourceAsStream("user_32x32.png")));
@@ -85,6 +86,7 @@ public class TpsWindowController implements Initializable {
         incomesMain.setVisible(false);
         withdrawalsMain.setVisible(false);
         statisticsMain.setVisible(true);
+        currPane = statisticsMain;
 
         // init View Style ComboBox
         dataViewStyleList = FXCollections.observableArrayList();
@@ -104,6 +106,7 @@ public class TpsWindowController implements Initializable {
         purchasesMainController.init();
         salesMainController.init();
         withdrawalsMainController.init();
+        statisticsMainController.init();
     }
 
     //sales TitledPane onMouseClicked Event

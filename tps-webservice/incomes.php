@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
-    include 'accounts.php';
+    include 'common_func.php';
 
     if($_POST['method'] === "getIncomes"){
         getIncomes($_POST['json']); //call getIncomes method
@@ -84,16 +84,20 @@ ini_set('display_errors', 1);
             }
         }
 
-        $result = $mysqli->query($query);
+        $mysqli->begin_transaction();                //begin Transaction
+        $incomesResult = $mysqli->query($query);
+        $accountsResult = updateAccounts("TotalIncomes", $totalValue, $date);
 
-        if($result === TRUE){
-            $incomesResult = TRUE;
-            $accountsResult = updateAccounts("TotalIncomes", $totalValue, $date);
+        if($incomesResult === TRUE && $accountsResult === TRUE){
+          $mysqli->commit();
+          $result = TRUE;
+        }
+        else{
+          $mysqli->rollback();
+          $result = FALSE;
         }
 
-        $jsonResponse = json_encode(array('IncomesResult' => $incomesResult, 'AccountsResult' => $accountsResult), JSON_FORCE_OBJECT);
-
-        echo $jsonResponse;
+        echo json_encode(array('result' => $result), JSON_FORCE_OBJECT);
     }
 
     mysqli_close($mysqli);

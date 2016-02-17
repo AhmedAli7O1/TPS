@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
-    include 'accounts.php';
+    include 'common_func.php';
 
     if($_POST['method'] === "getPurchases"){
         getPurchases($_POST['json']);    //call getPurchases method
@@ -83,16 +83,20 @@ ini_set('display_errors', 1);
           }
         }
 
-        $result = $mysqli->query($query);
+        $mysqli->begin_transaction();                //begin Transaction
+        $purchasesResult = $mysqli->query($query);
+        $accountResult = updateAccounts("TotalPurchases", $totalValue, $date);
 
-        if($result === TRUE){
-            $purchasesResult = TRUE;
-            $accountResult = updateAccounts("TotalPurchases", $totalValue, $date);
+        if($purchasesResult === TRUE && $accountResult === TRUE){
+          $mysqli->commit():
+          $result = TRUE;
+        }
+        else{
+          $mysqli->rollback();
+          $result = FALSE;
         }
 
-        $jsonResponse = json_encode(array('PurchasesResult' => $purchasesResult, 'AccountsResult' => $accountResult), JSON_FORCE_OBJECT);
-
-        echo $jsonResponse;
+        echo json_encode(array('result' => $result), JSON_FORCE_OBJECT);
     }
 
     mysqli_close($mysqli);

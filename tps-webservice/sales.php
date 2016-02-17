@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
-    include 'accounts.php';
+    include 'common_func.php';
 
     if($_POST['method'] === "getOrders"){
         getOrders($_POST['json']); //call getOrders method

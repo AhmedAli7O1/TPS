@@ -1,33 +1,58 @@
-<?php 
-    function updateAccounts($obj, $value, $date){
-        global $mysqli;
-        
-        $jsonResponse;
-        
-        // convert string Date to array
-        $date = explode('-', $date);
-        // update the Day to 1
-        $date[2] = 1;
-        // combine the array to create new Date String
-        $date = implode('-', $date);
-        
-        
-        $strQuery = "INSERT INTO Accounts 
-                        (" . $obj . ", Date)
-                     VALUES
-                        ('" . $value . "', '" . $date . "')
-                     ON DUPLICATE KEY UPDATE
-                        " . $obj . " = " .  $obj ." + " . $value . "";
-                        
-                        
-        $result = $mysqli->query($strQuery) or die($mysqli->error);
-        if($result === TRUE){
-            $jsonResponse = TRUE;
+<?php
+  include 'connection.php';
+
+  if($_POST['method'] === "getAccounts"){
+    getAccounts($_POST['json']); //call getOrders method
+  }
+  elseif ($_POST['method'] === "getDates") {
+    getDates();
+  }
+
+  function getAccounts($json){
+    global $mysqli;
+
+    //get params from json object
+    $jsonObj = json_decode($json);
+
+    $year = $jsonObj->{'year'};
+
+    $strQuery = "SELECT * FROM Accounts WHERE (Date Like '". $year ."-%')";
+    getAccountsByQuery($strQuery);
+  }
+
+  function getAccountsByQuery($query){
+    global $mysqli;
+
+    // get array of orders
+    $result = $mysqli->query($query);
+
+    $accounts = array();
+
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $accounts[] = $row;
         }
-        else{
-            $jsonResponse = FALSE;
-        }    
-        
-        return $jsonResponse;      
+
+        echo json_encode(array('Accounts' => $accounts));
     }
+  }
+
+  function getDates(){
+    global $mysqli;
+
+    $strQuery = "SELECT Date FROM Accounts";
+
+    $result = $mysqli->query($strQuery);
+
+    $dates = array();
+
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        $dates[] = $row;
+      }
+    }
+    echo json_encode(array('Dates' => $dates, 'size' => $result->num_rows));
+
+
+  }
 ?>

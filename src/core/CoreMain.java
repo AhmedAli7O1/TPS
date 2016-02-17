@@ -9,4 +9,5 @@ public abstract class CoreMain {
     protected static IIncomesData incomesData = new IncomesData();
     protected static IWithdrawalsData withdrawalsData = new WithdrawalsData();
     protected static IPurchasesData purchasesData = new PurchasesData();
+    protected static IAccountData accountData = new AccountsData();
 }

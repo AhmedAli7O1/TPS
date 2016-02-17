@@ -45,8 +45,7 @@ public class OutgoingsData implements IOutgoingsData {
 
         WebService webService = new WebService();
         JSONObject jsonResult = webService.getJson("outgoings", "addOutgoings", jsonToSend);
-        if(jsonResult.getBoolean("OutgoingsResult") &&
-                jsonResult.getBoolean("AccountsResult"))
+        if(jsonResult.getBoolean("result"))
             return true;
         else return false;
     }

@@ -49,6 +49,7 @@ public class LoginController extends Main implements Initializable {
                                 if(result){
                                     GuiMain.getLoginWindow().close();     // close login window
                                     GuiMain.getTpsWindow().show();        // open main window
+                                    GuiMain.getStatisticsMainController().btnViewOnAction();
                                 }
                                 else {
                                     //error image

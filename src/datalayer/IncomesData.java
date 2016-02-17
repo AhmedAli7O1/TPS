@@ -46,8 +46,7 @@ public class IncomesData implements IIncomesData {
 
         WebService webService = new WebService();
         JSONObject jsonResult = webService.getJson("incomes", "addIncomes", jsonToSend);
-        if(jsonResult.getBoolean("IncomesResult") &&
-                jsonResult.getBoolean("AccountsResult")){
+        if(jsonResult.getBoolean("result")){
             return true;
         }else return false;
     }

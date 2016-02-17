@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
-    include 'accounts.php';
+    include 'common_func.php';
 
     if($_POST['method'] === "getWithdrawals"){
         getWithdrawals($_POST['json']); //call getWithdrawals method
@@ -58,10 +58,6 @@ ini_set('display_errors', 1);
     function addWithdrawals($jsonString){
         global $mysqli;
 
-        $jsonResponse = "";
-        $withdrawalsResult = FALSE;
-        $accountsResult = FALSE;
-
         $jsonObject = json_decode($jsonString);
         $withdrawals = $jsonObject->{'Withdrawals'};
 
@@ -82,16 +78,20 @@ ini_set('display_errors', 1);
             }
         }
 
-        $result = $mysqli->query($query);
+        $mysqli->begin_transaction();                 //begin Transaction
+        $withdrawalsResult = $mysqli->query($query);
+        $accountsResult = updateAccounts("TotalWithdrawals", $totalValue, $date);
 
-        if($result === TRUE){
-            $withdrawalsResult = TRUE;
-            $accountsResult = updateAccounts("TotalWithdrawals", $totalValue, $date);
+        if($withdrawalsResult === TRUE && $accountsResult === TRUE){
+            $mysqli->commit();
+            $result = TRUE;
+        }
+        else{
+          $mysqli->rollback();
+          $result = FALSE;
         }
 
-        $jsonResponse = json_encode(array('WithdrawalsResult' => $withdrawalsResult, 'AccountsResult' => $accountsResult), JSON_FORCE_OBJECT);
-
-        echo $jsonResponse;
+         echo json_encode(array('result' => $result), JSON_FORCE_OBJECT);
     }
 
     mysqli_close($mysqli);

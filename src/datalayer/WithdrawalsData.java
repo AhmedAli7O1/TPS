@@ -50,8 +50,7 @@ public class WithdrawalsData implements IWithdrawalsData {
 
         WebService webService = new WebService();
         JSONObject jsonObj = webService.getJson("withdrawals", "addWithdrawals", jsonToSend);
-        if(jsonObj.getBoolean("WithdrawalsResult") &&
-                jsonObj.getBoolean("AccountsResult")){
+        if(jsonObj.getBoolean("result")){
             return true;
         }
         else return false;

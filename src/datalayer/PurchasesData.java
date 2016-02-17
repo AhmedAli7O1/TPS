@@ -51,8 +51,7 @@ public class PurchasesData implements IPurchasesData {
         jsonToSend.put("Purchases", purchases);
         WebService webService = new WebService();
         JSONObject jsonObj = webService.getJson("purchases", "addPurchase", jsonToSend);
-        if(jsonObj.getBoolean("PurchasesResult") &&
-                jsonObj.getBoolean("AccountsResult")){
+        if(jsonObj.getBoolean("result")){
             return true;
         }else return false;
     }

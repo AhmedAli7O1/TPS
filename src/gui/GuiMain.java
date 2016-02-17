@@ -2,6 +2,7 @@ package gui;
 
 import core.*;
 import core.igui.*;
+import gui.controllers.StatisticsMainController;
 import gui.controllers.TpsWindowController;
 import gui.windows.AddIncomesWindow;
 import gui.windows.AddOutgoingsWindow;
@@ -19,12 +20,14 @@ public abstract class GuiMain {
     private static AddOutgoingsWindow addOutgoingsWindow;
     private static AddIncomesWindow addIncomesWindow;
     private static TpsWindowController tpsWindowController;
+    private static StatisticsMainController statisticsMainController;
     private static IUserControl userControl;
     private static ISalesControl salesControl;
     private static IOutgoingsControl outgoingsControl;
     private static IIncomesControl incomesControl;
     private static IWithdrawalsControl withdrawalsControl;
     private static IPurchasesControl purchasesControl;
+    private static IAccountControl accountControl;
 
     public static TpsWindow getTpsWindow() {
         if(tpsWindow == null)
@@ -150,5 +153,24 @@ public abstract class GuiMain {
 
     public static void setAddIncomesWindow(AddIncomesWindow addIncomesWindow) {
         GuiMain.addIncomesWindow = addIncomesWindow;
+    }
+
+    public static IAccountControl getAccountControl() {
+        if(accountControl == null)
+            accountControl = new AccountsControl();
+
+        return accountControl;
+    }
+
+    public static void setAccountControl(IAccountControl accountControl) {
+        GuiMain.accountControl = accountControl;
+    }
+
+    public static StatisticsMainController getStatisticsMainController() {
+        return statisticsMainController;
+    }
+
+    public static void setStatisticsMainController(StatisticsMainController statisticsMainController) {
+        GuiMain.statisticsMainController = statisticsMainController;
     }
 }

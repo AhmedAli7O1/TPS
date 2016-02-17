@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
     include 'connection.php';
-    include 'accounts.php';
+    include 'common_func.php';
 
     if($_POST['method'] === "getOutgoings"){
         getOutgoings($_POST['json']); //call getOutgoings method
@@ -58,10 +58,6 @@ ini_set('display_errors', 1);
     function addOutgoings($jsonString){
         global $mysqli;
 
-        $jsonResponse = "";
-        $outgoingsResult = FALSE;
-        $accountsResult = FALSE;
-
         $jsonObj = json_decode($jsonString);   // json object contains outgoings array
         $outgoings = $jsonObj->{'Outgoings'};  // outgoings array
 
@@ -84,15 +80,20 @@ ini_set('display_errors', 1);
           }
         }
 
-        $result = $mysqli->query($query);
+        $mysqli->begin_transaction();                //begin Transaction
+        $outgoingsResult = $mysqli->query($query);
+        $accountsResult = updateAccounts("TotalOutgoings", $totalValue, $date);
 
-        if($result === TRUE){
-            $outgoingsResult = TRUE;
-            $accountsResult = updateAccounts("TotalOutgoings", $totalValue, $date);
+        if($outgoingsResult === TRUE && $accountsResult === TRUE){
+          $mysqli->commit();
+          $result = TRUE;
+        }
+        else {
+          $mysqli->rollback();
+          $result = FALSE;
         }
 
-        $jsonResponse = json_encode(array('OutgoingsResult' => $outgoingsResult, 'AccountsResult' => $accountsResult), JSON_FORCE_OBJECT);
-        echo $jsonResponse;
+        echo json_encode(array('result' => $result), JSON_FORCE_OBJECT);
     }
 
     mysqli_close($mysqli);
