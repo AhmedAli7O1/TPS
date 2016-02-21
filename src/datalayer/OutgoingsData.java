@@ -27,9 +27,10 @@ public class OutgoingsData implements IOutgoingsData {
             for(int i = 0; i < jsonOutgoingsArray.length(); i++){
                 outgoings.add(new Outgoing(
                         jsonOutgoingsArray.getJSONObject(i).getInt("ID"),
-                        jsonOutgoingsArray.getJSONObject(i).getString("Details"),
-                        jsonOutgoingsArray.getJSONObject(i).getDouble("Value"),
-                        LocalDate.parse(jsonOutgoingsArray.getJSONObject(i).getString("Date"))
+                        jsonOutgoingsArray.getJSONObject(i).getString("DETAILS"),
+                        jsonOutgoingsArray.getJSONObject(i).getDouble("VALUE"),
+                        LocalDate.parse(jsonOutgoingsArray.getJSONObject(i).getString("DATE")),
+                        jsonOutgoingsArray.getJSONObject(i).getInt("ACCOUNT_ID")
                 ));
             }
         }catch (Exception ex){

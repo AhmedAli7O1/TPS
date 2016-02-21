@@ -10,7 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SalesData implements ISalesData {
@@ -33,44 +32,34 @@ public class SalesData implements ISalesData {
         for(int i = 0; i < jsonOrdersArray.length(); i++){
             Order order = new Order(
                     jsonOrdersArray.getJSONObject(i).getInt("ID"),
-                    jsonOrdersArray.getJSONObject(i).getString("Customer"),
-                    jsonOrdersArray.getJSONObject(i).getDouble("Discount"),
-                    jsonOrdersArray.getJSONObject(i).getDouble("TotalPrice"),
-                    jsonOrdersArray.getJSONObject(i).getDouble("Paid"),
-                    LocalDate.parse(jsonOrdersArray.getJSONObject(i).getString("Date")),
-                    new ArrayList<>());
+                    jsonOrdersArray.getJSONObject(i).getString("CUSTOMER"),
+                    jsonOrdersArray.getJSONObject(i).getDouble("PRICE"),
+                    jsonOrdersArray.getJSONObject(i).getDouble("PAID"),
+                    LocalDate.parse(jsonOrdersArray.getJSONObject(i).getString("DATE")),
+                    new ArrayList<>(),
+                    jsonOrdersArray.getJSONObject(i).getInt("ACCOUNT_ID"));
             orders.add(order);
         }
 
-        // parse Items array from json into HashMap
-        HashMap<Integer, List<Item>> itemsMap = new HashMap<>();   // items list with OrderID as a Key
+        //loop through all items
         for(int i = 0; i < jsonItemsArray.length(); i++){
-
+            //get item data
             int id = jsonItemsArray.getJSONObject(i).getInt("ID");
-            String name = jsonItemsArray.getJSONObject(i).getString("Name");
-            int amount = jsonItemsArray.getJSONObject(i).getInt("Amount");
-            double price = jsonItemsArray.getJSONObject(i).getDouble("Price");
-            double discount = jsonItemsArray.getJSONObject(i).getDouble("Discount");
-            double soldPrice = jsonItemsArray.getJSONObject(i).getDouble("SoldPrice");
-            double purchaseValue = jsonItemsArray.getJSONObject(i).getDouble("PurchasesValue");
-            double paid = jsonItemsArray.getJSONObject(i).getDouble("Paid");
-            LocalDate soldDate = LocalDate.parse(jsonItemsArray.getJSONObject(i).getString("Date"));
-            int orderID = jsonItemsArray.getJSONObject(i).getInt("OrderID");
-
-            // create item key if doesn't exist
-            if(!itemsMap.containsKey(orderID)){
-                itemsMap.put(orderID, new ArrayList<>());
-            }
-
-            itemsMap.get(orderID).add(new Item(id, name, amount, price, discount, soldPrice, purchaseValue, paid, soldDate));
+            String item = jsonItemsArray.getJSONObject(i).getString("ITEM_NAME");
+            int amount = jsonItemsArray.getJSONObject(i).getInt("AMOUNT");
+            double price = jsonItemsArray.getJSONObject(i).getDouble("PRICE");
+            double paid = jsonItemsArray.getJSONObject(i).getDouble("PAID");
+            double purchasesValue = jsonItemsArray.getJSONObject(i).getDouble("PURCHASES_VALUE");
+            int orderId = jsonItemsArray.getJSONObject(i).getInt("ORDER_ID");
+            //add this item to corresponding order
+            orders.stream().filter(ord -> ord.getId() == orderId)
+                    .findFirst().get().getItems().add(
+                    new Item(
+                            id, item, amount, price, paid, purchasesValue, orderId
+                    )
+            );
         }
-
-        // add all items to Orders
-        for(int i = 0; i < orders.size(); i++){
-            orders.get(i).setItems(itemsMap.get(orders.get(i).getId()));
-        }
-
-        return orders;
+        return orders; //return orders list
     }
 
     @Override

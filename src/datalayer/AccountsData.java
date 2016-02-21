@@ -1,13 +1,11 @@
 package datalayer;
 
 import core.Account;
-import core.DataViewStyle;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
 import core.idata.IAccountData;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +16,9 @@ import java.util.List;
 public class AccountsData implements IAccountData {
 
     @Override
-    public List<Account> getAccounts(int year) throws WSConnException, NoDataException {
-        JSONObject jsonToSend = new JSONObject();
-        jsonToSend.put("year", year);
-
+    public List<Account> getAccounts() throws WSConnException, NoDataException {
         WebService webService = new WebService();
-        JSONObject jsonResult = webService.getJson("accounts", "getAccounts", jsonToSend);
+        JSONObject jsonResult = webService.getJson("accounts", "getAccounts");
         List<Account> accounts = new ArrayList<>();
         try {
             JSONArray jsonArray = jsonResult.getJSONArray("Accounts");
@@ -31,12 +26,15 @@ public class AccountsData implements IAccountData {
                 accounts.add(
                         new Account(
                                 jsonArray.getJSONObject(i).getInt("ID"),
-                                jsonArray.getJSONObject(i).getDouble("TotalSales"),
-                                jsonArray.getJSONObject(i).getDouble("TotalIncomes"),
-                                jsonArray.getJSONObject(i).getDouble("TotalOutgoings"),
-                                jsonArray.getJSONObject(i).getDouble("TotalWithdrawals"),
-                                jsonArray.getJSONObject(i).getDouble("TotalPurchases"),
-                                LocalDate.parse(jsonArray.getJSONObject(i).getString("Date"))
+                                jsonArray.getJSONObject(i).getDouble("SALES"),
+                                jsonArray.getJSONObject(i).getDouble("DEBTS"),
+                                jsonArray.getJSONObject(i).getDouble("INCOMES"),
+                                jsonArray.getJSONObject(i).getDouble("OUTGOINGS"),
+                                jsonArray.getJSONObject(i).getDouble("WITHDRAWALS"),
+                                jsonArray.getJSONObject(i).getDouble("PURCHASES"),
+                                jsonArray.getJSONObject(i).getDouble("BALANCE"),
+                                jsonArray.getJSONObject(i).getDouble("PROFITS"),
+                                LocalDate.parse(jsonArray.getJSONObject(i).getString("DATE"))
                         )
                 );
             }
@@ -48,23 +46,15 @@ public class AccountsData implements IAccountData {
     }
 
     @Override
-    public List<LocalDate> getDates(){
+    public boolean addAccount(double oldBalance, LocalDate date) throws WSConnException, NoDataException {
+        WebService webService = new WebService();
+        JSONObject jsonToSend = new JSONObject();
+        jsonToSend.put("oldBalance", oldBalance);
+        jsonToSend.put("date", date.toString());
 
-        List<LocalDate> dates = new ArrayList<>();
-
-        try {
-            WebService webService = new WebService();
-            JSONObject jsonResult = webService.getJson("accounts", "getDates");
-
-            if (jsonResult.getInt("size") > 0) {
-                JSONArray datesArray = jsonResult.getJSONArray("Dates");
-                for (int i = 0; i < datesArray.length(); i++) {
-                    dates.add(LocalDate.parse(datesArray.getJSONObject(i).getString("Date")));
-                }
-            }
-        }
-        catch (Exception ex){ ex.printStackTrace(); }
-
-        return dates;
+        JSONObject jsonResult = webService.getJson("accounts.php", "addAccount", jsonToSend);
+        if(jsonResult.getBoolean("result"))
+            return true;
+        else return false;
     }
 }

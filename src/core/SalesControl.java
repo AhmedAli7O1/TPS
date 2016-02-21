@@ -51,4 +51,9 @@ public class SalesControl implements ISalesControl {
         else
             return false;
     }
+
+    @Override
+    public LocalDate getItemDate(Item item){
+        return orders.stream().filter(ord -> ord.getId() == item.getOrderId()).findFirst().get().getDate();
+    }
 }

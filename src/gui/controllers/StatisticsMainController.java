@@ -1,44 +1,37 @@
 package gui.controllers;
 
-import core.DataViewStyle;
 import core.UpdateType;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
 import gui.ChartSeries;
 import gui.GuiMain;
 import javafx.application.Platform;
-import javafx.beans.binding.Binding;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * Created by Ahmed ali on 10/02/2016.
  */
 public class StatisticsMainController {
     @FXML private BarChart<String, Number> chart;
-    @FXML private CategoryAxis categoryAxis;
-    @FXML private NumberAxis numberAxis;
     @FXML private ChoiceBox<Integer> cbYear;
     @FXML private ChoiceBox<Integer> cbMonth;
-    @FXML private ImageView imageYear;
-    @FXML private ImageView imageMonth;
     @FXML private Label lblYearTotalSales;
     @FXML private Label lblMonthTotalSales;
+    @FXML private Label lblMonthTotalIncomes;
+    @FXML private Label lblMonthTotalPurchases;
+    @FXML private Label lblMonthTotalOutgoings;
+    @FXML private Label lblMonthTotalWithdrawals;
+    @FXML private Label lblMonthTotalBalance;
+    @FXML private Label lblMonthTotalDebts;
+    @FXML private Label lblMonthTotalProfits;
 
     private ObservableList<Integer> availableYears;
     private ObservableList<Integer> availableMonths;
@@ -50,15 +43,12 @@ public class StatisticsMainController {
         availableYears = FXCollections.observableArrayList();
         availableMonths = FXCollections.observableArrayList();
 
-        imageYear.setImage(new Image(GuiMain.class.getResourceAsStream("statyear_64x64.png")));
-        imageMonth.setImage(new Image(GuiMain.class.getResourceAsStream("statmonth_64x64.png")));
-
         cbYear.setItems(availableYears);
         cbMonth.setItems(availableMonths);
 
         availableYears.addAll(
                 GuiMain.getAccountControl()
-                        .getAvailableYears(UpdateType.UPDATE_IF_NO_DATA)
+                        .getAvailableYears()
         );
 
         cbYear.getSelectionModel().selectedItemProperty().addListener((observable1, oldValue1, newValue) -> {
@@ -90,14 +80,57 @@ public class StatisticsMainController {
                     protected Object call() throws Exception {
                         try{
                             ChartSeries chartSeries = new ChartSeries(
-                                    GuiMain.getAccountControl().getAccounts(
-                                            cbYear.getValue()
-                                    )); // need to add list of accounts
+                                    GuiMain.getAccountControl().getAccounts(UpdateType.FORCE_UPDATE));
 
                             Platform.runLater(() -> {
                                 chart.setData(chartSeries.getSeriesList());
                                 lblMonthTotalSales.setText(
-                                        GuiMain.getAccountControl().getMonthTotalSales(cbMonth.getValue()).toString());
+                                        GuiMain.getAccountControl().getMonthTotalSales(
+                                                cbMonth.getValue(), cbYear.getValue()).toString()
+                                );
+
+                                lblMonthTotalIncomes.setText(
+                                        GuiMain.getAccountControl().getMonthTotalIncomes(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
+                                lblMonthTotalPurchases.setText(
+                                        GuiMain.getAccountControl().getMonthTotalPurchases(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
+                                lblMonthTotalOutgoings.setText(
+                                        GuiMain.getAccountControl().getMonthTotalOutgoings(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
+                                lblMonthTotalWithdrawals.setText(
+                                        GuiMain.getAccountControl().getMonthTotalWithdrawals(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
+                                lblMonthTotalBalance.setText(
+                                        GuiMain.getAccountControl().getMonthBalance(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
+                                lblMonthTotalDebts.setText(
+                                        GuiMain.getAccountControl().getMonthTotalDebts(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
+                                lblMonthTotalProfits.setText(
+                                        GuiMain.getAccountControl().getMonthProfits(
+                                                cbMonth.getValue(), cbYear.getValue()
+                                        ).toString()
+                                );
+
                                 lblYearTotalSales.setText(
                                         GuiMain.getAccountControl().getYearTotalSales().toString());
                             });

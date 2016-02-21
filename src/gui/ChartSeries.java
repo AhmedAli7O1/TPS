@@ -49,10 +49,10 @@ public class ChartSeries {
 
     private void getData(List<Account> accounts){
         accounts.stream().forEach(account -> {
-            salesData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getTotalSales()));
-            incomesData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getTotalIncomes()));
-            outgoingsData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getTotalOutgoings()));
-            purchasesData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getTotalPurchases()));
+            salesData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getSales()));
+            incomesData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getIncomes()));
+            outgoingsData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getOutgoings()));
+            purchasesData.add(new XYChart.Data<>(String.valueOf(account.getDate().getMonthValue()), account.getPurchases()));
         });
     }
 }

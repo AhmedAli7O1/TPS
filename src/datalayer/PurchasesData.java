@@ -32,11 +32,12 @@ public class PurchasesData implements IPurchasesData {
             for(int i = 0; i < jsonPurchasesArray.length(); i++){
                 purchases.add(new Purchase(
                         jsonPurchasesArray.getJSONObject(i).getInt("ID"),
-                        jsonPurchasesArray.getJSONObject(i).getString("Item"),
-                        jsonPurchasesArray.getJSONObject(i).getInt("Amount"),
-                        jsonPurchasesArray.getJSONObject(i).getDouble("PurchasePrice"),
-                        jsonPurchasesArray.getJSONObject(i).getString("Seller"),
-                        LocalDate.parse(jsonPurchasesArray.getJSONObject(i).getString("Date"))
+                        jsonPurchasesArray.getJSONObject(i).getString("ITEM"),
+                        jsonPurchasesArray.getJSONObject(i).getInt("AMOUNT"),
+                        jsonPurchasesArray.getJSONObject(i).getDouble("PURCHASE_PRICE"),
+                        jsonPurchasesArray.getJSONObject(i).getString("SELLER"),
+                        LocalDate.parse(jsonPurchasesArray.getJSONObject(i).getString("DATE")),
+                        jsonPurchasesArray.getJSONObject(i).getInt("ACCOUNT_ID")
                 ));
             }
         }catch (Exception ex){

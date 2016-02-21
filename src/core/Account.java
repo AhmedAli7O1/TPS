@@ -7,20 +7,30 @@ import java.time.LocalDate;
  */
 public class Account {
     private int id;
-    private double totalSales;
-    private double totalIncomes;
-    private double totalOutgoings;
-    private double totalwithdrawals;
-    private double totalPurchases;
+    private double sales;
+    private double debts;
+    private double incomes;
+    private double outgoings;
+    private double withdrawals;
+    private double purchases;
+    private double balance;
+    private double profits;
     private LocalDate date;
 
-    public Account(int id, double totalSales, double totalIncomes, double totalOutgoings, double totalwithdrawals, double totalPurchases, LocalDate date) {
+    public Account(int id, double sales,
+                   double debts, double incomes,
+                   double outgoings, double withdrawals,
+                   double purchases, double balance,
+                   double profits, LocalDate date) {
         this.id = id;
-        this.totalSales = totalSales;
-        this.totalIncomes = totalIncomes;
-        this.totalOutgoings = totalOutgoings;
-        this.totalwithdrawals = totalwithdrawals;
-        this.totalPurchases = totalPurchases;
+        this.sales = sales;
+        this.debts = debts;
+        this.incomes = incomes;
+        this.outgoings = outgoings;
+        this.withdrawals = withdrawals;
+        this.purchases = purchases;
+        this.balance = balance;
+        this.profits = profits;
         this.date = date;
     }
 
@@ -28,24 +38,43 @@ public class Account {
         return id;
     }
 
-    public double getTotalSales() {
-        return totalSales;
+    public double getSales() {
+        return sales;
     }
 
-    public double getTotalIncomes() {
-        return totalIncomes;
+    public double getDebts() {
+        return debts;
     }
 
-    public double getTotalOutgoings() {
-        return totalOutgoings;
+    public double getIncomes() {
+        return incomes;
     }
 
-    public double getTotalwithdrawals() {
-        return totalwithdrawals;
+    public double getOutgoings() {
+        return outgoings;
     }
 
-    public double getTotalPurchases() {
-        return totalPurchases;
+    public double getWithdrawals() {
+        return withdrawals;
+    }
+
+    public double getPurchases() {
+        return purchases;
+    }
+
+    public double getOldBalance() {
+        //calc the actual balance
+        double acBalance = ((sales + incomes) - (outgoings + withdrawals));
+        //subtract from stored balance
+        return (this.balance - acBalance);
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getProfits() {
+        return profits;
     }
 
     public LocalDate getDate() {

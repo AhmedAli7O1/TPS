@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,7 +14,7 @@ public class IncomesView {
     private SimpleIntegerProperty id;
     private SimpleStringProperty details;
     private SimpleDoubleProperty value;
-    private SimpleIntegerProperty isDebt;
+    private SimpleBooleanProperty isDebt;
     private SimpleStringProperty date;
 
     public IncomesView(int id, String details, double value, LocalDate date) {
@@ -23,10 +24,10 @@ public class IncomesView {
         this.date = new SimpleStringProperty(date.toString());
     }
 
-    public IncomesView(String details, double value, int isDebt, String date) {
+    public IncomesView(String details, double value, boolean isDebt, String date) {
         this.details = new SimpleStringProperty(details);
         this.value = new SimpleDoubleProperty(value);
-        this.isDebt = new SimpleIntegerProperty(isDebt);
+        this.isDebt = new SimpleBooleanProperty(isDebt);
         this.date = new SimpleStringProperty(date);
     }
 
@@ -78,15 +79,15 @@ public class IncomesView {
         this.date.set(date);
     }
 
-    public int getIsDebt() {
+    public boolean getIsDebt() {
         return isDebt.get();
     }
 
-    public SimpleIntegerProperty isDebtProperty() {
+    public SimpleBooleanProperty isDebtProperty() {
         return isDebt;
     }
 
-    public void setIsDebt(int isDebt) {
+    public void setIsDebt(boolean isDebt) {
         this.isDebt.set(isDebt);
     }
 }

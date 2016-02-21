@@ -27,10 +27,11 @@ public class IncomesData implements IIncomesData {
             for(int i = 0; i < jsonIncomesArray.length(); i++){
                 incomes.add(new Income(
                         jsonIncomesArray.getJSONObject(i).getInt("ID"),
-                        jsonIncomesArray.getJSONObject(i).getString("Details"),
-                        jsonIncomesArray.getJSONObject(i).getDouble("Value"),
-                        jsonIncomesArray.getJSONObject(i).getInt("IsDebt"),
-                        LocalDate.parse(jsonIncomesArray.getJSONObject(i).getString("Date"))
+                        jsonIncomesArray.getJSONObject(i).getString("DETAILS"),
+                        jsonIncomesArray.getJSONObject(i).getDouble("VALUE"),
+                        (jsonIncomesArray.getJSONObject(i).getInt("IS_DEBT") == 1 ? true : false),
+                        LocalDate.parse(jsonIncomesArray.getJSONObject(i).getString("DATE")),
+                        jsonIncomesArray.getJSONObject(i).getInt("ACCOUNT_ID")
                 ));
             }
         }catch (Exception ex){

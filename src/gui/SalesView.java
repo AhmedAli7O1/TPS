@@ -10,21 +10,33 @@ public class SalesView {
     private SimpleIntegerProperty id;
     private SimpleStringProperty name;
     private SimpleIntegerProperty amount;
-    private SimpleDoubleProperty soldPrice;
+    private SimpleDoubleProperty price;
     private SimpleDoubleProperty paid;
+    private SimpleDoubleProperty purchaseValue;
     private SimpleStringProperty date;
 
     public SalesView(
             int id, String name,
-            int amount, double soldPrice,
-            double paid, String date) {
+            int amount, double price,
+            double paid, double purchaseValue,
+            String date) {
 
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.amount = new SimpleIntegerProperty(amount);
-        this.soldPrice = new SimpleDoubleProperty(soldPrice);
+        this.price = new SimpleDoubleProperty(price);
         this.paid = new SimpleDoubleProperty(paid);
+        this.purchaseValue = new SimpleDoubleProperty(purchaseValue);
         this.date = new SimpleStringProperty(date);
+    }
+
+    public SalesView(String name, int amount,
+                     double price, double paid, double purchaseValue) {
+        this.name = new SimpleStringProperty(name);
+        this.amount = new SimpleIntegerProperty(amount);
+        this.price = new SimpleDoubleProperty(price);
+        this.paid = new SimpleDoubleProperty(paid);
+        this.purchaseValue = new SimpleDoubleProperty(purchaseValue);
     }
 
     public int getId() {
@@ -63,18 +75,6 @@ public class SalesView {
         this.amount.set(amount);
     }
 
-    public double getSoldPrice() {
-        return soldPrice.get();
-    }
-
-    public SimpleDoubleProperty soldPriceProperty() {
-        return soldPrice;
-    }
-
-    public void setSoldPrice(double soldPrice) {
-        this.soldPrice.set(soldPrice);
-    }
-
     public double getPaid() {
         return paid.get();
     }
@@ -99,11 +99,27 @@ public class SalesView {
         this.date.set(date);
     }
 
-    public static Double getTotalPaid(List<SalesView> sales){
-        double total = 0;
-        for (SalesView sale : sales){
-            total += sale.getPaid();
-        }
-        return total;
+    public double getPrice() {
+        return price.get();
+    }
+
+    public SimpleDoubleProperty priceProperty() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public double getPurchaseValue() {
+        return purchaseValue.get();
+    }
+
+    public SimpleDoubleProperty purchaseValueProperty() {
+        return purchaseValue;
+    }
+
+    public void setPurchaseValue(double purchaseValue) {
+        this.purchaseValue.set(purchaseValue);
     }
 }

@@ -35,15 +35,14 @@ public class OutgoingsControl extends CoreMain implements IOutgoingsControl {
     public boolean saveChanges() throws WSConnException, NoDataException {
         if(newOutgoings.size() < 1)
             return true;
-        /*
-        if(outgoingsData.addOutgoings(newOutgoings)){
+
+        if(outgoingsData.addNewOutgoings(newOutgoings)){
             newOutgoings.clear();
             return true;
         }
         else
             return false;
-            */
-        return true;
+
     }
 
 

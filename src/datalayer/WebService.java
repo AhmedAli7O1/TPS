@@ -85,9 +85,12 @@ public class WebService extends DataSource {
         bw.close();
         reader.close();
 
-        System.out.println("Debug - File = 'WebService' Line = '88' : ");
+        System.out.println("############# Debug - File = 'WebService' Line = '88' #############");
+        System.out.println("WebService Request : ");
+        System.out.println(urlParameters);
+        System.out.println("WebService Response : ");
         System.out.println(response);
-        System.out.println("### End of Debug Line = '90' ###");
+        System.out.println("### End of Debug Line = '93' ###");
 
         return response;
     }

@@ -32,9 +32,10 @@ public class WithdrawalsData implements IWithdrawalsData {
             for(int i = 0; i < jsonWithdrawalsArray.length(); i++){
                 withdrawals.add(new Withdraw(
                         jsonWithdrawalsArray.getJSONObject(i).getInt("ID"),
-                        jsonWithdrawalsArray.getJSONObject(i).getString("Details"),
-                        jsonWithdrawalsArray.getJSONObject(i).getDouble("Value"),
-                        LocalDate.parse(jsonWithdrawalsArray.getJSONObject(i).getString("Date"))
+                        jsonWithdrawalsArray.getJSONObject(i).getString("DETAILS"),
+                        jsonWithdrawalsArray.getJSONObject(i).getDouble("VALUE"),
+                        LocalDate.parse(jsonWithdrawalsArray.getJSONObject(i).getString("DATE")),
+                        jsonWithdrawalsArray.getJSONObject(i).getInt("ACCOUNT_ID")
                 ));
             }
         }catch (Exception ex){

@@ -12,6 +12,6 @@ import java.util.List;
  * Created by Ahmed Ali on 16/02/2016.
  */
 public interface IAccountData {
-    List<Account> getAccounts(int year) throws WSConnException, NoDataException;
-    List<LocalDate> getDates() throws WSConnException, NoDataException;
+    List<Account> getAccounts() throws WSConnException, NoDataException;
+    boolean addAccount(double oldBalance, LocalDate date) throws WSConnException, NoDataException;
 }

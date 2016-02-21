@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox nodeOrientation="RIGHT_TO_LEFT" visible="false" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="gui.controllers.SalesMainController">
+<VBox nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.SalesMainController">
     <children>
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>
@@ -34,7 +34,7 @@
                 <TableColumn fx:id="cnSalesId" editable="false" maxWidth="50.0" minWidth="40.0" prefWidth="50.0" sortable="false" text="رقم" />
                 <TableColumn fx:id="cnSalesName" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" sortable="false" text="البضاعة" />
                 <TableColumn fx:id="cnSalesAmount" editable="false" maxWidth="60.0" minWidth="60.0" prefWidth="70.0" sortable="false" text="العدد" />
-                <TableColumn fx:id="cnSalesSoldPrice" editable="false" maxWidth="80.0" minWidth="80.0" sortable="false" text="سعر البيع" />
+                <TableColumn fx:id="cnSalesPrice" editable="false" maxWidth="80.0" minWidth="80.0" sortable="false" text="سعر البيع" />
                 <TableColumn fx:id="cnSalesPaid" editable="false" maxWidth="80.0" minWidth="80.0" sortable="false" text="المدفوع" />
                 <TableColumn fx:id="cnSalesDate" editable="false" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" sortable="false" text="التاريخ" />
             </columns>

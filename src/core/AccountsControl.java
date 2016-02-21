@@ -19,18 +19,6 @@ public class AccountsControl extends CoreMain implements IAccountControl {
     private List<LocalDate> dates;
     private HashMap<Integer, List<Integer>> availableDates;
 
-    //cash the last statistics to get balance
-    private double yearTotalSales;
-    private double yearTotalIncomes;
-    private double yearTotalOutgoings;
-    private double yearTotalWithdrawals;
-    private double yearTotalPurchases;
-    private double monthTotalSales;
-    private double monthTotalIncomes;
-    private double monthTotalOutgoings;
-    private double monthTotalWithdrawals;
-    private double monthTotalPurchases;
-
     public AccountsControl(){
         accounts = new ArrayList<>();
         dates = new ArrayList<>();
@@ -38,19 +26,31 @@ public class AccountsControl extends CoreMain implements IAccountControl {
     }
 
     @Override   // get accounts by months or year or all
-    public List<Account> getAccounts(int year) throws WSConnException, NoDataException {
-        accounts.clear();
-        accounts.addAll(accountData.getAccounts(year));
-        return accounts;
+    public List<Account> getAccounts(UpdateType updateType) throws WSConnException, NoDataException {
+        if(updateType == UpdateType.FORCE_UPDATE){
+            accounts.clear();
+            accounts.addAll(accountData.getAccounts());
+            return accounts;
+        }
+        else {
+            if(accounts.size() == 0) {
+                accounts.clear();
+                accounts.addAll(accountData.getAccounts());
+            }
+
+            return accounts;
+        }
     }
 
     private void getDates(){
+        try {
+            getAccounts(UpdateType.UPDATE_IF_NO_DATA);
+        }catch (Exception ex){ ex.printStackTrace(); }
+
         dates.clear();
         availableDates.clear();
 
-        try {
-            dates = accountData.getDates();
-        }catch (Exception ex){}
+        accounts.stream().map(acc -> dates.add(acc.getDate())).collect(Collectors.toList());
 
         dates.stream().filter(date -> availableDates.containsKey(
                 date.getYear()) == false).map(
@@ -63,15 +63,8 @@ public class AccountsControl extends CoreMain implements IAccountControl {
     }
 
     @Override
-    public List<Integer> getAvailableYears(UpdateType updateType){
-        if(updateType == UpdateType.FORCE_UPDATE){
-            getDates();
-        }
-        else if(updateType == UpdateType.UPDATE_IF_NO_DATA){
-            if(availableDates.size() == 0)
-                getDates();
-        }
-
+    public List<Integer> getAvailableYears(){
+        getDates();
         List<Integer> years = new ArrayList<>();
         availableDates.keySet().stream().map(
                 yr -> years.add(yr)
@@ -85,79 +78,105 @@ public class AccountsControl extends CoreMain implements IAccountControl {
     }
 
     @Override
-    public Double getMonthTotalSales(int month){ //view accounts with specific month
-        monthTotalSales = accounts.stream().filter(
-                acc -> acc.getDate().getMonthValue() == month)
-                .mapToDouble(Account::getTotalSales).sum();
-
-        return monthTotalSales;
+    public Double getMonthTotalSales(int month, int year){ //view accounts with specific month
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getSales).sum();
     }
 
-    public Double getMonthTotalIncomes(int month){
-        monthTotalIncomes =  accounts.stream().filter(
-                acc -> acc.getDate().getMonthValue() == month)
-                .mapToDouble(Account::getTotalIncomes).sum();
-
-        return monthTotalIncomes;
+    @Override
+    public Double getMonthTotalIncomes(int month, int year){
+        return   accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getIncomes).sum();
     }
 
-    public Double getMonthTotalOutgoings(int month){
-        monthTotalOutgoings = accounts.stream().filter(
-                acc -> acc.getDate().getMonthValue() == month)
-                .mapToDouble(Account::getTotalOutgoings).sum();
-
-        return monthTotalOutgoings;
+    @Override
+    public Double getMonthTotalOutgoings(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getOutgoings).sum();
     }
 
-    public Double getMonthTotalWithdrawals(int month){
-        monthTotalWithdrawals = accounts.stream().filter(
-                acc -> acc.getDate().getMonthValue() == month)
-                .mapToDouble(Account::getTotalwithdrawals).sum();
-
-        return monthTotalWithdrawals;
+    @Override
+    public Double getMonthTotalWithdrawals(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getWithdrawals).sum();
     }
 
-    public Double getMonthTotalPurchases(int month){
-        monthTotalPurchases = accounts.stream().filter(
-                acc -> acc.getDate().getMonthValue() == month)
-                .mapToDouble(Account::getTotalPurchases).sum();
-
-        return monthTotalPurchases;
+    @Override
+    public Double getMonthTotalPurchases(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getPurchases).sum();
     }
 
-    public Double getMonthTotalBalance(){
-        return ((monthTotalSales + monthTotalIncomes) - (monthTotalOutgoings + monthTotalWithdrawals));
+    @Override
+    public Double getMonthOldBalance(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getOldBalance).sum();
+    }
+
+    @Override
+    public Double getMonthBalance(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year)
+                .mapToDouble(Account::getBalance).sum();
+    }
+
+    @Override
+    public Double getMonthTotalDebts(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year
+        ).findFirst().get().getDebts();
+    }
+
+    @Override
+    public Double getMonthProfits(int month, int year){
+        return accounts.stream().filter(
+                acc -> acc.getDate().getMonthValue() == month &&
+                        acc.getDate().getYear() == year
+        ).findFirst().get().getProfits();
     }
 
     @Override
     public Double getYearTotalSales(){  //view all accounts
-        yearTotalSales = accounts.stream().mapToDouble(Account::getTotalSales).sum();
-        return yearTotalSales;
+        return accounts.stream().mapToDouble(Account::getSales).sum();
     }
 
+    @Override
     public Double getYearTotalIncomes(){
-        yearTotalIncomes = accounts.stream().mapToDouble(Account::getTotalIncomes).sum();
-        return yearTotalIncomes;
+        return accounts.stream().mapToDouble(Account::getIncomes).sum();
     }
 
+    @Override
     public Double getYearTotalOutgoings(){
-        yearTotalOutgoings = accounts.stream().mapToDouble(Account::getTotalOutgoings).sum();
-        return yearTotalOutgoings;
+        return accounts.stream().mapToDouble(Account::getOutgoings).sum();
     }
 
+    @Override
     public Double getYearTotalWithdrawals(){
-        yearTotalWithdrawals = accounts.stream().mapToDouble(Account::getTotalwithdrawals).sum();
-        return yearTotalWithdrawals;
+        return accounts.stream().mapToDouble(Account::getWithdrawals).sum();
     }
 
+    @Override
     public Double getYearTotalPurchases(){
-        yearTotalPurchases = accounts.stream().mapToDouble(Account::getTotalPurchases).sum();
-        return yearTotalPurchases;
+        return accounts.stream().mapToDouble(Account::getPurchases).sum();
     }
 
-    public Double getYearTotalBalance(){
-        return ((yearTotalSales + yearTotalIncomes) - (yearTotalOutgoings + yearTotalWithdrawals));
+    @Override
+    public int getAccountId(LocalDate date){
+        return accounts.stream().filter(
+                acc -> acc.getDate().isEqual(date.withDayOfMonth(1))).findFirst().get().getId();
     }
-
-
 }

@@ -1,7 +1,7 @@
 package datalayer;
 
 public class DataSource {
-    protected static String address = "http://127.0.0.1/tps-webservice/";
+    protected static String address = "http://127.0.0.1/webservice/";
 
     public static String getAddress() {
         return address;

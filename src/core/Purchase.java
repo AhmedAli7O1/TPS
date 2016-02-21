@@ -12,22 +12,25 @@ public class Purchase {
     private double purchasePrice;
     private String seller;
     private LocalDate date;
+    private int accountId;
 
-    public Purchase(int id, String item, int amount, double purchasePrice, String seller, LocalDate date) {
+    public Purchase(int id, String item, int amount, double purchasePrice, String seller, LocalDate date, int accountId) {
         this.id = id;
         this.item = item;
         this.amount = amount;
         this.purchasePrice = purchasePrice;
         this.seller = seller;
         this.date = date;
+        this.accountId = accountId;
     }
 
-    public Purchase(String item, int amount, double purchasePrice, String seller, LocalDate date) {
+    public Purchase(String item, int amount, double purchasePrice, String seller, LocalDate date, int accountId) {
         this.item = item;
         this.amount = amount;
         this.purchasePrice = purchasePrice;
         this.seller = seller;
         this.date = date;
+        this.accountId = accountId;
     }
 
     public int getId() {
@@ -76,5 +79,13 @@ public class Purchase {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 }

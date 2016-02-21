@@ -67,12 +67,13 @@ public class AddOutgoingsController implements Initializable {
         GuiMain.getOutgoingsControl().addOutgoings(outgoingsList.stream().map(outgoingView -> new Outgoing(
                 outgoingView.getDetails(),
                 outgoingView.getValue(),
-                LocalDate.parse(outgoingView.getDate())
+                LocalDate.parse(outgoingView.getDate()),
+                GuiMain.getAccountControl().getAccountId(LocalDate.parse(outgoingView.getDate()))
         )).collect(Collectors.toList()));
         GuiMain.getAddOutgoingsWindow().close();
 
         try {
             GuiMain.getOutgoingsControl().saveChanges();   //save all changes to data source
-        }catch (Exception ex){}
+        }catch (Exception ex){ ex.printStackTrace(); }
     }
 }

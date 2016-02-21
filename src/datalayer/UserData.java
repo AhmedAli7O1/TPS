@@ -22,12 +22,12 @@ public class UserData implements IUserData{
         try {
             JSONObject jsonResponse = webService.getJson("users", "login", jsonToSend);
 
-            return new User(jsonResponse.getString("Name"),
-                    Authorization.valueOf(jsonResponse.getString("Auth")),
-                    jsonResponse.getString("Title"),
-                    DateTime.parse(jsonResponse.getString("LastLogged")),
-                    DateTime.parse(jsonResponse.getString("LastEdit")),
-                    jsonResponse.getInt("SecKey"));
+            return new User(jsonResponse.getString("NAME"),
+                    Authorization.valueOf(jsonResponse.getString("AUTH")),
+                    jsonResponse.getString("TITLE"),
+                    DateTime.parse(jsonResponse.getString("LAST_LOGGED")),
+                    DateTime.parse(jsonResponse.getString("LAST_EDIT")),
+                    jsonResponse.getInt("SEC_KEY"));
         }
         catch (NoDataException ex){
             throw new LoginException(LoginException.ExType.INVALID_ID_PASS);

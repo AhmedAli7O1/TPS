@@ -7,18 +7,21 @@ public class Outgoing {
     private String details;
     private double value;
     private LocalDate date;
+    private int accountId;
 
-    public Outgoing(int id, String details, double value, LocalDate date) {
+    public Outgoing(int id, String details, double value, LocalDate date, int accountId) {
         this.id = id;
         this.details = details;
         this.value = value;
         this.date = date;
+        this.accountId = accountId;
     }
 
-    public Outgoing(String details, double value, LocalDate date) {
+    public Outgoing(String details, double value, LocalDate date, int accountId) {
         this.details = details;
         this.value = value;
         this.date = date;
+        this.accountId = accountId;
     }
 
     public int getId() {
@@ -51,5 +54,13 @@ public class Outgoing {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 }

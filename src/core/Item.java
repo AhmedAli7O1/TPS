@@ -1,47 +1,33 @@
 package core;
 
-import java.time.LocalDate;
-
 public class Item {
     private int id;
     private String name;
     private int amount;
     private double price;
-    private double discount;
-    private double soldPrice;
-    private double purchaseValue;
     private double paid;
-    private LocalDate date;
+    private double purchaseValue;
+    private int orderId;
 
     public Item(
             int id, String name, int amount,
-            double price, double discount,
-            double soldPrice, double purchaseValue,
-            double paid, LocalDate date) {
-
+            double price, double paid,
+            double purchaseValue, int orderId) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.price = price;
-        this.discount = discount;
-        this.soldPrice = soldPrice;
-        this.purchaseValue = purchaseValue;
         this.paid = paid;
-        this.date = date;
+        this.purchaseValue = purchaseValue;
+        this.orderId = orderId;
     }
 
     public Item(
-            String name, int amount, double price,
-            double discount, double soldPrice,
-            double paid, LocalDate date) {
-
+            String name, int amount, double price, double paid) {
         this.name = name;
         this.amount = amount;
         this.price = price;
-        this.discount = discount;
-        this.soldPrice = soldPrice;
         this.paid = paid;
-        this.date = date;
     }
 
     public int getId() {
@@ -76,20 +62,12 @@ public class Item {
         this.price = price;
     }
 
-    public double getDiscount() {
-        return discount;
+    public double getPaid() {
+        return paid;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public double getSoldPrice() {
-        return soldPrice;
-    }
-
-    public void setSoldPrice(double soldPrice) {
-        this.soldPrice = soldPrice;
+    public void setPaid(double paid) {
+        this.paid = paid;
     }
 
     public double getPurchaseValue() {
@@ -100,19 +78,11 @@ public class Item {
         this.purchaseValue = purchaseValue;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public double getPaid() {
-        return paid;
-    }
-
-    public void setPaid(double paid) {
-        this.paid = paid;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }

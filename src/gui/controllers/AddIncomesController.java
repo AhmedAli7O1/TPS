@@ -49,7 +49,7 @@ public class AddIncomesController implements Initializable {
                 new IncomesView(
                         txtDetails.getText(),
                         Double.parseDouble(txtValue.getText()),
-                        (ckIsDebt.isSelected() ? 1 : 0),
+                        ckIsDebt.isSelected(),
                         dpDate.getValue().toString()
                 )
         );
@@ -57,12 +57,17 @@ public class AddIncomesController implements Initializable {
 
     @FXML
     public void btnSaveOnAction(){
-        List<Income> incomes = newIncomesList.stream().map(incomeView -> new Income(
-                incomeView.getDetails(),
-                incomeView.getValue(),
-                incomeView.getIsDebt(),
-                LocalDate.parse(incomeView.getDate())
-        )).collect(Collectors.toList());
+        List<Income> incomes = newIncomesList.stream().map(incomeView ->
+
+            new Income(
+                    incomeView.getDetails(),
+                    incomeView.getValue(),
+                    incomeView.getIsDebt(),
+                    LocalDate.parse(incomeView.getDate()),
+                    GuiMain.getAccountControl().getAccountId(LocalDate.parse(incomeView.getDate()))
+            )
+
+        ).collect(Collectors.toList());
 
         GuiMain.getIncomesControl().addIncomes(incomes);
 

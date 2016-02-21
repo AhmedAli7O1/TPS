@@ -6,22 +6,25 @@ public class Income {
     private int id;
     private String details;
     private double value;
-    private int isDebt;
     private LocalDate date;
+    private boolean isDebt;
+    private int accountId;
 
-    public Income(int id, String details, double value, int isDebt, LocalDate date) {
+    public Income(int id, String details, double value, boolean isDebt, LocalDate date, int accountId) {
         this.id = id;
         this.details = details;
         this.value = value;
         this.isDebt = isDebt;
         this.date = date;
+        this.accountId = accountId;
     }
 
-    public Income(String details, double value, int isDebt, LocalDate date) {
+    public Income(String details, double value, boolean isDebt, LocalDate date, int accountId) {
         this.details = details;
         this.value = value;
         this.isDebt = isDebt;
         this.date = date;
+        this.accountId = accountId;
     }
 
     public int getId() {
@@ -56,11 +59,19 @@ public class Income {
         this.date = date;
     }
 
-    public int getIsDebt() {
+    public boolean getIsDebt() {
         return isDebt;
     }
 
-    public void setIsDebt(int isDebt) {
+    public void setIsDebt(boolean isDebt) {
         this.isDebt = isDebt;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 }

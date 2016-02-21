@@ -33,7 +33,7 @@ public class SalesMainController {
     @FXML private TableColumn<SalesView, Integer> cnSalesId;          //Column : ID
     @FXML private TableColumn<SalesView, String> cnSalesName;         //Column : Name
     @FXML private TableColumn<SalesView, Integer> cnSalesAmount;      //Column : Amount
-    @FXML private TableColumn<SalesView, Double> cnSalesSoldPrice;    //Column : Sold Price
+    @FXML private TableColumn<SalesView, Double> cnSalesPrice;        //Column : Sold Price
     @FXML private TableColumn<SalesView, Double> cnSalesPaid;         //Column : Paid
     @FXML private TableColumn<SalesView, DateFormat> cnSalesDate;     //Column : Date
     @FXML private TextField txtTotalSales;
@@ -53,13 +53,14 @@ public class SalesMainController {
         cnSalesId.setCellValueFactory(new PropertyValueFactory<>("id"));
         cnSalesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         cnSalesAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        cnSalesSoldPrice.setCellValueFactory(new PropertyValueFactory<>("soldPrice"));
+        cnSalesPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         cnSalesPaid.setCellValueFactory(new PropertyValueFactory<>("paid"));
         cnSalesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         salesList = FXCollections.observableArrayList();
 
         tableSales.setItems(salesList);
+
 
         /**
          * bind txtTotalSales which display Total Sales
@@ -103,9 +104,10 @@ public class SalesMainController {
                                         item.getId(),
                                         item.getName(),
                                         item.getAmount(),
-                                        item.getSoldPrice(),
+                                        item.getPrice(),
                                         item.getPaid(),
-                                        item.getDate().toString()
+                                        item.getPurchaseValue(),
+                                        GuiMain.getSalesControl().getItemDate(item).toString()
                                 )).collect(Collectors.toList()));
                             });
 

@@ -1,37 +1,38 @@
 package core;
 
-import org.joda.time.DateTime;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private int id;
     private String customer;
-    private double discount;
-    private double totalPrice;
+    private double price;
     private double paid;
     private LocalDate date;
     private List<Item> items;
+    private int accountId;
 
-    public Order(int id, String customer, double discount, double totalPrice, double paid, LocalDate date, List<Item> items) {
+    public Order(int id, String customer,
+                 double price, double paid, LocalDate date,
+                 List<Item> items, int accountId) {
         this.id = id;
         this.customer = customer;
-        this.discount = discount;
-        this.totalPrice = totalPrice;
+        this.price = price;
         this.paid = paid;
         this.date = date;
         this.items = items;
+        this.accountId = accountId;
     }
 
-    public Order(String customer, double discount, double totalPrice, double paid, LocalDate date, List<Item> items) {
+    public Order(String customer,
+                 double price, double paid, LocalDate date,
+                 List<Item> items, int accountId) {
         this.customer = customer;
-        this.discount = discount;
-        this.totalPrice = totalPrice;
+        this.price = price;
         this.paid = paid;
         this.date = date;
         this.items = items;
+        this.accountId = accountId;
     }
 
     public int getId() {
@@ -50,20 +51,12 @@ public class Order {
         this.customer = customer;
     }
 
-    public double getDiscount() {
-        return discount;
+    public double getPrice() {
+        return price;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setPrice(double totalPrice) {
+        this.price = totalPrice;
     }
 
     public double getPaid() {
@@ -88,5 +81,13 @@ public class Order {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 }
