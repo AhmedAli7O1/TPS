@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2016 at 06:48 PM
+-- Generation Time: Feb 21, 2016 at 09:54 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -44,7 +44,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`ID`, `SALES`, `DEBTS`, `INCOMES`, `OUTGOINGS`, `WITHDRAWALS`, `PURCHASES`, `BALANCE`, `PROFITS`, `DATE`) VALUES
-(1, 2500, 100, 210, 700, 250, 300, 2060, 100, '2016-02-01');
+(1, 2500, 100, 210, 700, 500, 3300, 1810, 100, '2016-02-01'),
+(2, 1000, 0, 0, 0, 200, 1000, 800, 0, '2016-03-01');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,7 @@ IF NEW.IS_DEBT > 0 THEN
 ELSEIF NEW.IS_DEBT = 0 THEN
 	SET @PROF = 0;
 END IF; 
-UPDATE ACCOUNTS SET INCOMES = INCOMES + @VALUE, BALANCE = BALANCE + @VALUE, PROFITS = PROFITS + @PROF;
+UPDATE ACCOUNTS SET INCOMES = INCOMES + @VALUE, BALANCE = BALANCE + @VALUE, PROFITS = PROFITS + @PROF WHERE ID = NEW.ACCOUNT_ID;
 END
 $$
 DELIMITER ;
@@ -121,7 +122,8 @@ INSERT INTO `orders` (`ID`, `CUSTOMER`, `PRICE`, `PAID`, `DATE`, `ACCOUNT_ID`) V
 (4, 'DASDSD', 100, 100, '2016-02-03', 1),
 (21, 'kljkljkljkljkl', 1000, 1000, '2016-02-21', 1),
 (22, 'محمود على', 1000, 1000, '2016-02-23', 1),
-(23, 'adjkakldj', 500, 500, '2016-02-21', 1);
+(23, 'adjkakldj', 500, 500, '2016-02-21', 1),
+(24, 'asdasdasd', 1000, 1000, '2016-03-06', 2);
 
 --
 -- Triggers `orders`
@@ -129,7 +131,7 @@ INSERT INTO `orders` (`ID`, `CUSTOMER`, `PRICE`, `PAID`, `DATE`, `ACCOUNT_ID`) V
 DELIMITER $$
 CREATE TRIGGER `SALES_ADD_ORDER` AFTER INSERT ON `orders` FOR EACH ROW BEGIN
 SET @TOTAL_SALES = NEW.PAID ;
-UPDATE ACCOUNTS SET SALES = SALES + @TOTAL_SALES, BALANCE = BALANCE + @TOTAL_SALES;
+UPDATE ACCOUNTS SET SALES = SALES + @TOTAL_SALES, BALANCE = BALANCE + @TOTAL_SALES WHERE ID = NEW.ACCOUNT_ID;
 END
 $$
 DELIMITER ;
@@ -162,7 +164,7 @@ INSERT INTO `outgoings` (`ID`, `DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
 DELIMITER $$
 CREATE TRIGGER `OUTGOINGS_ADD` AFTER INSERT ON `outgoings` FOR EACH ROW BEGIN
 SET @VALUE = NEW.VALUE ;
-UPDATE ACCOUNTS SET OUTGOINGS = OUTGOINGS + @VALUE, BALANCE = BALANCE - @VALUE;
+UPDATE ACCOUNTS SET OUTGOINGS = OUTGOINGS + @VALUE, BALANCE = BALANCE - @VALUE WHERE ID = NEW.ACCOUNT_ID;
 END
 $$
 DELIMITER ;
@@ -182,6 +184,33 @@ CREATE TABLE `purchases` (
   `DATE` date NOT NULL,
   `ACCOUNT_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`ID`, `ITEM`, `AMOUNT`, `PURCHASE_PRICE`, `SELLER`, `DATE`, `ACCOUNT_ID`) VALUES
+(1, 'AAAAAAA', 1, 200, 'AAAAAAA', '2016-02-21', 1),
+(2, 'sdfdfsdfsdf', 1, 200, 'dsfsdfsdf', '2016-02-21', 1),
+(3, 'qqqqqqqq', 1, 300, 'qqqqqqqqqq', '2016-02-21', 1),
+(4, 'assssssssss', 1, 500, 'asasas', '2016-02-21', 1),
+(5, 'adadasdasd', 1, 300, 'asdasdad', '2016-02-21', 1),
+(6, 'asdasdas', 1, 500, 'sdasdasd', '2016-02-21', 1),
+(7, 'adasdasd', 1, 100, 'asdasd', '2016-02-21', 1),
+(8, 'asdasd', 1, 900, 'asdasd', '2016-02-21', 1),
+(9, 'vdfdsfdsfsd', 1, 100, 'sdfsdfsdf', '2016-03-07', 2),
+(10, 'asdasd', 1, 900, 'asdasd', '2016-03-07', 2);
+
+--
+-- Triggers `purchases`
+--
+DELIMITER $$
+CREATE TRIGGER `PURCHASES_ADD` AFTER INSERT ON `purchases` FOR EACH ROW BEGIN
+SET @VALUE = NEW.PURCHASE_PRICE ;
+UPDATE ACCOUNTS SET PURCHASES = PURCHASES + @VALUE WHERE ID = NEW.ACCOUNT_ID;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -207,7 +236,9 @@ INSERT INTO `sales` (`ID`, `ITEM_NAME`, `AMOUNT`, `PRICE`, `PAID`, `PURCHASES_VA
 (16, 'kklskdlsdk', 1, 1000, 1000, 0, 21),
 (17, 'يشسمينكمشسنيكمن', 1, 500, 500, 0, 22),
 (18, 'ععععععععع', 1, 500, 500, 0, 22),
-(19, 'akd;lakdka;lk', 1, 500, 500, 0, 23);
+(19, 'akd;lakdka;lk', 1, 500, 500, 0, 23),
+(20, 'asdasdasd', 1, 500, 500, 0, 24),
+(21, 'ddfsdfsdf', 1, 500, 500, 0, 24);
 
 -- --------------------------------------------------------
 
@@ -232,7 +263,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `NAME`, `PASSWORD`, `TITLE`, `AUTH`, `LAST_EDIT`, `LAST_LOGGED`, `SEC_KEY`) VALUES
 (1, 'bluemax', '123', 'devo', 'DEV', '2016-02-17', '2016-02-25', 0),
-(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 8834);
+(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 9656);
 
 -- --------------------------------------------------------
 
@@ -247,6 +278,26 @@ CREATE TABLE `withdrawals` (
   `DATE` date NOT NULL,
   `ACCOUNT_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `withdrawals`
+--
+
+INSERT INTO `withdrawals` (`ID`, `DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
+(1, 'asdasdasd', 250, '2016-02-21', 1),
+(2, 'asdasdasd', 100, '2016-03-15', 2),
+(3, 'asdasd', 100, '2016-03-15', 2);
+
+--
+-- Triggers `withdrawals`
+--
+DELIMITER $$
+CREATE TRIGGER `WITHDRAWALS_ADD` AFTER INSERT ON `withdrawals` FOR EACH ROW BEGIN
+SET @VALUE = NEW.VALUE ;
+UPDATE ACCOUNTS SET WITHDRAWALS = WITHDRAWALS + @VALUE, BALANCE = BALANCE - @VALUE WHERE ID = NEW.ACCOUNT_ID;
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -321,7 +372,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `debts`
 --
@@ -336,7 +387,7 @@ ALTER TABLE `incomes`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `outgoings`
 --
@@ -346,12 +397,12 @@ ALTER TABLE `outgoings`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -361,7 +412,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `withdrawals`
 --
 ALTER TABLE `withdrawals`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --

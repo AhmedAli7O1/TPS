@@ -3,9 +3,7 @@ package gui.controllers;
 import core.DataViewStyle;
 import core.igui.*;
 import gui.GuiMain;
-import gui.windows.AddIncomesWindow;
-import gui.windows.AddOutgoingsWindow;
-import gui.windows.AddSalesWindow;
+import gui.windows.*;
 import gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -169,6 +167,20 @@ public class TpsWindowController implements Initializable {
         GuiMain.setAddIncomesWindow(new AddIncomesWindow());
         GuiMain.getAddIncomesWindow().showAndWait();
         incomesMainController.btnIncomesViewOnAction();
+    }
+
+    @FXML
+    public void btnAddPurchasesOnClick(){
+        GuiMain.setAddPurchasesWindow(new AddPurchasesWindow());
+        GuiMain.getAddPurchasesWindow().showAndWait();
+        purchasesMainController.btnViewOnAction();
+    }
+
+    @FXML
+    public void btnAddWithdrawalsOnClick(){
+        GuiMain.setAddWithdrawalsWindow(new AddWithdrawalsWindow());
+        GuiMain.getAddWithdrawalsWindow().showAndWait();
+        withdrawalsMainController.btnWithdrawalsViewOnAction();
     }
 
     //read ComboBox value and return it as SalesViewStyle

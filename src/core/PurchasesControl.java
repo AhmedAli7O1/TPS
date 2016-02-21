@@ -13,9 +13,11 @@ import java.util.List;
  */
 public class PurchasesControl extends CoreMain implements IPurchasesControl{
     List<Purchase> purchases;
+    List<Purchase> newPurchases;
 
     public PurchasesControl(){
         purchases = new ArrayList<>();
+        newPurchases = new ArrayList<>();
     }
 
     @Override
@@ -23,5 +25,22 @@ public class PurchasesControl extends CoreMain implements IPurchasesControl{
         purchases.clear();
         purchases.addAll(purchasesData.getPurchases(date, style));
         return this.purchases;
+    }
+
+    @Override
+    public void addPurchases(List<Purchase> newPurchases){
+        this.newPurchases.addAll(newPurchases);
+    }
+
+    @Override
+    public boolean saveChanges()throws WSConnException, NoDataException{
+        if(newPurchases.size() < 1)
+            return true;
+
+        if(purchasesData.addNewPurchases(newPurchases)){
+            newPurchases.clear();
+            return true;
+        }
+        else return false;
     }
 }

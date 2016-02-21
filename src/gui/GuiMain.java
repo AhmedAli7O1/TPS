@@ -4,10 +4,7 @@ import core.*;
 import core.igui.*;
 import gui.controllers.StatisticsMainController;
 import gui.controllers.TpsWindowController;
-import gui.windows.AddIncomesWindow;
-import gui.windows.AddOutgoingsWindow;
-import gui.windows.AddSalesWindow;
-import gui.windows.TpsWindow;
+import gui.windows.*;
 import javafx.stage.Stage;
 
 /**
@@ -19,6 +16,8 @@ public abstract class GuiMain {
     private static AddSalesWindow addSalesWindow;
     private static AddOutgoingsWindow addOutgoingsWindow;
     private static AddIncomesWindow addIncomesWindow;
+    private static AddPurchasesWindow addPurchasesWindow;
+    private static AddWithdrawalsWindow addWithdrawalsWindow;
     private static TpsWindowController tpsWindowController;
     private static StatisticsMainController statisticsMainController;
     private static IUserControl userControl;
@@ -172,5 +171,27 @@ public abstract class GuiMain {
 
     public static void setStatisticsMainController(StatisticsMainController statisticsMainController) {
         GuiMain.statisticsMainController = statisticsMainController;
+    }
+
+    public static AddPurchasesWindow getAddPurchasesWindow() {
+        if(addPurchasesWindow == null)
+            addPurchasesWindow = new AddPurchasesWindow();
+
+        return addPurchasesWindow;
+    }
+
+    public static void setAddPurchasesWindow(AddPurchasesWindow addPurchasesWindow) {
+        GuiMain.addPurchasesWindow = addPurchasesWindow;
+    }
+
+    public static AddWithdrawalsWindow getAddWithdrawalsWindow() {
+        if(addWithdrawalsWindow == null)
+            addWithdrawalsWindow = new AddWithdrawalsWindow();
+
+        return addWithdrawalsWindow;
+    }
+
+    public static void setAddWithdrawalsWindow(AddWithdrawalsWindow addWithdrawalsWindow) {
+        GuiMain.addWithdrawalsWindow = addWithdrawalsWindow;
     }
 }

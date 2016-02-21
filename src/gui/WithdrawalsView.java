@@ -22,6 +22,13 @@ public class WithdrawalsView {
         this.date = new SimpleStringProperty(date.toString());
     }
 
+    public WithdrawalsView(String details, double value, String date) {
+        this.id = new SimpleIntegerProperty();
+        this.details = new SimpleStringProperty(details);
+        this.value = new SimpleDoubleProperty(value);
+        this.date = new SimpleStringProperty(date);
+    }
+
     public int getId() {
         return id.get();
     }
