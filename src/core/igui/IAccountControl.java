@@ -32,6 +32,7 @@ public interface IAccountControl {
     Double getYearTotalOutgoings();
     Double getYearTotalWithdrawals();
     Double getYearTotalPurchases();
+    Double getYearTotalProfits();
 
     int getAccountId(LocalDate date);
 }

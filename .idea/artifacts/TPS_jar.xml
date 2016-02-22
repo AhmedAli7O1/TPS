@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/TPS_jar</output-path>
     <root id="archive" name="TPS.jar">
       <element id="module-output" name="TPS" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/json-20151123.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/joda-time-2.9.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/json-20151123.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

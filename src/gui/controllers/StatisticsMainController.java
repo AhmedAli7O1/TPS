@@ -23,15 +23,20 @@ public class StatisticsMainController {
     @FXML private BarChart<String, Number> chart;
     @FXML private ChoiceBox<Integer> cbYear;
     @FXML private ChoiceBox<Integer> cbMonth;
-    @FXML private Label lblYearTotalSales;
     @FXML private Label lblMonthTotalSales;
     @FXML private Label lblMonthTotalIncomes;
     @FXML private Label lblMonthTotalPurchases;
     @FXML private Label lblMonthTotalOutgoings;
     @FXML private Label lblMonthTotalWithdrawals;
     @FXML private Label lblMonthTotalBalance;
-    @FXML private Label lblMonthTotalDebts;
+    @FXML private Label lblMonthOldBalance;
     @FXML private Label lblMonthTotalProfits;
+    @FXML private Label lblYearTotalSales;
+    @FXML private Label lblYearTotalIncomes;
+    @FXML private Label lblYearTotalPurchases;
+    @FXML private Label lblYearTotalOutgoings;
+    @FXML private Label lblYearTotalWithdrawals;
+    @FXML private Label lblYearTotalProfits;
 
     private ObservableList<Integer> availableYears;
     private ObservableList<Integer> availableMonths;
@@ -119,8 +124,8 @@ public class StatisticsMainController {
                                         ).toString()
                                 );
 
-                                lblMonthTotalDebts.setText(
-                                        GuiMain.getAccountControl().getMonthTotalDebts(
+                                lblMonthOldBalance.setText(
+                                        GuiMain.getAccountControl().getMonthOldBalance(
                                                 cbMonth.getValue(), cbYear.getValue()
                                         ).toString()
                                 );
@@ -132,7 +137,28 @@ public class StatisticsMainController {
                                 );
 
                                 lblYearTotalSales.setText(
-                                        GuiMain.getAccountControl().getYearTotalSales().toString());
+                                        GuiMain.getAccountControl().getYearTotalSales().toString()
+                                );
+
+                                lblYearTotalIncomes.setText(
+                                        GuiMain.getAccountControl().getYearTotalIncomes().toString()
+                                );
+
+                                lblYearTotalPurchases.setText(
+                                        GuiMain.getAccountControl().getYearTotalPurchases().toString()
+                                );
+
+                                lblYearTotalOutgoings.setText(
+                                        GuiMain.getAccountControl().getYearTotalOutgoings().toString()
+                                );
+
+                                lblYearTotalWithdrawals.setText(
+                                        GuiMain.getAccountControl().getYearTotalWithdrawals().toString()
+                                );
+
+                                lblYearTotalProfits.setText(
+                                        GuiMain.getAccountControl().getYearTotalProfits().toString()
+                                );
                             });
 
                         }catch (WSConnException ex){

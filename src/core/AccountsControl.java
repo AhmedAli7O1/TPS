@@ -175,6 +175,11 @@ public class AccountsControl extends CoreMain implements IAccountControl {
     }
 
     @Override
+    public Double getYearTotalProfits(){
+        return accounts.stream().mapToDouble(Account::getProfits).sum();
+    }
+
+    @Override
     public int getAccountId(LocalDate date){
         return accounts.stream().filter(
                 acc -> acc.getDate().isEqual(date.withDayOfMonth(1))).findFirst().get().getId();

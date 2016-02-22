@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2016 at 09:54 PM
+-- Generation Time: Feb 22, 2016 at 10:00 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -44,8 +44,9 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`ID`, `SALES`, `DEBTS`, `INCOMES`, `OUTGOINGS`, `WITHDRAWALS`, `PURCHASES`, `BALANCE`, `PROFITS`, `DATE`) VALUES
-(1, 2500, 100, 210, 700, 500, 3300, 1810, 100, '2016-02-01'),
-(2, 1000, 0, 0, 0, 200, 1000, 800, 0, '2016-03-01');
+(3, 1500, 0, 1000, 200, 300, 2000, 2000, 2000, '2016-01-01'),
+(4, 4500, 0, 0, 0, 500, 0, 6000, 4000, '2016-02-01'),
+(5, 0, 0, 500, 0, 0, 0, 7000, 500, '2016-03-01');
 
 -- --------------------------------------------------------
 
@@ -80,8 +81,9 @@ CREATE TABLE `incomes` (
 --
 
 INSERT INTO `incomes` (`ID`, `DETAILS`, `VALUE`, `DATE`, `IS_DEBT`, `ACCOUNT_ID`) VALUES
-(1, 'kljkljkljkl', 50, '2016-02-21', 0, 1),
-(2, 'kfkdjkhfg', 10, '2016-02-21', 1, 1);
+(3, 'fsdfsdf', 500, '2016-01-04', 1, 3),
+(4, 'asdasdasd', 500, '2016-01-13', 0, 3),
+(5, 'asdasd', 500, '2016-03-08', 1, 5);
 
 --
 -- Triggers `incomes`
@@ -110,6 +112,7 @@ CREATE TABLE `orders` (
   `CUSTOMER` varchar(200) NOT NULL,
   `PRICE` double NOT NULL,
   `PAID` double NOT NULL,
+  `PURCHASES_VALUE` double NOT NULL,
   `DATE` date NOT NULL,
   `ACCOUNT_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -118,20 +121,24 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`ID`, `CUSTOMER`, `PRICE`, `PAID`, `DATE`, `ACCOUNT_ID`) VALUES
-(4, 'DASDSD', 100, 100, '2016-02-03', 1),
-(21, 'kljkljkljkljkl', 1000, 1000, '2016-02-21', 1),
-(22, 'محمود على', 1000, 1000, '2016-02-23', 1),
-(23, 'adjkakldj', 500, 500, '2016-02-21', 1),
-(24, 'asdasdasd', 1000, 1000, '2016-03-06', 2);
+INSERT INTO `orders` (`ID`, `CUSTOMER`, `PRICE`, `PAID`, `PURCHASES_VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
+(25, 'fdsfsdfsdf', 2000, 1500, 0, '2016-01-01', 3),
+(26, 'sdfsdfdsf', 5000, 4500, 500, '2016-02-01', 4);
 
 --
 -- Triggers `orders`
 --
 DELIMITER $$
+CREATE TRIGGER `ORDERS_ADD_PUR_VALUE` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+SET @VALUE = NEW.PURCHASES_VALUE - OLD.PURCHASES_VALUE;
+UPDATE ACCOUNTS SET PROFITS = PROFITS - @VALUE WHERE ID = NEW.ACCOUNT_ID;
+END
+$$
+DELIMITER ;
+DELIMITER $$
 CREATE TRIGGER `SALES_ADD_ORDER` AFTER INSERT ON `orders` FOR EACH ROW BEGIN
 SET @TOTAL_SALES = NEW.PAID ;
-UPDATE ACCOUNTS SET SALES = SALES + @TOTAL_SALES, BALANCE = BALANCE + @TOTAL_SALES WHERE ID = NEW.ACCOUNT_ID;
+UPDATE ACCOUNTS SET SALES = SALES + @TOTAL_SALES, BALANCE = BALANCE + @TOTAL_SALES, PROFITS = PROFITS + @TOTAL_SALES WHERE ID = NEW.ACCOUNT_ID;
 END
 $$
 DELIMITER ;
@@ -155,8 +162,8 @@ CREATE TABLE `outgoings` (
 --
 
 INSERT INTO `outgoings` (`ID`, `DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
-(1, 'asadasdasd', 300, '2016-02-21', 1),
-(2, 'adsdasdasd', 200, '2016-02-21', 1);
+(3, 'sdfsdfsdf', 100, '2016-01-08', 3),
+(4, 'sdfsdfsdf', 100, '2016-01-08', 3);
 
 --
 -- Triggers `outgoings`
@@ -190,16 +197,8 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`ID`, `ITEM`, `AMOUNT`, `PURCHASE_PRICE`, `SELLER`, `DATE`, `ACCOUNT_ID`) VALUES
-(1, 'AAAAAAA', 1, 200, 'AAAAAAA', '2016-02-21', 1),
-(2, 'sdfdfsdfsdf', 1, 200, 'dsfsdfsdf', '2016-02-21', 1),
-(3, 'qqqqqqqq', 1, 300, 'qqqqqqqqqq', '2016-02-21', 1),
-(4, 'assssssssss', 1, 500, 'asasas', '2016-02-21', 1),
-(5, 'adadasdasd', 1, 300, 'asdasdad', '2016-02-21', 1),
-(6, 'asdasdas', 1, 500, 'sdasdasd', '2016-02-21', 1),
-(7, 'adasdasd', 1, 100, 'asdasd', '2016-02-21', 1),
-(8, 'asdasd', 1, 900, 'asdasd', '2016-02-21', 1),
-(9, 'vdfdsfdsfsd', 1, 100, 'sdfsdfsdf', '2016-03-07', 2),
-(10, 'asdasd', 1, 900, 'asdasd', '2016-03-07', 2);
+(11, 'sfdsfsdf', 1, 1000, 'asdasdasda', '2016-01-05', 3),
+(12, 'asdsdadad', 2, 1000, 'adadad', '2016-01-05', 3);
 
 --
 -- Triggers `purchases`
@@ -233,12 +232,21 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`ID`, `ITEM_NAME`, `AMOUNT`, `PRICE`, `PAID`, `PURCHASES_VALUE`, `ORDER_ID`) VALUES
-(16, 'kklskdlsdk', 1, 1000, 1000, 0, 21),
-(17, 'يشسمينكمشسنيكمن', 1, 500, 500, 0, 22),
-(18, 'ععععععععع', 1, 500, 500, 0, 22),
-(19, 'akd;lakdka;lk', 1, 500, 500, 0, 23),
-(20, 'asdasdasd', 1, 500, 500, 0, 24),
-(21, 'ddfsdfsdf', 1, 500, 500, 0, 24);
+(22, 'dfgdfgdfg', 1, 1000, 1000, 0, 25),
+(23, 'dfgdfgdfgdfg', 1, 1000, 500, 0, 25),
+(24, 'sdfsdfsdf', 1, 3000, 2500, 500, 26),
+(25, 'asdasdasds', 1, 2000, 2000, 0, 26);
+
+--
+-- Triggers `sales`
+--
+DELIMITER $$
+CREATE TRIGGER `SALES_ADD_PUR_VALUE` AFTER UPDATE ON `sales` FOR EACH ROW BEGIN
+SET @VALUE = NEW.PURCHASES_VALUE - OLD.PURCHASES_VALUE;
+UPDATE ORDERS SET PURCHASES_VALUE = PURCHASES_VALUE + @VALUE WHERE ID = NEW.ORDER_ID;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -263,7 +271,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `NAME`, `PASSWORD`, `TITLE`, `AUTH`, `LAST_EDIT`, `LAST_LOGGED`, `SEC_KEY`) VALUES
 (1, 'bluemax', '123', 'devo', 'DEV', '2016-02-17', '2016-02-25', 0),
-(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 9656);
+(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 31551);
 
 -- --------------------------------------------------------
 
@@ -284,9 +292,8 @@ CREATE TABLE `withdrawals` (
 --
 
 INSERT INTO `withdrawals` (`ID`, `DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
-(1, 'asdasdasd', 250, '2016-02-21', 1),
-(2, 'asdasdasd', 100, '2016-03-15', 2),
-(3, 'asdasd', 100, '2016-03-15', 2);
+(4, 'dasdasdasd', 300, '2016-01-06', 3),
+(5, 'sdfsdfsdf', 500, '2016-02-22', 4);
 
 --
 -- Triggers `withdrawals`
@@ -372,7 +379,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `debts`
 --
@@ -382,27 +389,27 @@ ALTER TABLE `debts`
 -- AUTO_INCREMENT for table `incomes`
 --
 ALTER TABLE `incomes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `outgoings`
 --
 ALTER TABLE `outgoings`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -412,7 +419,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `withdrawals`
 --
 ALTER TABLE `withdrawals`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
