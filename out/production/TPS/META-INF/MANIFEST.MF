@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
+Class-Path: json-20151123.jar joda-time-2.9.1.jar
 Main-Class: gui.Main
 

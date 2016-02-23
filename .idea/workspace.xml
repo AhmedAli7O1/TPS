@@ -7,15 +7,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/TPS_jar/TPS.jar" afterPath="$PROJECT_DIR$/out/artifacts/TPS_jar/TPS.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/TPS_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/TPS_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/ChartSeries.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/ChartSeries.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/AddIncomesController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/AddIncomesController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/AddOutgoingsController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/AddOutgoingsController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/IncomesMainController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/IncomesMainController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/IncomesMainController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/IncomesMainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/LoginController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/LoginController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/OutgoingsMainController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/OutgoingsMainController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/OutgoingsMainController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/OutgoingsMainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/PurchasesMainController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/PurchasesMainController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/PurchasesMainController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/PurchasesMainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/SalesMainController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/SalesMainController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/SalesMainController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/SalesMainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/StatisticsMainController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/StatisticsMainController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/WithdrawalsMainController$1.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/WithdrawalsMainController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/WithdrawalsMainController.class" afterPath="$PROJECT_DIR$/out/production/TPS/GUI/controllers/WithdrawalsMainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/datalayer/SalesData.class" afterPath="$PROJECT_DIR$/out/production/TPS/datalayer/SalesData.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/gui/StatisticsMain.fxml" afterPath="$PROJECT_DIR$/layout/gui/StatisticsMain.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/gui/style.css" afterPath="$PROJECT_DIR$/layout/gui/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/TPS/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/out/production/TPS/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/AccountsControl.java" afterPath="$PROJECT_DIR$/src/core/AccountsControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/igui/IAccountControl.java" afterPath="$PROJECT_DIR$/src/core/igui/IAccountControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/controllers/StatisticsMainController.java" afterPath="$PROJECT_DIR$/src/gui/controllers/StatisticsMainController.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,12 +83,12 @@
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="StatisticsMainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/controllers/StatisticsMainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79574466">
-              <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.33168316">
+              <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/src/gui/controllers/TpsWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="39" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="39" />
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -98,8 +107,8 @@
       <file leaf-file-name="StatisticsMain.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layout/gui/StatisticsMain.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.9454546">
-              <caret line="220" column="37" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="219" column="37" selection-start-line="219" selection-start-column="37" selection-end-line="219" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -111,7 +120,7 @@
       <file leaf-file-name="TpsWindow.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layout/gui/TpsWindow.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.109091">
+            <state vertical-scroll-proportion="0.0">
               <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
               <folding>
                 <element signature="n#Pane#0;n#children#0;n#StackPane#0;n#children#0;n#AnchorPane#0;n#center#0;n#BorderPane#0;n#!!top" expanded="false" />
@@ -127,7 +136,7 @@
         <entry file="file://$PROJECT_DIR$/src/gui/GuiMain.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="156" column="27" selection-start-line="156" selection-start-column="27" selection-end-line="156" selection-end-column="27" />
+              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,7 +146,7 @@
         <entry file="file://$PROJECT_DIR$/src/core/igui/IAccountControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -147,12 +156,10 @@
         <entry file="file://$PROJECT_DIR$/src/core/AccountsControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="178" column="72" selection-start-line="178" selection-start-column="72" selection-end-line="178" selection-end-column="72" />
+              <caret line="184" column="40" selection-start-line="184" selection-start-column="40" selection-end-line="184" selection-end-column="40" />
               <folding>
                 <element signature="e#5667#5668#0" expanded="true" />
                 <element signature="e#5748#5749#0" expanded="true" />
-                <element signature="e#5804#5805#0" expanded="true" />
-                <element signature="e#5883#5884#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -259,8 +266,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="width" value="1296" />
+    <option name="height" value="776" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -308,6 +315,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -318,28 +326,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="TPS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="TPS">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -490,7 +476,28 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="TPS">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -507,7 +514,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -919,7 +926,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -929,10 +936,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969153" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763976" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33064517" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19023137" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19012944" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1319,7 +1326,7 @@
     <entry file="file://$PROJECT_DIR$/src/gui/GuiMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="156" column="27" selection-start-line="156" selection-start-column="27" selection-end-line="156" selection-end-column="27" />
+          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1338,7 +1345,7 @@
     <entry file="file://$PROJECT_DIR$/src/core/igui/IAccountControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1346,12 +1353,10 @@
     <entry file="file://$PROJECT_DIR$/src/core/AccountsControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="178" column="72" selection-start-line="178" selection-start-column="72" selection-end-line="178" selection-end-column="72" />
+          <caret line="184" column="40" selection-start-line="184" selection-start-column="40" selection-end-line="184" selection-end-column="40" />
           <folding>
             <element signature="e#5667#5668#0" expanded="true" />
             <element signature="e#5748#5749#0" expanded="true" />
-            <element signature="e#5804#5805#0" expanded="true" />
-            <element signature="e#5883#5884#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1374,7 +1379,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layout/gui/TpsWindow.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.109091">
+        <state vertical-scroll-proportion="0.0">
           <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
           <folding>
             <element signature="n#Pane#0;n#children#0;n#StackPane#0;n#children#0;n#AnchorPane#0;n#center#0;n#BorderPane#0;n#!!top" expanded="false" />
@@ -1387,8 +1392,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layout/gui/StatisticsMain.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9454546">
-          <caret line="220" column="37" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="219" column="37" selection-start-line="219" selection-start-column="37" selection-end-line="219" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1399,7 +1404,7 @@
     <entry file="file://$PROJECT_DIR$/src/gui/controllers/TpsWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="39" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="39" />
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1408,14 +1413,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7106383">
           <caret line="23" column="80" selection-start-line="23" selection-start-column="80" selection-end-line="23" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/controllers/StatisticsMainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79574466">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33168316">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding />
         </state>
       </provider>

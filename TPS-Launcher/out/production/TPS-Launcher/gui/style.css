@@ -1,0 +1,6 @@
+.mainPane {
+    -fx-background-image:url("iveco-bk.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 750.0 560.0;
+    -fx-background-position: center center;
+}

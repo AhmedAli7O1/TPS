@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2016 at 10:00 PM
+-- Generation Time: Feb 23, 2016 at 07:55 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -251,6 +251,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `updates`
+--
+
+CREATE TABLE `updates` (
+  `ID` int(11) NOT NULL,
+  `VER` int(11) NOT NULL,
+  `LINK` varchar(300) NOT NULL,
+  `SIZE` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -271,7 +284,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `NAME`, `PASSWORD`, `TITLE`, `AUTH`, `LAST_EDIT`, `LAST_LOGGED`, `SEC_KEY`) VALUES
 (1, 'bluemax', '123', 'devo', 'DEV', '2016-02-17', '2016-02-25', 0),
-(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 31551);
+(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 6732);
 
 -- --------------------------------------------------------
 
@@ -359,6 +372,12 @@ ALTER TABLE `sales`
   ADD KEY `ORDER_ID` (`ORDER_ID`);
 
 --
+-- Indexes for table `updates`
+--
+ALTER TABLE `updates`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -410,6 +429,11 @@ ALTER TABLE `purchases`
 --
 ALTER TABLE `sales`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `updates`
+--
+ALTER TABLE `updates`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
