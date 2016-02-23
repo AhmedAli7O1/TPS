@@ -1,66 +1,59 @@
 package core;
 
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableIntegerArray;
-import javafx.concurrent.Task;
-
+import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.net.URL;
+import java.security.MessageDigest;
 
 /**
  * Created by Ahmed Ali on 23/02/2016.
  */
 public class DownloadUpdate {
 
-    private String fileName = "";
-    private String strLink;
-    private URL downloadLink;
-    private int fileSize;
-    private int downloadedSize;
+    private byte[] response;
+    private String link;
+    private String fileName;
 
-    public DownloadUpdate(String link, int size){
-        strLink = link;
-        fileSize = size;
-        downloadedSize = 0;
+    public DownloadUpdate(String link, String fileName){
+        this.link = link;
+        this.fileName = fileName;
     }
 
-    public void download() throws IOException {
-        new Thread(
-                new Task() {
-                    @Override
-                    protected Object call() throws Exception {
+    public void download() throws IOException{
+        URL downloadLink = new URL(link);
 
-                        downloadLink = new URL(strLink);
+        InputStream in = new BufferedInputStream(downloadLink.openStream());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-                        InputStream in = new BufferedInputStream(downloadLink.openStream());
-                        ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-                        byte[] buffer = new byte[1024];
-                        int n = 0;
-                        while (-1 != (n = in.read(buffer))){
-                            out.write(buffer, 0, n);
-                            downloadedSize = out.size();
-                        }
-                        out.close();
-                        in.close();
-                        byte[] response = out.toByteArray();
-
-                        FileOutputStream fos = new FileOutputStream(fileName);
-                        fos.write(response);
-                        fos.close();
-
-                        return null;
-                    }
-                }
-        ).start();
+        byte[] buffer = new byte[1024];
+        int n = 0;
+        while (-1 != (n = in.read(buffer))){
+            out.write(buffer, 0, n);
+        }
+        out.close();
+        in.close();
+        response = out.toByteArray();
+        FileOutputStream fos = new FileOutputStream(fileName);
+        fos.write(response);
+        fos.close();
     }
 
-    public int getDownloadedSize() {
-        return downloadedSize;
-    }
-
-    public int getFileSize() {
-        return fileSize;
+    public boolean checkDownloadedFile(String hash){
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(response);
+            byte[] digest = md.digest();
+            String digestInHex = DatatypeConverter.printHexBinary(digest).toUpperCase();
+            if(digestInHex.equals(hash)){
+                return true;
+            }
+            else {
+                System.out.println("hash not match");
+                return false;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

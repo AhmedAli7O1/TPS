@@ -16,8 +16,8 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="750.0" styleClass="mainPane" VBox.vgrow="ALWAYS">
          <children>
-            <ProgressIndicator layoutX="674.0" layoutY="494.0" />
-            <Label fx:id="lblState" layoutX="552.0" layoutY="507.0" text="جارى الأتصال" textFill="#076b3d">
+            <ProgressIndicator layoutX="696.0" layoutY="510.0" prefHeight="37.0" prefWidth="30.0" />
+            <Label fx:id="lblState" layoutX="588.0" layoutY="515.0" text="جارى الأتصال" textFill="#076b3d">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -37,6 +37,7 @@
                   </Glow>
                </effect>
             </Label>
+            <Label fx:id="lblDownloadProgress" layoutX="60.0" layoutY="520.0" text="Label" />
          </children>
       </AnchorPane>
    </children>

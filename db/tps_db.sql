@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2016 at 07:55 PM
+-- Generation Time: Feb 23, 2016 at 10:35 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -258,8 +258,16 @@ CREATE TABLE `updates` (
   `ID` int(11) NOT NULL,
   `VER` int(11) NOT NULL,
   `LINK` varchar(300) NOT NULL,
-  `SIZE` int(11) NOT NULL
+  `SIZE` int(11) NOT NULL,
+  `HASH` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `updates`
+--
+
+INSERT INTO `updates` (`ID`, `VER`, `LINK`, `SIZE`, `HASH`) VALUES
+(1, 2, 'http://127.0.0.1/webservice/TPS.jar', 859818, 'B8D4B52AAFC8C52A09E3F866B26394C4');
 
 -- --------------------------------------------------------
 
@@ -433,7 +441,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `updates`
 --
 ALTER TABLE `updates`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --

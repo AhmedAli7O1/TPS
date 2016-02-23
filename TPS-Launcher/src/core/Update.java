@@ -8,18 +8,21 @@ public class Update {
     private int ver;
     private String link;
     private int size;
+    private String hash;
 
-    public Update(int id, int ver, String link, int size) {
+    public Update(int id, int ver, String link, int size, String hash) {
         this.id = id;
         this.ver = ver;
         this.link = link;
         this.size = size;
+        this.hash = hash;
     }
 
-    public Update(int ver, String link, int size) {
+    public Update(int ver, String link, int size, String hash) {
         this.ver = ver;
         this.link = link;
         this.size = size;
+        this.hash = hash;
     }
 
     public int getId() {
@@ -52,5 +55,13 @@ public class Update {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 }

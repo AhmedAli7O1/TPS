@@ -13,12 +13,13 @@ public class Updates {
         WebService webService = new WebService();
 
         JSONObject jsonResult = webService.getJson("updates", "getLastUpdate");
-        JSONObject obj = jsonResult.getJSONArray("LastUpdate").getJSONObject(0);
+        JSONObject obj = jsonResult.getJSONObject("LastUpdate");
         Update lastUpdate = new Update(
                 obj.getInt("ID"),
                 obj.getInt("VER"),
                 obj.getString("LINK"),
-                obj.getInt("SIZE")
+                obj.getInt("SIZE"),
+                obj.getString("HASH")
         );
         return lastUpdate;
     }
