@@ -198,8 +198,4 @@ public class TpsWindowController implements Initializable {
     public ObservableList<String> getDataViewStyleList() {
         return dataViewStyleList;
     }
-
-    public void test(){
-        System.out.println("workssssssssssssssssssssssssssss");
-    }
 }

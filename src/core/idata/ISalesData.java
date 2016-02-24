@@ -1,6 +1,7 @@
 package core.idata;
 
 
+import core.Item;
 import core.Order;
 import core.DataViewStyle;
 import core.exceptions.NoDataException;
@@ -13,4 +14,5 @@ public interface ISalesData {
 
     List<Order> getOrders(LocalDate date, DataViewStyle style) throws WSConnException, NoDataException;
     boolean addNewOrder(Order order) throws WSConnException, NoDataException;
+    List<Item> searchItems(String searchFor) throws WSConnException, NoDataException;
 }

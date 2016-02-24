@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2016 at 10:35 PM
+-- Generation Time: Feb 24, 2016 at 10:13 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.2
 
@@ -39,15 +39,6 @@ CREATE TABLE `accounts` (
   `DATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`ID`, `SALES`, `DEBTS`, `INCOMES`, `OUTGOINGS`, `WITHDRAWALS`, `PURCHASES`, `BALANCE`, `PROFITS`, `DATE`) VALUES
-(3, 1500, 0, 1000, 200, 300, 2000, 2000, 2000, '2016-01-01'),
-(4, 4500, 0, 0, 0, 500, 0, 6000, 4000, '2016-02-01'),
-(5, 0, 0, 500, 0, 0, 0, 7000, 500, '2016-03-01');
-
 -- --------------------------------------------------------
 
 --
@@ -75,15 +66,6 @@ CREATE TABLE `incomes` (
   `IS_DEBT` tinyint(1) NOT NULL,
   `ACCOUNT_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `incomes`
---
-
-INSERT INTO `incomes` (`ID`, `DETAILS`, `VALUE`, `DATE`, `IS_DEBT`, `ACCOUNT_ID`) VALUES
-(3, 'fsdfsdf', 500, '2016-01-04', 1, 3),
-(4, 'asdasdasd', 500, '2016-01-13', 0, 3),
-(5, 'asdasd', 500, '2016-03-08', 1, 5);
 
 --
 -- Triggers `incomes`
@@ -118,14 +100,6 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`ID`, `CUSTOMER`, `PRICE`, `PAID`, `PURCHASES_VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
-(25, 'fdsfsdfsdf', 2000, 1500, 0, '2016-01-01', 3),
-(26, 'sdfsdfdsf', 5000, 4500, 500, '2016-02-01', 4);
-
---
 -- Triggers `orders`
 --
 DELIMITER $$
@@ -158,14 +132,6 @@ CREATE TABLE `outgoings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `outgoings`
---
-
-INSERT INTO `outgoings` (`ID`, `DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
-(3, 'sdfsdfsdf', 100, '2016-01-08', 3),
-(4, 'sdfsdfsdf', 100, '2016-01-08', 3);
-
---
 -- Triggers `outgoings`
 --
 DELIMITER $$
@@ -193,14 +159,6 @@ CREATE TABLE `purchases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `purchases`
---
-
-INSERT INTO `purchases` (`ID`, `ITEM`, `AMOUNT`, `PURCHASE_PRICE`, `SELLER`, `DATE`, `ACCOUNT_ID`) VALUES
-(11, 'sfdsfsdf', 1, 1000, 'asdasdasda', '2016-01-05', 3),
-(12, 'asdsdadad', 2, 1000, 'adadad', '2016-01-05', 3);
-
---
 -- Triggers `purchases`
 --
 DELIMITER $$
@@ -226,16 +184,6 @@ CREATE TABLE `sales` (
   `PURCHASES_VALUE` double NOT NULL,
   `ORDER_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sales`
---
-
-INSERT INTO `sales` (`ID`, `ITEM_NAME`, `AMOUNT`, `PRICE`, `PAID`, `PURCHASES_VALUE`, `ORDER_ID`) VALUES
-(22, 'dfgdfgdfg', 1, 1000, 1000, 0, 25),
-(23, 'dfgdfgdfgdfg', 1, 1000, 500, 0, 25),
-(24, 'sdfsdfsdf', 1, 3000, 2500, 500, 26),
-(25, 'asdasdasds', 1, 2000, 2000, 0, 26);
 
 --
 -- Triggers `sales`
@@ -292,7 +240,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `NAME`, `PASSWORD`, `TITLE`, `AUTH`, `LAST_EDIT`, `LAST_LOGGED`, `SEC_KEY`) VALUES
 (1, 'bluemax', '123', 'devo', 'DEV', '2016-02-17', '2016-02-25', 0),
-(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 6732);
+(2, 'ayman', '123', 'admin', 'ADMIN', '2016-02-02', '2016-02-16', 19522);
 
 -- --------------------------------------------------------
 
@@ -307,14 +255,6 @@ CREATE TABLE `withdrawals` (
   `DATE` date NOT NULL,
   `ACCOUNT_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `withdrawals`
---
-
-INSERT INTO `withdrawals` (`ID`, `DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`) VALUES
-(4, 'dasdasdasd', 300, '2016-01-06', 3),
-(5, 'sdfsdfsdf', 500, '2016-02-22', 4);
 
 --
 -- Triggers `withdrawals`

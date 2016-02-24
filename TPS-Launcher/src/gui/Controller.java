@@ -14,33 +14,33 @@ public class Controller implements Initializable {
     private String settingsPath;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // get app path to save any downloaded updates into
-        //appPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-        jarPath = "TPS.jar";
-        settingsPath = "tps.properties";
+                // get app path to save any downloaded updates into
+                //appPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+                jarPath = "TPS.jar";
+                settingsPath = "tps.properties";
 
-        GuiMain.setAppSettings(new AppSettings(settingsPath));
-        updateControl = new UpdateControl(jarPath, GuiMain.getAppSettings().getVerNum());
+                GuiMain.setAppSettings(new AppSettings(settingsPath));
+                updateControl = new UpdateControl(jarPath, GuiMain.getAppSettings().getVerNum());
 
-        new Thread(
-                new Task() {
-                    @Override
-                    protected Object call() throws Exception {
-                        Thread.sleep(GuiMain.getAppSettings().getSplashTimeout());
-                        boolean result = updateControl.checkForUpdates();
-                        Platform.runLater(() -> updateCallBack(result));
-                        return null;
-                    }
-                }
-        ).start();
+                new Thread(
+                        new Task() {
+                            @Override
+                            protected Object call() throws Exception {
+                                Thread.sleep(GuiMain.getAppSettings().getSplashTimeout());
+                                boolean result = updateControl.checkForUpdates();
+                                Platform.runLater(() -> updateCallBack(result));
+                                return null;
+                            }
+                        }
+                ).start();
 
-    }
+            }
 
-    private void updateCallBack(boolean result){
-        if(result){
-            // set version number
-            GuiMain.getAppSettings().setVerNum(updateControl.getLastUpdateVer());
-            GuiMain.getAppSettings().save();
+        private void updateCallBack(boolean result){
+            if(result){
+                // set version number
+                GuiMain.getAppSettings().setVerNum(updateControl.getLastUpdateVer());
+                GuiMain.getAppSettings().save();
 
             // open TPS App
             try {

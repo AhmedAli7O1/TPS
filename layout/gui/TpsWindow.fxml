@@ -20,12 +20,12 @@
    <bottom>
       <ToolBar BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Button" />
+          <Button mnemonicParsing="false" text="Button" visible="false" />
         </items>
       </ToolBar>
    </bottom>
    <left>
-      <Accordion fx:id="rightAccordion" BorderPane.alignment="CENTER">
+      <Accordion fx:id="rightAccordion" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="161.0" BorderPane.alignment="CENTER">
         <panes>
             <TitledPane fx:id="btnStatistics" animated="false" onMouseClicked="#statisticsOnClicked" stylesheets="@style.css" text="احصائيات">
                <content>

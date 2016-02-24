@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="purchasesVBox" nodeOrientation="RIGHT_TO_LEFT" prefHeight="492.0" prefWidth="695.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.PurchasesMainController">
+<VBox fx:id="purchasesVBox" nodeOrientation="RIGHT_TO_LEFT" prefHeight="492.0" prefWidth="695.0" spacing="10.0" visible="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.PurchasesMainController">
     <children>
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>

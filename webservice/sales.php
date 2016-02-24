@@ -2,11 +2,14 @@
 ini_set('display_errors', 1);
     include 'connection.php';
 
-    if($_POST['method'] === "getOrders"){
+    if($_POST['method'] == "getOrders"){
         getOrders($_POST['json']); //call getOrders method
     }
-    elseif($_POST['method'] === "addOrder"){
+    elseif($_POST['method'] == "addOrder"){
         addOrder($_POST['json']);
+    }
+    elseif ($_POST['method'] == "searchItems") {
+      searchItems($_POST['json']);
     }
 
     function getOrders($json){
@@ -120,6 +123,23 @@ ini_set('display_errors', 1);
         }
 
         echo json_encode(array('result' => $salesResult), JSON_FORCE_OBJECT);
+    }
+
+    function searchItems($json){
+      global $mysqli;
+      $search = json_decode($json);
+
+      $searchFor = $search->{'searchFor'};
+
+      $query = "SELECT * FROM SALES WHERE (ITEM_NAME Like '%" . $searchFor . "%')";
+      $items = array();
+      $result = $mysqli->query($query) or die($mysqli->error);
+      if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $items[] = $row;
+        }
+      }
+      echo json_encode(array('Items' => $items));
     }
 
     mysqli_close($mysqli);

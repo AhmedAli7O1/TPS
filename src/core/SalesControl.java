@@ -35,6 +35,7 @@ public class SalesControl implements ISalesControl {
         return items;
     }
 
+
     @Override
     public void addOrder(Order order) {
         newOrdersQueue.offer(order);
@@ -55,5 +56,10 @@ public class SalesControl implements ISalesControl {
     @Override
     public LocalDate getItemDate(Item item){
         return orders.stream().filter(ord -> ord.getId() == item.getOrderId()).findFirst().get().getDate();
+    }
+
+    @Override
+    public List<Item> searchItems(String searchFor) throws WSConnException, NoDataException{
+        return salesData.searchItems(searchFor);
     }
 }

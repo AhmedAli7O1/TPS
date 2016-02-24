@@ -15,4 +15,5 @@ public interface ISalesControl {
     boolean addNewOrders()throws WSConnException, NoDataException;
     List<Item> getItems(LocalDate date, DataViewStyle style)throws WSConnException, NoDataException;
     LocalDate getItemDate(Item item);
+    List<Item> searchItems(String searchFor) throws WSConnException, NoDataException;
 }

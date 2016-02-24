@@ -72,4 +72,36 @@ public class SalesData implements ISalesData {
         }
         else return false;
     }
+
+    @Override
+    public List<Item> searchItems(String searchFor) throws WSConnException, NoDataException{
+        // put params into a json object to send
+        JSONObject jsonToSend = new JSONObject();
+        jsonToSend.put("searchFor", searchFor);
+
+        WebService webService = new WebService();
+
+        JSONObject obj = webService.getJson("sales", "searchItems", jsonToSend);
+        JSONArray jsonItemsArray = obj.getJSONArray("Items");
+
+        List<Item> items = new ArrayList<>();
+        //loop through all items
+        for(int i = 0; i < jsonItemsArray.length(); i++){
+            //get item data
+            int id = jsonItemsArray.getJSONObject(i).getInt("ID");
+            String item = jsonItemsArray.getJSONObject(i).getString("ITEM_NAME");
+            int amount = jsonItemsArray.getJSONObject(i).getInt("AMOUNT");
+            double price = jsonItemsArray.getJSONObject(i).getDouble("PRICE");
+            double paid = jsonItemsArray.getJSONObject(i).getDouble("PAID");
+            double purchasesValue = jsonItemsArray.getJSONObject(i).getDouble("PURCHASES_VALUE");
+            int orderId = jsonItemsArray.getJSONObject(i).getInt("ORDER_ID");
+            items.add(
+                    new Item(
+                            id, item, amount, price, paid, purchasesValue, orderId
+                    )
+            );
+        }
+
+        return items;
+    }
 }

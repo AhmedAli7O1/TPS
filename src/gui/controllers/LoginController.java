@@ -23,12 +23,16 @@ public class LoginController extends Main implements Initializable {
     @FXML private ImageView imageState;
     @FXML private Pane paneLoading;
     @FXML private VBox paneMain;
+    @FXML private ImageView imageLogin;
+    @FXML private ImageView imageLogout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //empty for now
         imageState.setImage(new Image(GuiMain.class.getResourceAsStream("login_64x64.png")));
         imageState.resize(64,64);
+        imageLogin.setImage(new Image(GuiMain.class.getResourceAsStream("login_16x16.png")));
+        imageLogout.setImage(new Image(GuiMain.class.getResourceAsStream("logout_16x16.png")));
 
     }
 
