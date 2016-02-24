@@ -36,6 +36,7 @@ public class DownloadUpdate {
         FileOutputStream fos = new FileOutputStream(fileName);
         fos.write(response);
         fos.close();
+        System.out.println("file saved at : " + fileName);
     }
 
     public boolean checkDownloadedFile(String hash){
@@ -45,6 +46,7 @@ public class DownloadUpdate {
             byte[] digest = md.digest();
             String digestInHex = DatatypeConverter.printHexBinary(digest).toUpperCase();
             if(digestInHex.equals(hash)){
+                System.out.println("downloaded file match");
                 return true;
             }
             else {

@@ -7,6 +7,7 @@ import javafx.stage.Stage;
  */
 public abstract class GuiMain {
     private static Stage mainStage;
+    private static AppSettings appSettings;
 
     public static Stage getMainStage() {
         return mainStage;
@@ -14,5 +15,13 @@ public abstract class GuiMain {
 
     public static void setMainStage(Stage mainStage) {
         GuiMain.mainStage = mainStage;
+    }
+
+    public static AppSettings getAppSettings() {
+        return appSettings;
+    }
+
+    public static void setAppSettings(AppSettings appSettings) {
+        GuiMain.appSettings = appSettings;
     }
 }

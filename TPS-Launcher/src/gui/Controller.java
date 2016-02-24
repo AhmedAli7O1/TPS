@@ -1,44 +1,32 @@
 package gui;
 
-import core.DownloadUpdate;
 import core.UpdateControl;
-import core.exceptions.WSConnException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-
-import javax.xml.bind.DatatypeConverter;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.util.Arrays;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML private Label lblState;
-
     private UpdateControl updateControl;
-    private Properties props = new Properties();
-
+    private String jarPath;
+    private String settingsPath;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // get app path to save any downloaded updates into
-        String jarPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath() + "TPS.jar";
-        try {
-            props.load(getClass().getResourceAsStream("tps.properties"));
-        }catch (Exception ex){ ex.printStackTrace(); }
+        //appPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        jarPath = "TPS.jar";
+        settingsPath = "tps.properties";
 
-        updateControl = new UpdateControl(jarPath, Integer.parseInt(props.getProperty("ver")));
+        GuiMain.setAppSettings(new AppSettings(settingsPath));
+        updateControl = new UpdateControl(jarPath, GuiMain.getAppSettings().getVerNum());
 
         new Thread(
                 new Task() {
                     @Override
                     protected Object call() throws Exception {
+                        Thread.sleep(GuiMain.getAppSettings().getSplashTimeout());
                         boolean result = updateControl.checkForUpdates();
                         Platform.runLater(() -> updateCallBack(result));
                         return null;
@@ -49,8 +37,18 @@ public class Controller implements Initializable {
     }
 
     private void updateCallBack(boolean result){
-        if(result)
-            System.out.println("true");
-        else System.out.println("false");
+        if(result){
+            // set version number
+            GuiMain.getAppSettings().setVerNum(updateControl.getLastUpdateVer());
+            GuiMain.getAppSettings().save();
+
+            // open TPS App
+            try {
+                ProcessBuilder pb = new ProcessBuilder("java", "-jar", jarPath);
+                pb.start();
+            }catch (Exception ex){ ex.printStackTrace(); }
+        }
+        //close splash screen
+        GuiMain.getMainStage().close();
     }
 }

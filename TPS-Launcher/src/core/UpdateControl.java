@@ -29,31 +29,44 @@ public class UpdateControl {
     public boolean checkForUpdates()throws WSConnException{
         try {
             lastUpdate = updatesData.getLastUpdate();
+            if(lastUpdate == null) {
+                System.out.println("no updates ");
+                return true;         // no updates found..
+            }
+
             if (lastUpdate.getVer() > VER_NUM) {
+                System.out.println("update found");
                 //update is needed
                 try {
                     return updateToLastVer();
                 }catch (Exception ex){
                     ex.printStackTrace();
-                    return false;
+                    return false;    // problem in updating process
                 }
-            } else return false;
+            } else return true;      // the application is at last version
         }catch (NoDataException ex){
-            return false;
+            ex.printStackTrace();
+            return true;             //no updates
         }
     }
 
     public boolean updateToLastVer()throws IOException{
         if(lastUpdate != null) {
+            System.out.println("start downloading update");
             DownloadUpdate downloadUpdate = new DownloadUpdate(lastUpdate.getLink(), jarPath);
-            downloadUpdate.download();
-            return downloadUpdate.checkDownloadedFile(lastUpdate.getHash());
+            downloadUpdate.download();  //start download last update
+            return downloadUpdate.checkDownloadedFile(lastUpdate.getHash()); //true if the download file is valid
         }
         else {
             System.err.println("no updates were found!");
-            return false;
+            return true;   //no updates needed
         }
     }
 
+    public int getLastUpdateVer(){
+        if(lastUpdate != null)
+            return lastUpdate.getVer();
+        else return VER_NUM;
+    }
 
 }

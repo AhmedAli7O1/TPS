@@ -3,6 +3,7 @@ package data;
 import core.Update;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -11,16 +12,20 @@ import org.json.JSONObject;
 public class Updates {
     public Update getLastUpdate() throws WSConnException, NoDataException {
         WebService webService = new WebService();
-
-        JSONObject jsonResult = webService.getJson("updates", "getLastUpdate");
-        JSONObject obj = jsonResult.getJSONObject("LastUpdate");
-        Update lastUpdate = new Update(
-                obj.getInt("ID"),
-                obj.getInt("VER"),
-                obj.getString("LINK"),
-                obj.getInt("SIZE"),
-                obj.getString("HASH")
-        );
-        return lastUpdate;
+        try {
+            JSONObject jsonResult = webService.getJson("updates", "getLastUpdate");
+            JSONObject obj = jsonResult.getJSONObject("LastUpdate");
+            Update lastUpdate = new Update(
+                    obj.getInt("ID"),
+                    obj.getInt("VER"),
+                    obj.getString("LINK"),
+                    obj.getInt("SIZE"),
+                    obj.getString("HASH")
+            );
+            return lastUpdate;
+        }catch (JSONException ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 }
