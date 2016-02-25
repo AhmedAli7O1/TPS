@@ -15,7 +15,7 @@ public class DownloadUpdate {
     private String fileName;
 
     public DownloadUpdate(String link, String fileName){
-        this.link = link;
+        this.link = link + fileName;
         this.fileName = fileName;
     }
 

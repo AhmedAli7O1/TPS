@@ -22,6 +22,15 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        AppSettings appSettings = new AppSettings("tps.properties");
+        if(appSettings.loadSettings()){
+            System.out.println("settings loaded...");
+        }else {
+            System.out.println("couldn't load settings!");
+            System.exit(0);
+        }
+        GuiMain.setAppSettings(appSettings);
+
         launch(args);
     }
 }

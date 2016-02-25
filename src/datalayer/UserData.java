@@ -1,6 +1,6 @@
 package datalayer;
 
-import core.Authorization;
+import core.UserType;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
 import core.idata.IUserData;
@@ -23,7 +23,7 @@ public class UserData implements IUserData{
             JSONObject jsonResponse = webService.getJson("users", "login", jsonToSend);
 
             return new User(jsonResponse.getString("NAME"),
-                    Authorization.valueOf(jsonResponse.getString("AUTH")),
+                    UserType.valueOf(jsonResponse.getString("AUTH")),
                     jsonResponse.getString("TITLE"),
                     DateTime.parse(jsonResponse.getString("LAST_LOGGED")),
                     DateTime.parse(jsonResponse.getString("LAST_EDIT")),

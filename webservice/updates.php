@@ -8,7 +8,7 @@
   function getLastUpdate(){
     global $mysqli;
 
-    $query = "SELECT * FROM UPDATES ORDER BY ID DESC LIMIT 1";
+    $query = "SELECT * FROM updates ORDER BY ID DESC LIMIT 1";
 
     $result = $mysqli->query($query);
 

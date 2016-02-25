@@ -24,15 +24,15 @@ ini_set('display_errors', 1);
         $day = date('d', $undate);
 
         if($style === "YEAR"){
-            $strQuery = "SELECT * FROM WITHDRAWALS WHERE (DATE Like '". $year ."-%')";
+            $strQuery = "SELECT * FROM withdrawals WHERE (DATE Like '". $year ."-%')";
             getWithdrawalsByQuery($strQuery);
         }
         elseif($style === "MONTH"){
-            $strQuery = "SELECT * FROM WITHDRAWALS WHERE (DATE Like '". $year ."-". $month ."-%')";
+            $strQuery = "SELECT * FROM withdrawals WHERE (DATE Like '". $year ."-". $month ."-%')";
             getWithdrawalsByQuery($strQuery);
         }
         elseif($style === "DAY"){
-            $strQuery = "SELECT * FROM WITHDRAWALS WHERE (DATE = '" . $date . "' )";
+            $strQuery = "SELECT * FROM withdrawals WHERE (DATE = '" . $date . "' )";
             getWithdrawalsByQuery($strQuery);
         }
     }
@@ -60,7 +60,7 @@ ini_set('display_errors', 1);
         $jsonObject = json_decode($jsonString);
         $withdrawals = $jsonObject->{'Withdrawals'};
 
-        $query = "INSERT INTO WITHDRAWALS (`DETAILS`, `VALUE`, `DATE`, ACCOUNT_ID)
+        $query = "INSERT INTO withdrawals (`DETAILS`, `VALUE`, `DATE`, ACCOUNT_ID)
             VALUES ";
 
         for($i = 0; $i < count($withdrawals); $i++){

@@ -9,13 +9,13 @@ public class User extends CoreMain{
      * ###########################
      */
     private String name;
-    private Authorization auth;
+    private UserType auth;
     private String title;
     private DateTime lastLogged;
     private DateTime lastEdit;
     private int secKey;
 
-    public User(String name, Authorization auth,
+    public User(String name, UserType auth,
                 String title, DateTime lastLogged, DateTime lastEdit, int secKey){
         this.name = name;
         this.auth = auth;
@@ -23,6 +23,22 @@ public class User extends CoreMain{
         this.lastLogged = lastLogged;
         this.lastEdit = lastEdit;
         this.secKey = secKey;
+
+        // set Authorizations
+        switch (auth){
+            case DEV:
+                Authorization.ADD_SALES = true;
+                Authorization.DELETE_SALES = true;
+                Authorization.EDIT_SALES_ITEM = true;
+                Authorization.EDIT_SALES_AMOUNT = true;
+                Authorization.EDIT_SALES_VALUE = true;
+                Authorization.EDIT_SALES_PRICE = true;
+                Authorization.EDIT_SALES_PAID = true;
+                break;
+            case ADMIN:
+                Authorization.EDIT_SALES_VALUE = true;
+                break;
+        }
     }
 
     public String getName() {
@@ -33,11 +49,11 @@ public class User extends CoreMain{
         this.name = name;
     }
 
-    public Authorization getAuth() {
+    public UserType getAuth() {
         return auth;
     }
 
-    public void setAuth(Authorization auth) {
+    public void setAuth(UserType auth) {
         this.auth = auth;
     }
 

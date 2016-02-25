@@ -1,5 +1,6 @@
 package gui.controllers;
 
+import core.Authorization;
 import core.DataViewStyle;
 import core.igui.*;
 import gui.GuiMain;
@@ -47,6 +48,8 @@ public class TpsWindowController implements Initializable {
     @FXML private ImageView imageCalc;
     @FXML private Accordion rightAccordion;
     @FXML private TitledPane btnStatistics;
+    @FXML private Button btnAddSales;
+
     private List<VBox> panes;                                        //List of panes "Sales, Outgoings, Withdrawals...etc"
     private VBox currPane;                                           //Current Pane
     private ObservableList<String> dataViewStyleList;                //how sales are displayed daily, monthly...etc
@@ -56,6 +59,9 @@ public class TpsWindowController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         GuiMain.setTpsWindowController(this);
         GuiMain.setStatisticsMainController(statisticsMainController);
+
+        //setup authorizations for controls
+        btnAddSales.setDisable(!Authorization.ADD_SALES);
 
         // set some icons
         imageUserIcon.setImage(new Image(GuiMain.class.getResourceAsStream("user_32x32.png")));

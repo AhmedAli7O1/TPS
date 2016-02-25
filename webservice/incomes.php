@@ -24,15 +24,15 @@ ini_set('display_errors', 1);
         $day = date('d', $undate);
 
         if($style === "YEAR"){
-            $strQuery = "SELECT * FROM INCOMES WHERE (DATE Like '". $year ."-%')";
+            $strQuery = "SELECT * FROM incomes WHERE (DATE Like '". $year ."-%')";
             getIncomesByQuery($strQuery);
         }
         elseif($style === "MONTH"){
-            $strQuery = "SELECT * FROM INCOMES WHERE (DATE Like '". $year ."-". $month ."-%')";
+            $strQuery = "SELECT * FROM incomes WHERE (DATE Like '". $year ."-". $month ."-%')";
             getIncomesByQuery($strQuery);
         }
         elseif($style === "DAY"){
-            $strQuery = "SELECT * FROM INCOMES WHERE (DATE = '" . $date . "' )";
+            $strQuery = "SELECT * FROM incomes WHERE (DATE = '" . $date . "' )";
             getIncomesByQuery($strQuery);
         }
     }
@@ -61,7 +61,7 @@ ini_set('display_errors', 1);
         $incomes = $jsonObj->{'Incomes'};
 
 
-        $query = "INSERT INTO INCOMES
+        $query = "INSERT INTO incomes
                     (`DETAILS`, `VALUE`, `IS_DEBT`, `DATE`, `ACCOUNT_ID`)
                   VALUES ";
 

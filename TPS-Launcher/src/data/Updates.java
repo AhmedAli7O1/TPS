@@ -20,7 +20,8 @@ public class Updates {
                     obj.getInt("VER"),
                     obj.getString("LINK"),
                     obj.getInt("SIZE"),
-                    obj.getString("HASH")
+                    obj.getString("APP_HASH"),
+                    obj.getString("SETT_HASH")
             );
             return lastUpdate;
         }catch (JSONException ex){

@@ -13,7 +13,7 @@
   function getAccounts(){
     global $mysqli;
 
-    $strQuery = "SELECT * FROM ACCOUNTS";
+    $strQuery = "SELECT * FROM accounts";
     $accounts = getAccountsByQuery($strQuery);
 
     //return accounts as a json Object
@@ -45,7 +45,7 @@
     $oldBalance = $jsonObj->{'oldBalance'};
     $date = $jsonObj->{'date'};
     //create new account for the current Month
-    $strQuery = "INSERT INTO ACCOUNTS (DATE, BALANCE) VALUES ('" . $date . "', '" . $oldBalance . "')";
+    $strQuery = "INSERT INTO accounts (DATE, BALANCE) VALUES ('" . $date . "', '" . $oldBalance . "')";
     $result = $mysqli->query($strQuery);
     if($result == TRUE){
       $response = TRUE;

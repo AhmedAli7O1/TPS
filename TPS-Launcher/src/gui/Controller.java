@@ -10,41 +10,40 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     private UpdateControl updateControl;
-    private String jarPath;
-    private String settingsPath;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-                // get app path to save any downloaded updates into
-                //appPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-                jarPath = "TPS.jar";
-                settingsPath = "tps.properties";
 
-                GuiMain.setAppSettings(new AppSettings(settingsPath));
-                updateControl = new UpdateControl(jarPath, GuiMain.getAppSettings().getVerNum());
+        GuiMain.setAppSettings(new AppSettings("tps.properties"));
 
-                new Thread(
-                        new Task() {
-                            @Override
-                            protected Object call() throws Exception {
-                                Thread.sleep(GuiMain.getAppSettings().getSplashTimeout());
-                                boolean result = updateControl.checkForUpdates();
-                                Platform.runLater(() -> updateCallBack(result));
-                                return null;
-                            }
-                        }
-                ).start();
+        // load settings file if not found just create a new one and close the app.
+        if(GuiMain.getAppSettings().loadSettings()){
+            System.out.println("settings loaded");
+        }
+        else {
+            System.out.println("couldn't load settings file");
+            System.exit(0);
+        }
 
-            }
+        updateControl = new UpdateControl();
 
-        private void updateCallBack(boolean result){
-            if(result){
-                // set version number
-                GuiMain.getAppSettings().setVerNum(updateControl.getLastUpdateVer());
-                GuiMain.getAppSettings().save();
+        new Thread(
+                new Task() {
+                    @Override
+                    protected Object call() throws Exception {
+                        Thread.sleep(GuiMain.getAppSettings().getSplashTimeout());
+                        boolean result = updateControl.checkForUpdates();
+                        Platform.runLater(() -> updateCallBack(result));
+                        return null;
+                    }
+                }
+        ).start();
+    }
 
+    private void updateCallBack(boolean result){
+        if(result){
             // open TPS App
             try {
-                ProcessBuilder pb = new ProcessBuilder("java", "-jar", jarPath);
+                ProcessBuilder pb = new ProcessBuilder("java", "-jar", GuiMain.getAppSettings().getAppPath());
                 pb.start();
             }catch (Exception ex){ ex.printStackTrace(); }
         }

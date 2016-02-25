@@ -3,6 +3,7 @@ package core;
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
 import data.Updates;
+import gui.GuiMain;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
@@ -16,14 +17,10 @@ import java.security.MessageDigest;
  * Created by Ahmed Ali on 23/02/2016.
  */
 public class UpdateControl {
-    private int VER_NUM;
     private Updates updatesData = new Updates();
     private Update lastUpdate;
-    private String jarPath;
 
-    public UpdateControl(String jarPath, int verNum){
-        this.VER_NUM = verNum;
-        this.jarPath = jarPath;
+    public UpdateControl(){
     }
 
     public boolean checkForUpdates()throws WSConnException{
@@ -34,7 +31,7 @@ public class UpdateControl {
                 return true;         // no updates found..
             }
 
-            if (lastUpdate.getVer() > VER_NUM) {
+            if (lastUpdate.getVer() > GuiMain.getAppSettings().getVerNum()) {
                 System.out.println("update found");
                 //update is needed
                 try {
@@ -53,20 +50,29 @@ public class UpdateControl {
     public boolean updateToLastVer()throws IOException{
         if(lastUpdate != null) {
             System.out.println("start downloading update");
-            DownloadUpdate downloadUpdate = new DownloadUpdate(lastUpdate.getLink(), jarPath);
-            downloadUpdate.download();  //start download last update
-            return downloadUpdate.checkDownloadedFile(lastUpdate.getHash()); //true if the download file is valid
+
+            //download TPS.jar -> app file
+            DownloadUpdate downloadApp = new DownloadUpdate(lastUpdate.getLink(), GuiMain.getAppSettings().getAppPath());
+            downloadApp.download();  //start download last update
+            boolean resultOne = downloadApp.checkDownloadedFile(lastUpdate.getAppHash()); //true if the download file is valid
+
+            //download settings file
+            DownloadUpdate downloadSettings = new DownloadUpdate(lastUpdate.getLink(), GuiMain.getAppSettings().getSettingsPath());
+            downloadSettings.download();  //start download last update
+            boolean resultTwo = downloadSettings.checkDownloadedFile(lastUpdate.getSettingsHash());
+
+            if(resultOne && resultTwo) {
+                // set version number
+                GuiMain.getAppSettings().setVerNum(lastUpdate.getVer());
+                GuiMain.getAppSettings().save();
+
+                return true;
+            }
+            else return false;
         }
         else {
             System.err.println("no updates were found!");
             return true;   //no updates needed
         }
     }
-
-    public int getLastUpdateVer(){
-        if(lastUpdate != null)
-            return lastUpdate.getVer();
-        else return VER_NUM;
-    }
-
 }

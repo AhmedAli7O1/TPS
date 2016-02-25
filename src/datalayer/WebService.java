@@ -2,6 +2,8 @@ package datalayer;
 
 import core.exceptions.NoDataException;
 import core.exceptions.WSConnException;
+import gui.GuiMain;
+import jdk.nashorn.internal.runtime.logging.DebugLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,13 +14,13 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class WebService extends DataSource {
+public class WebService {
     private String urlParameters =  "method=";
     private JSONObject jsonObject;
     private String strUrl;
 
     public JSONObject getJson(String className, String methodName){
-        strUrl = address;
+        strUrl = GuiMain.getAppSettings().getDataSource();
 
         strUrl += className + ".php";
         urlParameters += methodName;
@@ -32,7 +34,7 @@ public class WebService extends DataSource {
     }
 
     public JSONObject getJson(String className, String methodName, Object obj) throws WSConnException, NoDataException{
-        strUrl = address;
+        strUrl = GuiMain.getAppSettings().getDataSource();
 
         strUrl += className + ".php";
         urlParameters += methodName;
@@ -85,12 +87,10 @@ public class WebService extends DataSource {
         bw.close();
         reader.close();
 
-        System.out.println("############# Debug - File = 'WebService' Line = '88' #############");
         System.out.println("WebService Request : ");
         System.out.println(urlParameters);
         System.out.println("WebService Response : ");
         System.out.println(response);
-        System.out.println("### End of Debug Line = '93' ###");
 
         return response;
     }

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  * Created by Ahmed ali on 13/02/2016.
  */
 public abstract class GuiMain {
+    private static AppSettings appSettings;
     private static Stage loginWindow;
     private static TpsWindow tpsWindow;
     private static AddSalesWindow addSalesWindow;
@@ -193,5 +194,13 @@ public abstract class GuiMain {
 
     public static void setAddWithdrawalsWindow(AddWithdrawalsWindow addWithdrawalsWindow) {
         GuiMain.addWithdrawalsWindow = addWithdrawalsWindow;
+    }
+
+    public static AppSettings getAppSettings() {
+        return appSettings;
+    }
+
+    public static void setAppSettings(AppSettings appSettings) {
+        GuiMain.appSettings = appSettings;
     }
 }

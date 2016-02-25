@@ -24,15 +24,15 @@ ini_set('display_errors', 1);
         $day = date('d', $undate);
 
         if($style === "YEAR"){
-            $strQuery = "SELECT * FROM PURCHASES WHERE (DATE Like '". $year ."-%')";
+            $strQuery = "SELECT * FROM purchases WHERE (DATE Like '". $year ."-%')";
             getPurchasesByQuery($strQuery);
         }
         elseif($style === "MONTH"){
-            $strQuery = "SELECT * FROM PURCHASES WHERE (DATE Like '". $year ."-". $month ."-%')";
+            $strQuery = "SELECT * FROM purchases WHERE (DATE Like '". $year ."-". $month ."-%')";
             getPurchasesByQuery($strQuery);
         }
         elseif($style === "DAY"){
-            $strQuery = "SELECT * FROM PURCHASES WHERE (DATE = '" . $date . "' )";
+            $strQuery = "SELECT * FROM purchases WHERE (DATE = '" . $date . "' )";
             getPurchasesByQuery($strQuery);
         }
     }
@@ -61,7 +61,7 @@ ini_set('display_errors', 1);
 
         $purchases = $jsonObject->{'Purchases'};
 
-        $query = "INSERT INTO PURCHASES (`ITEM`, `AMOUNT`, `PURCHASE_PRICE`, `SELLER`, `DATE`, `ACCOUNT_ID`)
+        $query = "INSERT INTO purchases (`ITEM`, `AMOUNT`, `PURCHASE_PRICE`, `SELLER`, `DATE`, `ACCOUNT_ID`)
             VALUES ";
 
         for($i = 0; $i < count($purchases); $i++){

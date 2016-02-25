@@ -15,7 +15,7 @@
 
         // check if user exist
         $strQuery = sprintf("SELECT `NAME`, `TITLE`, `AUTH`, `LAST_EDIT`, `LAST_LOGGED`, `SEC_KEY`
-                                FROM USERS WHERE (NAME = '%s' AND PASSWORD = '%s')", $uName, $uPass);
+                                FROM users WHERE (NAME = '%s' AND PASSWORD = '%s')", $uName, $uPass);
 
         $result = $mysqli->query($strQuery);
 
@@ -24,7 +24,7 @@
             $row["SEC_KEY"] = rand();
 
             // add key to db
-            $insQuery = sprintf("UPDATE USERS SET SEC_KEY='%s' WHERE (NAME='%s')", $row["SEC_KEY"], $row["NAME"]);
+            $insQuery = sprintf("UPDATE users SET SEC_KEY='%s' WHERE (NAME='%s')", $row["SEC_KEY"], $row["NAME"]);
             $mysqli->query($insQuery);
             echo json_encode($row);
         }

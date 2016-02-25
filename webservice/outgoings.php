@@ -24,15 +24,15 @@ ini_set('display_errors', 1);
         $day = date('d', $undate);
 
         if($style === "YEAR"){
-            $strQuery = "SELECT * FROM OUTGOINGS WHERE (DATE Like '". $year ."-%')";
+            $strQuery = "SELECT * FROM outgoings WHERE (DATE Like '". $year ."-%')";
             getOutgoingsByQuery($strQuery);
         }
         elseif($style === "MONTH"){
-            $strQuery = "SELECT * FROM OUTGOINGS WHERE (DATE Like '". $year ."-". $month ."-%')";
+            $strQuery = "SELECT * FROM outgoings WHERE (DATE Like '". $year ."-". $month ."-%')";
             getOutgoingsByQuery($strQuery);
         }
         elseif($style === "DAY"){
-            $strQuery = "SELECT * FROM OUTGOINGS WHERE (DATE = '" . $date . "' )";
+            $strQuery = "SELECT * FROM outgoings WHERE (DATE = '" . $date . "' )";
             getOutgoingsByQuery($strQuery);
         }
     }
@@ -60,7 +60,7 @@ ini_set('display_errors', 1);
         $jsonObj = json_decode($jsonString);   // json object contains outgoings array
         $outgoings = $jsonObj->{'Outgoings'};  // outgoings array
 
-        $query = "INSERT INTO OUTGOINGS (`DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`)
+        $query = "INSERT INTO outgoings (`DETAILS`, `VALUE`, `DATE`, `ACCOUNT_ID`)
             VALUES ";
 
         $totalValue = 0;

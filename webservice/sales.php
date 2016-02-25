@@ -27,15 +27,15 @@ ini_set('display_errors', 1);
         $day = date('d', $undate);
 
         if($style === "YEAR"){
-            $strQuery = "SELECT * FROM ORDERS WHERE (DATE Like '". $year ."-%')";
+            $strQuery = "SELECT * FROM orders WHERE (DATE Like '". $year ."-%')";
             getSalesByQuery($strQuery);
         }
         elseif($style === "MONTH"){
-            $strQuery = "SELECT * FROM ORDERS WHERE (DATE Like '". $year ."-". $month ."-%')";
+            $strQuery = "SELECT * FROM orders WHERE (DATE Like '". $year ."-". $month ."-%')";
             getSalesByQuery($strQuery);
         }
         elseif($style === "DAY"){
-            $strQuery = "SELECT * FROM ORDERS WHERE (DATE = '" . $date . "' )";
+            $strQuery = "SELECT * FROM orders WHERE (DATE = '" . $date . "' )";
             getSalesByQuery($strQuery);
         }
     }
@@ -57,7 +57,7 @@ ini_set('display_errors', 1);
             $items = array();
 
             foreach($orders as $order){
-                $query = sprintf("SELECT * FROM SALES WHERE (ORDER_ID = '%d' )", $order['ID']);
+                $query = sprintf("SELECT * FROM sales WHERE (ORDER_ID = '%d' )", $order['ID']);
                 $result = $mysqli->query($query);
                 while($row = $result->fetch_assoc()){
                     $items[] = $row;
@@ -84,14 +84,14 @@ ini_set('display_errors', 1);
         $items = $order->{'items'};
         $accountId = $order->{'accountId'};
 
-        $orderQuery = "INSERT INTO ORDERS (`CUSTOMER`, `PRICE`, `PAID`, `DATE`, `ACCOUNT_ID`)
+        $orderQuery = "INSERT INTO orders (`CUSTOMER`, `PRICE`, `PAID`, `DATE`, `ACCOUNT_ID`)
             VALUES ('" . $customer . "','" . $price . "', '" . $paid . "', '" . $date . "', '" . $accountId . "')";
 
         $mysqli->begin_transaction();                //begin Transaction
         $orderResult = $mysqli->query($orderQuery);  //excute Order query
 
         //create 'Add Items' Query
-        $itemsQuery = "INSERT INTO SALES (`ITEM_NAME`, `AMOUNT`, `PRICE`, `PAID`, `PURCHASES_VALUE`, `ORDER_ID`)
+        $itemsQuery = "INSERT INTO sales (`ITEM_NAME`, `AMOUNT`, `PRICE`, `PAID`, `PURCHASES_VALUE`, `ORDER_ID`)
             VALUES ";
 
         for($i = 0; $i < count($items); $i++){
@@ -131,7 +131,7 @@ ini_set('display_errors', 1);
 
       $searchFor = $search->{'searchFor'};
 
-      $query = "SELECT * FROM SALES WHERE (ITEM_NAME Like '%" . $searchFor . "%')";
+      $query = "SELECT * FROM sales WHERE (ITEM_NAME Like '%" . $searchFor . "%')";
       $items = array();
       $result = $mysqli->query($query) or die($mysqli->error);
       if($result->num_rows > 0){
