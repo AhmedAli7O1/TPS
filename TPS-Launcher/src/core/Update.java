@@ -9,23 +9,20 @@ public class Update {
     private String link;
     private int size;
     private String appHash;
-    private String settingsHash;
 
-    public Update(int id, int ver, String link, int size, String appHash, String settingsHash) {
+    public Update(int id, int ver, String link, int size, String appHash) {
         this.id = id;
         this.ver = ver;
         this.link = link;
         this.size = size;
         this.appHash = appHash;
-        this.settingsHash = settingsHash;
     }
 
-    public Update(int ver, String link, int size, String appHash, String settingsHash) {
+    public Update(int ver, String link, int size, String appHash) {
         this.ver = ver;
         this.link = link;
         this.size = size;
         this.appHash = appHash;
-        this.settingsHash = settingsHash;
     }
 
     public int getId() {
@@ -66,13 +63,5 @@ public class Update {
 
     public void setAppHash(String appHash) {
         this.appHash = appHash;
-    }
-
-    public String getSettingsHash() {
-        return settingsHash;
-    }
-
-    public void setSettingsHash(String settingsHash) {
-        this.settingsHash = settingsHash;
     }
 }

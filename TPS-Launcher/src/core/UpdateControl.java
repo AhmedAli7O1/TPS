@@ -54,14 +54,9 @@ public class UpdateControl {
             //download TPS.jar -> app file
             DownloadUpdate downloadApp = new DownloadUpdate(lastUpdate.getLink(), GuiMain.getAppSettings().getAppPath());
             downloadApp.download();  //start download last update
-            boolean resultOne = downloadApp.checkDownloadedFile(lastUpdate.getAppHash()); //true if the download file is valid
+            boolean result = downloadApp.checkDownloadedFile(lastUpdate.getAppHash()); //true if the download file is valid
 
-            //download settings file
-            DownloadUpdate downloadSettings = new DownloadUpdate(lastUpdate.getLink(), GuiMain.getAppSettings().getSettingsPath());
-            downloadSettings.download();  //start download last update
-            boolean resultTwo = downloadSettings.checkDownloadedFile(lastUpdate.getSettingsHash());
-
-            if(resultOne && resultTwo) {
+            if(result) {
                 // set version number
                 GuiMain.getAppSettings().setVerNum(lastUpdate.getVer());
                 GuiMain.getAppSettings().save();

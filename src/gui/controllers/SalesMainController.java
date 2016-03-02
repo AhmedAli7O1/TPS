@@ -87,19 +87,6 @@ public class SalesMainController {
 
         tableSales.setItems(salesList);
 
-        /**
-         * bind txtTotalSales which display Total Sales
-         * of the table Sales
-         * that means whenever the table updates the TextField
-         * will update too
-         */
-        DoubleBinding total = Bindings.createDoubleBinding(() ->
-                        tableSales.getItems().stream().collect(Collectors.summingDouble(SalesView::getPaid)),
-                tableSales.getItems()
-        );
-
-        lblTotalSales.textProperty().bind(total.asString("%3.0f"));
-
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<SalesView> filteredSalesList = new FilteredList<>(salesList, p -> true);
 
@@ -130,6 +117,19 @@ public class SalesMainController {
 
         // 5. Add sorted (and filtered) data to the table.
         tableSales.setItems(sortedSalesList);
+
+        /**
+         * bind txtTotalSales which display Total Sales
+         * of the table Sales
+         * that means whenever the table updates the TextField
+         * will update too
+         */
+        DoubleBinding total = Bindings.createDoubleBinding(() ->
+                        tableSales.getItems().stream().collect(Collectors.summingDouble(SalesView::getPaid)),
+                tableSales.getItems()
+        );
+
+        lblTotalSales.textProperty().bind(total.asString("%3.0f"));
 
     }
 
